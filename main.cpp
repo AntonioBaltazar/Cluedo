@@ -1,9 +1,11 @@
 #include <iostream>
-
-using namespace std;
+#include <windows.h>
+#include "Utils.h"
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    activateVirtualTerminal();
+    std::cout << "Hello world!" << std::endl;
+    std::cout << color("woww", Color::GREEN);
     return 0;
 }
