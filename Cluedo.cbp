@@ -32,7 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Utils.cpp" />
+		<Unit filename="Utils.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="render/Dice.cpp" />
+		<Unit filename="render/Dice.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
