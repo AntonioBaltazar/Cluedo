@@ -3,6 +3,8 @@
 #define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
 #define DISABLE_NEWLINE_AUTO_RETURN  0x0008
 
+#include <vector>
+
 enum class Color
 {
     Black = 30,
@@ -26,6 +28,8 @@ enum class Color
 void gotoxy(int x, int y);
 void ShowConsoleCursor(bool showFlag);
 std::string color(std::string str, Color c);
+Color getColor(int c);
+std::vector<std::string> strSplit(std::string str, std::string delimiter);
 void activateVirtualTerminal();
 
 #endif // UTILS_H_INCLUDED

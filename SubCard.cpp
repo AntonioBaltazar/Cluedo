@@ -40,6 +40,7 @@ std::vector<Card> card_shuffle()
         temp = MyPackage[random1];
         MyPackage[random1] = MyPackage[random2];
         MyPackage[random2] = temp;
+
      }
 
     return MyPackage;
