@@ -37,7 +37,7 @@ std::vector<Card> card_shuffle()
         int random = rand()%NBCARDS;
 
         temp = MyPackage[i];
-        MyPackageSorted.push_back(MyPackage[random]);
+        MyPackageMixed.push_back(MyPackage[random]);
         MyPackage[random] = temp;
      }
 
