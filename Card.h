@@ -7,7 +7,7 @@
 #define WEAPON 5
 #define ROOM 5
 #define SUSPECTS 5
-#define NBCARDS 9
+#define NBCARDS 10
 
 class Card
 {
@@ -31,8 +31,10 @@ public:
 };
 
 ///Prototype
-std::vector<Card> card_shuffle();
+std::vector<Card> card_creation();
+std::vector<Card> card_shuffle(std::vector<Card> MyPackage);
 void card_package_display(std::vector<Card> MyPackage);
+void card_management();
 
 
 #endif // CARD_H_INCLUDED
