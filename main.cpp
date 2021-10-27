@@ -1,5 +1,6 @@
 #include <iostream>
 #include <windows.h>
+#include "render/Dice.h"
 #include "Utils.h"
 #include "Card.h"
 
@@ -24,6 +25,7 @@ int main()
                 break;
             case 3:
                 //Appel fct Martin
+                diceMenu();
                 break;
             default: break;
         }

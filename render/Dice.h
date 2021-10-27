@@ -1,6 +1,8 @@
 #ifndef DICE_H_INCLUDED
 #define DICE_H_INCLUDED
 
+void diceMenu();
+
 class Dice {
 private:
     int m_x;
