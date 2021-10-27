@@ -31,10 +31,12 @@ int main()
         }
     } while (saisie > 0 && saisie < 4);
 
-    std::vector<Card> MyPackage;
-    MyPackage = card_shuffle();
 
-    card_package_display(MyPackage);
+
+    ///Card Creation & Mixture
+    std::vector<Card> MyPackage;
+    MyPackage = card_shuffle(); //Mélange
+    card_package_display(MyPackage); //Affichage
 
     return 0;
 }

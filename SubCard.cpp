@@ -8,7 +8,6 @@
 std::vector<Card> card_shuffle()
 {
     std::vector<Card> MyPackage;
-    std::vector<Card> MyPackageMixed;
     Card temp;
 
     srand(time(NULL));
@@ -31,17 +30,20 @@ std::vector<Card> card_shuffle()
      MyPackage.push_back( Card("person","martin")   );
      MyPackage.push_back( Card("person","tonio")    );
 
+     int alea = rand()%(30 - 15 + 1) + 15;
      //Shuffle algorithm
-     for(int i = 0; i < NBCARDS -1; i++)
+     for(int i = 0; i < alea; i++)
      {
-        int random = rand()%NBCARDS;
+        int random1 = 0, random2 = 0;
+        do {    random1 = rand()%NBCARDS;   random2 = rand()%NBCARDS;   } while(random1 == random2);
 
-        temp = MyPackage[i];
-        MyPackageMixed.push_back(MyPackage[random]);
-        MyPackage[random] = temp;
+        temp = MyPackage[random1];
+        MyPackage[random1] = MyPackage[random2];
+        MyPackage[random2] = temp;
+
      }
 
-    return MyPackageMixed;
+    return MyPackage;
 }
 
 ///Displays every card of the package
@@ -52,7 +54,7 @@ void card_package_display(std::vector<Card> MyPackage)
     //
     for(it = MyPackage.begin(); it != MyPackage.end(); it++)
     {
-        std::cout << color(it->getName(),Color::Blue);
-        std::cout << color(it->getType(),Color::Green);
+        std::cout << color(it->getType(),Color::Blue);
+        std::cout <<" "<< color(it->getName(),Color::Green)<<std::endl;
     }
 }
