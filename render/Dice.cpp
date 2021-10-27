@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <conio.h>
+#include <windows.h>
 #include "Dice.h"
 #include "../Utils.h"
 #include "Dice.h"
@@ -24,15 +26,21 @@ void diceMenu()
     system("cls");
     std::cout << color("Dice menu :", Color::Bright_Blue) << std::endl;
     Dice d(40, 4, 6);
-    d.render();
+    while(!kbhit())
+    {
+        d.random();
+        d.render();
+        Sleep(1000);
+    }
+
 }
 
 void Dice::render()
 {
     std::ifstream f;
     std::string content;
-    std::vector<std::vector<std::string>> datas;
     std::vector<std::string> s;
+    std::vector<std::vector<std::string>> datas;
 
     f.open("ressources/dice" + std::to_string(getValue()) + ".txt");
 
