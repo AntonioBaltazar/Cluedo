@@ -18,6 +18,30 @@ std::string color(std::string str, Color c)
     return "\033[" + value + std::string("m") + str + "\033[0m";
 }
 
+Color getColor(int c)
+{
+    switch (c)
+    {
+        case 30: return Color::Black;
+        case 31: return Color::Red;
+        case 32: return Color::Green;
+        case 33: return Color::Yellow;
+        case 34: return Color::Blue;
+        case 35: return Color::Magenta;
+        case 36: return Color::Cyan;
+        case 37: return Color::White;
+        case 90: return Color::Bright_Black;
+        case 91: return Color::Bright_Red;
+        case 92: return Color::Bright_Green;
+        case 93: return Color::Bright_Yellow;
+        case 94: return Color::Bright_Blue;
+        case 95: return Color::Bright_Magenta;
+        case 96: return Color::Bright_Cyan;
+        case 97: return Color::Bright_White;
+        default: return Color::White;
+    }
+}
+
 /// https://stackoverflow.com/questions/4053837/colorizing-text-in-the-console-with-c
 void activateVirtualTerminal()
 {

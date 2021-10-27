@@ -28,6 +28,7 @@ enum class Color
 void gotoxy(int x, int y);
 void ShowConsoleCursor(bool showFlag);
 std::string color(std::string str, Color c);
+Color getColor(int c);
 std::vector<std::string> strSplit(std::string str, std::string delimiter);
 void activateVirtualTerminal();
 
