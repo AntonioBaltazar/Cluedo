@@ -22,7 +22,7 @@ void diceMenu()
 {
     system("cls");
     std::cout << color("Dice menu :", Color::Bright_Blue) << std::endl;
-    Dice d;
+    Dice d(40, 4, 4);
     d.render();
 }
 
@@ -46,7 +46,12 @@ void Dice::render()
 
     for (size_t i = 0; i < datas.size(); i++)
         for (size_t j = 0; j < datas[i].size(); j++)
-            std::cout << "ok" << std::endl;
+        {
+            gotoxy((getX() + i)*2, getY() + j);
+            std::vector<std::string> caseDatas = strSplit(datas[i][j], ":");
+            std::cout << color(caseDatas[0], getColor(std::stoi(caseDatas[1]))) << std::endl;
+        }
+
 
     f.close();
 }
