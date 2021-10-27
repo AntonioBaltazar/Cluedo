@@ -18,6 +18,12 @@ std::string color(std::string str, Color c)
     return "\033[" + value + std::string("m") + str + "\033[0m";
 }
 
+std::string color(unsigned char ch, Color c)
+{
+    std::string value = std::to_string(as_integer(c));
+    return "\033[" + value + std::string("m") + std::to_string((unsigned char)ch) + "\033[0m";
+}
+
 Color getColor(int c)
 {
     switch (c)
