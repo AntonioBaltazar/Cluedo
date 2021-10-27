@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "Dice.h"
 #include "../Utils.h"
 #include "Dice.h"
@@ -22,7 +23,7 @@ void diceMenu()
 {
     system("cls");
     std::cout << color("Dice menu :", Color::Bright_Blue) << std::endl;
-    Dice d(40, 4, 4);
+    Dice d(40, 4, 6);
     d.render();
 }
 
@@ -33,25 +34,20 @@ void Dice::render()
     std::vector<std::vector<std::string>> datas;
     std::vector<std::string> s;
 
-    f.open("ressources/dice6.txt");
+    f.open("ressources/dice" + std::to_string(getValue()) + ".txt");
 
+    //Reading data from the file, line by line
     while (std::getline(f, content))
-    {
-        s = strSplit(content, " ");
-        for (size_t i = 0; i < s.size(); i++)
-            std::cout << color(s[i], Color::Cyan) << std::endl;
-        std::cout << std::endl;
-        datas.push_back(s);
-    }
+        datas.push_back(strSplit(content, " "));
 
+    //Data display
     for (size_t i = 0; i < datas.size(); i++)
         for (size_t j = 0; j < datas[i].size(); j++)
         {
             gotoxy((getX() + i)*2, getY() + j);
-            std::vector<std::string> caseDatas = strSplit(datas[i][j], ":");
+            std::vector<std::string> caseDatas = strSplit(datas[j][i], ":");
             std::cout << color(caseDatas[0], getColor(std::stoi(caseDatas[1]))) << std::endl;
         }
-
 
     f.close();
 }
