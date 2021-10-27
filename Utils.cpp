@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <winuser.h>
 #include <string>
+#include <vector>
 #include "Utils.h"
 
 template <typename Enumeration>
@@ -26,6 +27,20 @@ void activateVirtualTerminal()
     consoleMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     consoleMode |= DISABLE_NEWLINE_AUTO_RETURN;
     SetConsoleMode( handleOut , consoleMode );
+}
+
+std::vector<std::string> strSplit(std::string str, std::string delimiter)
+{
+    std::vector<std::string> res;
+    size_t position = 0;
+
+    while ((position = str.find(delimiter)) != std::string::npos)
+    {
+        res.push_back(str.substr(0, position));
+        str.erase(0, position + delimiter.length());
+    }
+    res.push_back(str);
+    return res;
 }
 
 void gotoxy(int x, int y)

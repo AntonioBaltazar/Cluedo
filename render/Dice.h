@@ -10,7 +10,7 @@ private:
     int m_value;
 public:
     Dice();
-    Dice(int, int);
+    Dice(int, int, int);
     ~Dice();
 
     // Getters
@@ -25,6 +25,7 @@ public:
 
     // Methods
     void random(int);
+    void render();
 
 };
 
