@@ -3,7 +3,7 @@
 #include <time.h>
 
 #include "Card.h"
-#include "Utils.h"
+#include "../Utils.h"
 
 
 ///Creation of a card package
