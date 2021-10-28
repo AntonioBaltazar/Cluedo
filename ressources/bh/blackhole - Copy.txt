@@ -1,0 +1,21 @@
+#wmax:26
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34
+xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34
+254:93 254:93 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 254:93 254:93
+254:93 254:93 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 254:93 254:93
+xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34
+xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 xxx:34 254:93 254:93 254:93 254:93 254:93 254:93 254:93 254:93 254:93 254:93 254:93 254:93 xxx:34 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 254:93 254:93 254:93 254:93 254:93 254:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
