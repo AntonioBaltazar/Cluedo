@@ -20,8 +20,15 @@ public:
     std::string getRoom()const;
     std::string getWeapon()const;
 
+    ///Setter
+     void setPerson(std::string person);
+     void setRoom(std::string room);
+     void setWeapon(std::string weapon);
+
     ///Methods
     void display();
 };
+
+void script_Creation();
 
 #endif // SCRIPT_H_INCLUDED

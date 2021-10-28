@@ -5,6 +5,7 @@
 #include "Utils.h"
 #include "Card/Card.h"
 #include "Script/Script.h"
+#include "Script/Script.h"
 
 int main()
 {
@@ -29,7 +30,7 @@ int main()
                 ///Appel fct Tonio
                 //Card Package Creation, Mixture and dislpay
                 //card_Management(); OK
-                myScript.display();
+                script_Creation();
                 break;
             case 3:
                 ///Appel fct Martin
