@@ -53,7 +53,6 @@ std::vector<Card> card_Shuffle(std::vector<Card> myPackage)
         temp = myPackage[random1];
         myPackage[random1] = myPackage[random2];
         myPackage[random2] = temp;
-
     }
 
     return myPackage;

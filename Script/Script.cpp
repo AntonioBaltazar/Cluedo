@@ -20,6 +20,13 @@ std::string Script::getRoom()const    { return m_room ; }
 
 std::string Script::getWeapon()const  { return m_weapon ; }
 
+///Setter's Implementation
+
+void Script::setPerson(std::string person)  { m_person=person ; }
+
+void Script::setRoom(std::string room)      { m_room=room ; }
+
+void Script::setWeapon(std::string weapon)  { m_weapon=weapon ; }
 
 ///Method's implementation
 
