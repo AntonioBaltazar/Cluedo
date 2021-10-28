@@ -29,13 +29,16 @@ void diceMenu()
     system("cls");
     std::cout << color("Dice menu :", Color::Bright_Blue) << std::endl;
     Dice d(40, 4, 6);
+    int nb = 1;
     d.render();
-    /*while(!kbhit())
+    while(!kbhit())
     {
-        d.random();
+        //d.random();
+        d.setValue(nb%6 + 1);
+        nb++;
         d.render();
         Sleep(1000);
-    }*/
+    }
 
 }
 
@@ -68,18 +71,21 @@ void Dice::render()
     for (size_t i = 0; i < datas.size(); i++)
         for (size_t j = 0; j < datas[i].size(); j++)
         {
-            //int coeff = datas[i].size() > (size_t)getWmax() ? 1 : 2;
-            gotoxy((getX() + i)*2, getY() + j);
-            std::vector<std::string> caseDatas = strSplit(datas[j][i], ":");
+            int coeff = datas[i].size() > (size_t)getWmax() ? 1 : 2;
+            gotoxy(getX()*2 + j*coeff, getY() + i);
+            std::vector<std::string> caseDatas = strSplit(datas[i][j], ":");
             unsigned char ansi = caseDatas[0].size() >= 3 ? char(stoi(caseDatas[0])) : '\0';
             if (ansi != '\0')
             {
                 std::cout << "\033[" + caseDatas[1] + "m";
-                std::cout << ansi;
+                if (caseDatas[0] == "000")
+                    std::cout << " ";
+                else
+                    std::cout << ansi;
                 std::cout << "\033[0m";
             } else
                 std::cout << color(caseDatas[0], getColor(std::stoi(caseDatas[1])));
         }
-
+    std::cout << std::endl;
     f.close();
 }
