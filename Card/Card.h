@@ -31,10 +31,10 @@ public:
 };
 
 ///Prototype
-std::vector<Card> card_creation();
-std::vector<Card> card_shuffle(std::vector<Card> MyPackage);
-void card_package_display(std::vector<Card> MyPackage);
-void card_management();
+std::vector<Card> card_Creation();
+std::vector<Card> card_Shuffle(std::vector<Card> myPackage);
+void card_Package_Display(std::vector<Card> myPackage);
+void card_Management();
 
 
 #endif // CARD_H_INCLUDED

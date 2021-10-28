@@ -32,9 +32,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Card.cpp" />
 		<Unit filename="Card.h" />
-		<Unit filename="SubCard.cpp" />
+		<Unit filename="Card/Card.cpp" />
+		<Unit filename="Card/Card.h" />
+		<Unit filename="Card/SubCard.cpp" />
+		<Unit filename="Script.h" />
+		<Unit filename="Script/Script.cpp" />
+		<Unit filename="Script/Script.h" />
+		<Unit filename="Script/SubScript.cpp" />
 		<Unit filename="Utils.cpp" />
 		<Unit filename="Utils.h" />
 		<Unit filename="main.cpp" />

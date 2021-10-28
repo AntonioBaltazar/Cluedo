@@ -1,13 +1,16 @@
 #include <iostream>
 #include <windows.h>
+
 #include "render/Dice.h"
 #include "Utils.h"
-#include "Card.h"
+#include "Card/Card.h"
+#include "Script/Script.h"
 
 int main()
 {
     activateVirtualTerminal();
     int saisie = 0;
+    Script myScript("Tonio","Uranus","spoon");
 
     do
     {
@@ -25,7 +28,8 @@ int main()
             case 2:
                 ///Appel fct Tonio
                 //Card Package Creation, Mixture and dislpay
-                card_management();
+                //card_Management(); OK
+                myScript.display();
                 break;
             case 3:
                 ///Appel fct Martin
