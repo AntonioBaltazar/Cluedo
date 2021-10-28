@@ -3,6 +3,7 @@
 #include <winuser.h>
 #include <string>
 #include <vector>
+
 #include "Utils.h"
 
 template <typename Enumeration>
