@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 #include "../Utils.h"
+#include "Blackhole.h"
 #include "Dice.h"
 
 // Constructors & Destructor
@@ -24,8 +25,10 @@ void diceMenu()
 {
     system("cls");
     std::cout << color("Dice menu :", Color::Bright_Blue) << std::endl << std::endl;
-    GraphicElement d(10, 3, "blackhole");
-    d.render("");
+    Blackhole bh(10, 2, "blackhole", "Trou noir");
+    bh.render();
+    //GraphicElement d(10, 3, "blackhole");
+    //d.render("");
     /*Dice d(40, 4, "dice", 6);
     int nb = 1;
     d.render();
