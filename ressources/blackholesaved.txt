@@ -1,0 +1,22 @@
+#wmax:28
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 186:37 039:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 179:94 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 186:37 179:94 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 039:34 186:37 xxx:34 039:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 186:37 179:94 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 186:37 039:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 176:93 176:93 176:93 176:93 176:93 179:94 186:37 176:93 176:93 176:93 176:93 176:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 176:93 176:93 176:93 176:93 176:93 177:93 xxx:34 xxx:34 039:34 179:94 186:37 xxx:34 xxx:34 xxx:34 177:93 176:93 176:93 176:93 176:93 176:93 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 176:93 176:93 176:93 177:93 177:93 177:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 179:94 186:37 039:34 xxx:34 xxx:34 xxx:34 xxx:34 177:93 177:93 177:93 176:93 176:93 176:93 xxx:34 xxx:34
+xxx:34 176:93 176:93 177:93 177:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 179:94 186:37 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 177:93 177:93 176:93 176:93 xxx:34
+176:93 176:93 177:93 178:37 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 039:34 186:37 186:37 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 178:37 177:93 176:93 176:93
+xxx:34 176:93 176:93 177:93 177:93 178:37 178:37 178:37 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 186:37 179:94 039:34 xxx:34 xxx:34 xxx:34 xxx:34 178:37 178:37 178:37 177:93 177:93 176:93 176:93 xxx:34
+xxx:34 xxx:34 176:93 176:93 176:93 177:93 177:93 177:93 177:93 178:37 178:37 xxx:34 xxx:34 186:37 xxx:34 039:34 xxx:34 178:37 178:37 177:93 177:93 177:93 177:93 176:93 176:93 176:93 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 176:93 176:93 176:93 176:93 176:93 177:93 177:93 177:93 178:37 186:37 179:94 178:37 177:93 177:93 177:93 176:93 176:93 176:93 176:93 176:93 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 176:93 176:93 176:93 176:93 176:93 176:93 176:93 176:93 176:93 176:93 176:93 176:93 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 186:37 179:94 039:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 039:34 186:37 179:94 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 039:34 186:37 xxx:34 039:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 179:94 186:37 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 039:34 xxx:34 186:37 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
+xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 186:37 179:94 039:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34 xxx:34
