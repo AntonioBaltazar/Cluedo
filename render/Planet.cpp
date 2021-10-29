@@ -14,4 +14,4 @@ std::string Planet::getName() const { return m_name; }
 void Planet::setName(std::string name) { m_name = name; }
 
 // Methods
-void Planet::render() { GraphicElement::render(""); }
+void Planet::render() { GraphicElement::render(); }

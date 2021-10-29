@@ -19,7 +19,11 @@ void Dice::setValue(int value) { m_value = value; }
 
 // Methods
 void Dice::random(int maxValue = 6) { setValue(rand() % maxValue + 1); }
-void Dice::render() { GraphicElement::render(std::to_string(getValue())); }
+void Dice::render()
+{
+    GraphicElement::loadDatasFromFile(std::to_string(getValue()));
+    GraphicElement::render();
+}
 
 void diceMenu()
 {
