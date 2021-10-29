@@ -29,6 +29,4 @@ public:
     void translateDatas();
 };
 
-
-
 #endif // BLACKHOLE_H_INCLUDED

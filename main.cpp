@@ -16,6 +16,7 @@ int main()
 
     do
     {
+        system("cls");
         std::cout << color("Que voulez-vous faire ?", Color::Red) << std::endl;
         std::cout << color("1.", Color::Bright_Red) << " Emma" << std::endl;
         std::cout << color("2.", Color::Bright_Red) << " Tonio" << std::endl;
