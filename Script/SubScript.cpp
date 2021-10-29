@@ -24,6 +24,15 @@ void script_Creation()
 
     myScript.setPerson((myPackage[aleaPerson].getName()));
 
+    do
+    {
+        aleaRoom = rand()%ROOM;
+    }while(myPackage[aleaRoom].getName()=="planet");
+
+    myScript.setWeapon((myPackage[aleaRoom].getName()));
+
+    myScript.display();
+
 
     //myPackage.display();
 
