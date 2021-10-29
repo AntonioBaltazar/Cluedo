@@ -10,6 +10,7 @@
 int main()
 {
     activateVirtualTerminal();
+    setCursor(false);
     int saisie = 0;
     Script myScript("Tonio","Uranus","spoon");
 

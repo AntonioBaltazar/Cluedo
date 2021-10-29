@@ -27,6 +27,7 @@ enum class Color
 
 void gotoxy(int x, int y);
 void ShowConsoleCursor(bool showFlag);
+void setCursor(bool visible);
 std::string color(std::string str, Color c);
 std::string color(unsigned char ch, Color c);
 Color getColor(int c);
