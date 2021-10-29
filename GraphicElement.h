@@ -1,5 +1,6 @@
 #ifndef GRAPHICELEMENT_H_INCLUDED
 #define GRAPHICELEMENT_H_INCLUDED
+#include <vector>
 
 class GraphicElement {
 protected:
@@ -26,7 +27,8 @@ public:
     void setPath(std::string path);
 
     //Methods
-    void render(std::string extravalue);
+    std::vector<std::vector<std::string>> render();
+    std::vector<std::vector<std::string>> render(std::string extravalue);
 };
 
 

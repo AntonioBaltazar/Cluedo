@@ -23,7 +23,7 @@ void GraphicElement::setMaxWidth(int maxWidth) { m_maxWidth = maxWidth; }
 void GraphicElement::setPath(std::string path) { m_path = path; }
 
 //Methods
-void GraphicElement::render(std::string extravalue = "")
+std::vector<std::vector<std::string>> GraphicElement::render(std::string extravalue = "")
 {
     std::ifstream f;
     std::string content;
@@ -66,4 +66,5 @@ void GraphicElement::render(std::string extravalue = "")
         }
     std::cout << std::endl;
     f.close();
+    return datas;
 }
