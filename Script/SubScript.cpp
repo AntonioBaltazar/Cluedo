@@ -20,7 +20,7 @@ void script_Creation()
     do
     {
         aleaPerson = rand()%SUSPECTS;
-    }while(myPackage[aleaPerson].getName()="person")
+    }while(myPackage[aleaPerson].getName()=="person");
 
     myScript.setPerson((myPackage[aleaPerson].getName()));
 
