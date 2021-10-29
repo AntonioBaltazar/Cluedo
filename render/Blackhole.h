@@ -16,14 +16,16 @@ public:
 
     // Getters
     std::string getName() const;
-    std::vector<std::string> getTemp() const;
+    std::vector<std::string>& getTemp();
 
     // Setters
     void setName(std::string name);
     void setTemp(std::vector<std::string> temp);
 
     // Methods
-    void render();
+    void render(std::string title, std::string playerName);
+    void renderTitle(std::string title, std::string playerName);
+    void renderBlackHole();
     void translateDatas();
 };
 

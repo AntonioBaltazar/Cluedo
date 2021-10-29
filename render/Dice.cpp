@@ -28,20 +28,6 @@ void Dice::render()
 void diceMenu()
 {
     system("cls");
-    std::cout << color("Dice menu :", Color::Bright_Blue) << std::endl << std::endl;
-    Blackhole bh(10, 2, "blackhole", "Trou noir");
-    bh.render();
-    //GraphicElement d(10, 3, "blackhole");
-    //d.render("");
-    /*Dice d(40, 4, "dice", 6);
-    int nb = 1;
-    d.render();
-    while(!kbhit())
-    {
-        d.setValue(nb%6 + 1);
-        nb++;
-        d.render();
-        Sleep(1000);
-    }*/
-
+    Blackhole bh(15, 2, "blackhole", "Trou noir");
+    bh.render(" passe un tour dans le trou noir seul..", "Martin");
 }
