@@ -2,7 +2,7 @@
 #include "../Card/Card.h"
 #include <vector>
 #include <time.h>
-
+#include <iostream>
 void script_Creation()
 {
     Script myScript;
@@ -16,20 +16,33 @@ void script_Creation()
     int aleaRoom = rand()%ROOM;
     int aleaWeapon = rand()%WEAPON;
 
-    ///tester si on a bien une carte de type person
+    ///Test if it is a person card, if yes we set this person as the murderer of Mr Lenoir
     do
     {
         aleaPerson = rand()%SUSPECTS;
-    }while(myPackage[aleaPerson].getName()=="person");
+        std::cout<<"suspects\n";
+    }while(myPackage[aleaPerson].getType()!="person");
 
+        std::cout<<"aleaRoom = "<<aleaWeapon<<std::endl;
     myScript.setPerson((myPackage[aleaPerson].getName()));
 
+    ///Test if it is a room card, if yes we set this room as the place of the murder of Mr Lenoir
     do
     {
         aleaRoom = rand()%ROOM;
-    }while(myPackage[aleaRoom].getName()=="planet");
+    }while(myPackage[aleaRoom].getType()!="planet");
 
-    myScript.setWeapon((myPackage[aleaRoom].getName()));
+    std::cout<<"aleaRoom = "<<aleaRoom<<std::endl;
+    myScript.setRoom((myPackage[aleaRoom].getName()));
+
+    ///Test if it is a weapon card, if yes we set this weapon as the object that was used for the murder
+    do
+    {
+        aleaWeapon = rand()%WEAPON;
+    }while(myPackage[aleaWeapon].getType()!="weapon");
+
+    std::cout<<"aleaWeapon = "<<aleaWeapon<<std::endl;
+    myScript.setWeapon((myPackage[aleaWeapon].getName()));
 
     myScript.display();
 
