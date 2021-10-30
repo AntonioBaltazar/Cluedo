@@ -48,20 +48,34 @@ void Dialog::displayConversation()
 void Dialog::displayMessage()
 {
     gotoxy(12, 24);
-    for (int i = 0; i < 106; i++)
-        std::cout << " ";
+    for (int j = 0; j < 3; j++)
+    {
+        for (int i = 0; i < 100; i++)
+            std::cout << " ";
+        gotoxy(8, 24+j);
+
+    }
+
     gotoxy(115, 26);
     std::cout << " ";
 
-    gotoxy(12, 24);
+    int startName = 18 - getMessages().front().getPerson().getName().size();
+    int startMsg = 18 + 3;
+    gotoxy(startName, 24);
     std::cout << color(getMessages().front().getPerson().getName() + " : ", getMessages().front().getPerson().getColorName());
 
     // TypeWriter's effect
+    int letters = 0;
     for (const auto& word : strSplit(getMessages().front().getContent(), " "))
     {
         for (size_t i = 0; i < word.size(); i++) {
+            if (letters == 76)
+                gotoxy(startMsg, 25);
+            if (letters == 152)
+                gotoxy(startMsg, 26);
             std::cout << color(word[i], Color::White);
             Sleep(rand() % 45 + 20);
+            letters++;
         }
         std::cout << " ";
     }

@@ -37,6 +37,7 @@ void diceMenu()
     Person tonio("ANTONIO", Color::Bright_Green);
     Person emma("EMMA", Color::Bright_Magenta);
     std::queue<Message> msgs;
+    msgs.push(Message(tonio, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ex tortor, commodo nec ligula sit amet, condimentum bibendum erat. Suspendisse potenti."));
     msgs.push(Message(martin, "*marche dans les couloirs avec Tonio*"));
     msgs.push(Message(emma, "bouh"));
     msgs.push(Message(tonio, "Ouhhouhh c'est la maison de l'horreur ici.."));
