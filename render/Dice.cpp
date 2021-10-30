@@ -7,6 +7,7 @@
 #include "Blackhole.h"
 #include "Dice.h"
 #include "../Dialog.h"
+#include "../scenes/Menu.h"
 
 // Constructors & Destructor
 Dice::Dice() : GraphicElement() {}
@@ -32,7 +33,7 @@ void diceMenu()
     system("cls");
     //Blackhole bh(15, 2, "blackhole", "Trou noir");
     //bh.render(" passe un tour dans le trou noir seul..", "Martin");
-    Dialog d;
+    /*Dialog d;
     Person martin("MARTIN", Color::Bright_Cyan);
     Person tonio("ANTONIO", Color::Bright_Green);
     Person emma("EMMA", Color::Bright_Magenta);
@@ -44,5 +45,7 @@ void diceMenu()
 
     d.getMessages() = msgs;
 
-    d.displayConversation();
+    d.displayConversation();*/
+    Menu m;
+    m.render();
 }
