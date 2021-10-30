@@ -24,8 +24,6 @@ public:
 
     // Methods
     void render(std::string title, std::string playerName);
-    void renderTitle(std::string title, std::string playerName);
-    void renderBlackHole();
     void translateDatas();
 };
 
