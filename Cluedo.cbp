@@ -39,6 +39,8 @@
 		<Unit filename="Card/Card.cpp" />
 		<Unit filename="Card/Card.h" />
 		<Unit filename="Card/SubCard.cpp" />
+		<Unit filename="Dialog.cpp" />
+		<Unit filename="Dialog.h" />
 		<Unit filename="GraphicElement.cpp" />
 		<Unit filename="GraphicElement.h" />
 		<Unit filename="Script/Script.cpp" />

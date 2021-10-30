@@ -5,6 +5,7 @@
 #include "../Utils.h"
 #include "Blackhole.h"
 #include "Dice.h"
+#include "../Dialog.h"
 
 // Constructors & Destructor
 Dice::Dice() : GraphicElement() {}
@@ -28,6 +29,8 @@ void Dice::render()
 void diceMenu()
 {
     system("cls");
-    Blackhole bh(15, 2, "blackhole", "Trou noir");
-    bh.render(" passe un tour dans le trou noir seul..", "Martin");
+    //Blackhole bh(15, 2, "blackhole", "Trou noir");
+    //bh.render(" passe un tour dans le trou noir seul..", "Martin");
+    Dialog d;
+    d.displayMessage();
 }

@@ -5,12 +5,13 @@
 #include "Utils.h"
 #include "Card/Card.h"
 #include "Script/Script.h"
-#include "Script/Script.h"
+#include "ConsoleHandler.h"
 
 int main()
 {
-    activateVirtualTerminal();
-    setCursor(false);
+    // Resize console, hide cursor, get title & allow colors
+    initConsole("Cluedoremifasollasi");
+
     int saisie = 0;
     Script myScript("Tonio","Uranus","spoon");
 

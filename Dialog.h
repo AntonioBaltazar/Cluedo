@@ -35,12 +35,20 @@ class Dialog {
 private:
     std::queue<Message> m_messages;
 public:
-    Dialog() {}
-    Dialog(std::queue<Message> msgs) : m_messages(msgs) {}
-    ~Dialog() {}
+    // Constructors & Destructor
+    Dialog();
+    Dialog(std::queue<Message> msgs);
+    ~Dialog();
 
-    std::queue<Message>& getMessages() { return m_messages; }
-    void setMessages(std::queue<Message> msgs) { m_messages = msgs; }
+    // Getters
+    std::queue<Message>& getMessages();
+
+    // Setters
+    void setMessages(std::queue<Message> msgs);
+
+    // Methods
+    void addMessage(Message msg);
+    void displayMessage();
 
 };
 
