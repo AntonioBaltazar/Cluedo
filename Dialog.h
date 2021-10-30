@@ -48,7 +48,9 @@ public:
 
     // Methods
     void addMessage(Message msg);
+    void displayBorders(int topY, int bottomY);
     void displayMessage();
+    void displayConversation();
 
 };
 
