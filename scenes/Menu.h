@@ -16,7 +16,7 @@ public:
     void setBackgroundColor(int backgroundColor) { m_backgroundColor = backgroundColor; }
 
     void render();
-    void displayFile(std::string fileName);
+    void displayFile(std::string fileName, int translateX, int translateY);
 };
 
 

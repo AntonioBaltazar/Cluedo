@@ -10,15 +10,19 @@
 void Menu::render()
 {
     system("cls");
-    displayFile("menu");
-    displayFile("menu2");
-    displayFile("menu3");
+    displayFile("menu", 41, 9);
+    displayFile("menu2", 41, 9);
+    displayFile("menu3", 41, 9);
+    displayFile("menu4", 41, 9);
+
+    while(!kbhit());
+    int ch = getch();
 }
 
-void Menu::displayFile(std::string fileName)
+void Menu::displayFile(std::string fileName, int translateX, int translateY)
 {
     std::vector<std::string> cluedo;
-    int timeable = 1;
+    int delay = 0;
 
     std::ifstream f;
     std::string content;
@@ -29,8 +33,10 @@ void Menu::displayFile(std::string fileName)
     while (std::getline(f, content))
     {
         if (content[0] == '@')
-            timeable = (int)content[1];
-        else if (content[0] == '%')
+        {
+            content.erase(remove(content.begin(), content.end(), '@'), content.end());
+            delay = std::stoi(content);
+        } else if (content[0] == '%')
         {
             content.erase(remove(content.begin(), content.end(), '%'), content.end());
 
@@ -44,17 +50,15 @@ void Menu::displayFile(std::string fileName)
             for (int i = std::stoi(strs[0]); i < std::stoi(strs[2]); i++)
                 for (int j = std::stoi(strs[1]); j < std::stoi(strs[3]); j++)
                 {
-                    gotoxy(i, j);
+                    gotoxy(translateX + i, translateY + j);
                     std::cout << char(std::stoi(strs[4]));
-                    if (timeable == 1)
-                        Sleep(rand() % 50);
+                    Sleep(delay);
                 }
         } else if (content[0] != '#') {
             std::vector<std::string> strs = strSplit(content, ":");
-            gotoxy(std::stoi(strs[0]), std::stoi(strs[1]));
+            gotoxy(translateX + std::stoi(strs[0]), translateY + std::stoi(strs[1]));
             std::cout << char(std::stoi(strs[2]));
-            if (timeable)
-                Sleep(rand() % 50);
+            Sleep(delay);
         }
     }
 
@@ -62,16 +66,4 @@ void Menu::displayFile(std::string fileName)
     SetConsoleTextAttribute(H,getBackgroundColor()*16+getTextColor());
 
     f.close();
-
-    /*for (size_t i = 0; i < cluedo.size(); i++) {
-        std::vector<std::string> strs = strSplit(cluedo[i], ":");
-        gotoxy(std::stoi(strs[0]), std::stoi(strs[1]));
-        std::cout << char(std::stoi(strs[2]));
-        if (timeable)
-            Sleep(rand() % 50);
-    }*/
-
-    while(!kbhit());
-    int ch = getch();
-
 }
