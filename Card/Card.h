@@ -35,6 +35,8 @@ std::vector<Card> card_Creation();
 std::vector<Card> card_Shuffle(std::vector<Card> myPackage);
 void card_Package_Display(std::vector<Card> myPackage);
 void card_Management();
+std::vector<Card> card_CreationB();
+Card card_CreationC(std::string content);
 
 
 #endif // CARD_H_INCLUDED

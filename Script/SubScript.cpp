@@ -8,7 +8,7 @@
 void script_Creation()
 {
     Script myScript;
-    std::vector<Card> myPackage = card_Creation();
+    std::vector<Card> myPackage;// = card_Creation();
     std::vector<Card>::iterator it;
 
     myPackage = card_Shuffle(myPackage);

@@ -1,15 +1,65 @@
 #include <iostream>
 #include <vector>
 #include <time.h>
+#include <fstream>
 
 #include "Card.h"
 #include "../Utils.h"
 
 
+std::vector<Card> card_CreationB()
+{
+    std::string content;
+    std::string path = "CHANGEME.txt";
+    std::ifstream file(path.c_str());
+    std::vector<Card> myPackage;
+
+    if(file)
+    {
+        while(std::getline(file,content))
+        {
+            std::cout<<content<<std::endl;
+            myPackage.push_back(card_CreationC(content));
+        }
+
+        std::cout << "Reading " << path << " => OK" << std::endl;
+        file.close(); // fermeture du flux
+    }else // en cas d'erreur...
+    {
+        std::cout << "Cannot read " << path << std::endl;
+    }
+
+    return myPackage;
+}
+
+Card card_CreationC(std::string content)
+{
+    Card newCard;
+    std::vector <std::string> newContent;
+    //int i = 0;
+
+    newContent = strSplit(content," : ");
+
+    if(newContent[0] == "Personnage")
+    {
+        ///On set les infos
+    }
+
+
+
+    return newCard;
+}
+
+
+/// COMMMENTAIRE A RETIRER : subscript (decla de myPackage)
+
+/*
 ///Creation of a card package
 std::vector<Card> card_Creation()
 {
     std::vector<Card> myPackage;
+
+
     //Weapons cards
     myPackage.push_back( Card("weapon","pistolet") );
     myPackage.push_back( Card("weapon","corde")    );
@@ -22,12 +72,13 @@ std::vector<Card> card_Creation()
     myPackage.push_back( Card("planet","Soleil")   );
 
     //Suspects cards
-    myPackage.push_back( Card("person","emma")     );
+    myPackage.push_back( Card("person","Emma")     );
     myPackage.push_back( Card("person","Martin")   );
     myPackage.push_back( Card("person","Tonio")    );
 
     return myPackage;
 }
+*/
 
 ///Shuffle a package of cards
 std::vector<Card> card_Shuffle(std::vector<Card> myPackage)
@@ -35,7 +86,6 @@ std::vector<Card> card_Shuffle(std::vector<Card> myPackage)
     Card temp;
 
     srand(time(NULL));
-
     int alea = rand()%(30 - 15 + 1) + 15;
 
     //Shuffle algorithm
@@ -53,7 +103,6 @@ std::vector<Card> card_Shuffle(std::vector<Card> myPackage)
         myPackage[random1] = myPackage[random2];
         myPackage[random2] = temp;
     }
-
     return myPackage;
 }
 
@@ -90,7 +139,7 @@ void card_Management()
 {
     std::vector<Card> myPackage;
 
-    myPackage = card_Creation(); //Mélange
-    myPackage = card_Shuffle(myPackage); //Mélange
-    card_Package_Display(myPackage); //Affichage
+    myPackage = card_CreationB(); //Mélange
+    //myPackage = card_Shuffle(myPackage); //Mélange
+    //card_Package_Display(myPackage); //Affichage
 }
