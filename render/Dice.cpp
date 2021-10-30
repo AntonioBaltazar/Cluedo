@@ -33,12 +33,12 @@ void diceMenu()
     //Blackhole bh(15, 2, "blackhole", "Trou noir");
     //bh.render(" passe un tour dans le trou noir seul..", "Martin");
     Dialog d;
-    Person martin("MARTIN");
-    Person tonio("ANTONIO");
-    Person emma("EMMA");
+    Person martin("MARTIN", Color::Bright_Cyan);
+    Person tonio("ANTONIO", Color::Bright_Green);
+    Person emma("EMMA", Color::Bright_Magenta);
     std::queue<Message> msgs;
     msgs.push(Message(martin, "*marche dans les couloirs avec Tonio*"));
-    msgs.push(Message(emma, "BOUHH"));
+    msgs.push(Message(emma, "bouh"));
     msgs.push(Message(tonio, "Ouhhouhh c'est la maison de l'horreur ici.."));
 
     d.getMessages() = msgs;

@@ -2,17 +2,21 @@
 #define DIALOG_H_INCLUDED
 
 #include <queue>
+#include "Utils.h"
 
 class Person {
 private:
     std::string m_name;
+    Color m_colorName;
 public:
     Person() {}
-    Person(std::string name) : m_name(name) {}
+    Person(std::string name, Color colorName) : m_name(name), m_colorName(colorName) {}
     ~Person() {}
 
     std::string getName() const { return m_name; }
+    Color getColorName() const { return m_colorName; }
     void setName(std::string name) { m_name = name; }
+    void setColorName(Color colorName) { m_colorName = colorName; }
 };
 
 class Message {
