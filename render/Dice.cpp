@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
+#include <queue>
 #include <conio.h>
 #include <windows.h>
 #include "../Utils.h"
 #include "Blackhole.h"
 #include "Dice.h"
+#include "../Dialog.h"
 
 // Constructors & Destructor
 Dice::Dice() : GraphicElement() {}
@@ -28,6 +30,18 @@ void Dice::render()
 void diceMenu()
 {
     system("cls");
-    Blackhole bh(15, 2, "blackhole", "Trou noir");
-    bh.render(" passe un tour dans le trou noir seul..", "Martin");
+    //Blackhole bh(15, 2, "blackhole", "Trou noir");
+    //bh.render(" passe un tour dans le trou noir seul..", "Martin");
+    Dialog d;
+    Person martin("MARTIN");
+    Person tonio("ANTONIO");
+    Person emma("EMMA");
+    std::queue<Message> msgs;
+    msgs.push(Message(martin, "*marche dans les couloirs avec Tonio*"));
+    msgs.push(Message(emma, "BOUHH"));
+    msgs.push(Message(tonio, "Ouhhouhh c'est la maison de l'horreur ici.."));
+
+    d.getMessages() = msgs;
+
+    d.displayConversation();
 }

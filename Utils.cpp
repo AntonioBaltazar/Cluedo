@@ -6,6 +6,7 @@
 
 #include "Utils.h"
 
+
 template <typename Enumeration>
 auto as_integer(Enumeration const value)
     -> typename std::underlying_type<Enumeration>::type
@@ -56,25 +57,6 @@ Color getColor(int c)
     }
 }
 
-void setCursor(bool visible)
-{
-    CONSOLE_CURSOR_INFO info;
-    info.dwSize = 100;
-    info.bVisible = visible;
-    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-}
-
-/// https://stackoverflow.com/questions/4053837/colorizing-text-in-the-console-with-c
-void activateVirtualTerminal()
-{
-    HANDLE handleOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    DWORD consoleMode;
-    GetConsoleMode( handleOut , &consoleMode);
-    consoleMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-    consoleMode |= DISABLE_NEWLINE_AUTO_RETURN;
-    SetConsoleMode( handleOut , consoleMode );
-}
-
 std::vector<std::string> strSplit(std::string str, std::string delimiter)
 {
     std::vector<std::string> res;
@@ -95,13 +77,4 @@ void gotoxy(int x, int y)
     coord.X = x;
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
-void ShowConsoleCursor(bool showFlag)
-{
-    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO cursorInfo;
-    GetConsoleCursorInfo(out, &cursorInfo);
-    cursorInfo.bVisible = showFlag; // set the cursor visibility
-    SetConsoleCursorInfo(out, &cursorInfo);
 }

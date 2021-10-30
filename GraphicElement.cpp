@@ -66,7 +66,7 @@ void GraphicElement::render()
                 if (caseDatas[0] == "xxx")
                     std::cout << " ";
                 else
-                    std::cout << char(stoi(caseDatas[0]));
+                    std::cout << char(std::stoi(caseDatas[0]));
                 std::cout << "\033[0m";
             } else
                 std::cout << color(caseDatas[0], getColor(std::stoi(caseDatas[1])));
