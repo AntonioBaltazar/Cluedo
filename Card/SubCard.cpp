@@ -37,7 +37,6 @@ std::vector<Card> card_Shuffle(std::vector<Card> myPackage)
     srand(time(NULL));
 
     int alea = rand()%(30 - 15 + 1) + 15;
-    std::cout<<"Alea = "<<alea<<std::endl;
 
     //Shuffle algorithm
     for(int i = 0; i < alea; i++)
@@ -65,8 +64,23 @@ void card_Package_Display(std::vector<Card> myPackage)
 
     for(it = myPackage.begin(); it != myPackage.end(); it++)
     {
-        std::cout << color(it->getType(),Color::Blue);
-        std::cout <<" "<< color(it->getName(),Color::Green)<<std::endl;
+        if(it->getType()=="person")
+        {
+            std::cout << color(it->getType(),Color::Blue);
+            std::cout <<" "<< color(it->getName(),Color::Bright_Blue)<<std::endl;
+        }
+
+        if(it->getType()=="planet")
+        {
+            std::cout << color(it->getType(),Color::Red);
+            std::cout <<" "<< color(it->getName(),Color::Bright_Red)<<std::endl;
+        }
+
+        if(it->getType()=="weapon")
+        {
+            std::cout << color(it->getType(),Color::Green);
+            std::cout <<" "<< color(it->getName(),Color::Bright_Green)<<std::endl;
+        }
     }
 }
 
