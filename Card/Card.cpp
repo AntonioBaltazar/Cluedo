@@ -1,8 +1,6 @@
 #include "Card.h"
 #include <iostream>
 
-
-
 ///Constructor's and Destructor's Implementation
 
 Card::Card()
@@ -20,6 +18,10 @@ std::string Card::getType()const  { return m_type ; }
 
 std::string Card::getName()const  { return m_name ; }
 
+///Getter's Implementation
+void Card::setType(std::string type)  { m_type = type ; }
+
+void Card::setName(std::string name)  { m_name = name ; }
 
 ///Method's implementation
 

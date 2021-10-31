@@ -25,7 +25,21 @@ void Dialog::displayConversation()
     while (!getMessages().empty())
     {
         displayMessage();
-        while (!kbhit());
+        while (!kbhit())
+        {
+            gotoxy(115, 24);
+            std::cout << "\033[97m";
+            std::cout << char(std::stoi("31"));
+            std::cout << "\033[37m";
+            if (kbhit()) break;
+            Sleep(600);
+
+            gotoxy(115, 24);
+            std::cout << " ";
+            if (kbhit()) break;
+            Sleep(600);
+
+        }
         char ch = getch();
         getMessages().pop();
     }
@@ -35,18 +49,19 @@ void Dialog::displayMessage()
 {
     gotoxy(12, 24);
     for (int i = 0; i < 106; i++)
-    {
         std::cout << " ";
-    }
+    gotoxy(115, 26);
+    std::cout << " ";
+
     gotoxy(12, 24);
-    std::cout << color(getMessages().front().getPerson().getName() + " : ", Color::Bright_Yellow);
+    std::cout << color(getMessages().front().getPerson().getName() + " : ", getMessages().front().getPerson().getColorName());
 
     // TypeWriter's effect
     for (const auto& word : strSplit(getMessages().front().getContent(), " "))
     {
         for (size_t i = 0; i < word.size(); i++) {
             std::cout << color(word[i], Color::White);
-            Sleep(rand() % 50 + 25);
+            Sleep(rand() % 45 + 20);
         }
         std::cout << " ";
     }

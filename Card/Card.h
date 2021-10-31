@@ -26,6 +26,10 @@ public:
     std::string getType()const;
     std::string getName()const;
 
+    ///Setter
+    void setType(std::string type);
+    void setName(std::string name);
+
     ///Methods
     void display();
 };

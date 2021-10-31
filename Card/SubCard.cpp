@@ -7,32 +7,27 @@
 #include "../Utils.h"
 
 
-std::vector<Card> card_CreationB()
+std::vector<Card> card_Creation()
 {
     std::string content;
     std::string path = "CHANGEME.txt";
     std::ifstream file(path.c_str());
     std::vector<Card> myPackage;
 
-    if(file)
+    if(file) //If the file is well opened then we recover the information
     {
         while(std::getline(file,content))
-        {
-            std::cout<<content<<std::endl;
             myPackage.push_back(card_CreationC(content));
-        }
 
-        std::cout << "Reading " << path << " => OK" << std::endl;
-        file.close(); // fermeture du flux
-    }else // en cas d'erreur...
+        file.close();
+    }else //if not we warn the user
     {
         std::cout << "Cannot read " << path << std::endl;
     }
-
     return myPackage;
 }
 
-Card card_CreationC(std::string content)
+Card card_convert(std::string content)
 {
     Card newCard;
     std::vector <std::string> newContent;
@@ -40,12 +35,11 @@ Card card_CreationC(std::string content)
 
     newContent = strSplit(content," : ");
 
-    if(newContent[0] == "Personnage")
-    {
-        ///On set les infos
-    }
+    newCard.setType(newContent[0]);
+    newCard.setName(newContent[1]);
 
-
+    std::cout<<"newContent[0] : "<<newContent[0]<<std::endl;
+    std::cout<<"newContent[1] : "<<newContent[1]<<std::endl;
 
     return newCard;
 }
@@ -140,6 +134,7 @@ void card_Management()
     std::vector<Card> myPackage;
 
     myPackage = card_CreationB(); //Mélange
+    std::cout<<"Creation is over ! "<<std::endl;
     //myPackage = card_Shuffle(myPackage); //Mélange
-    //card_Package_Display(myPackage); //Affichage
+    card_Package_Display(myPackage); //Affichage
 }
