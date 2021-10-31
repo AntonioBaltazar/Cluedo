@@ -45,6 +45,7 @@
 		<Unit filename="Dialog.h" />
 		<Unit filename="GraphicElement.cpp" />
 		<Unit filename="GraphicElement.h" />
+		<Unit filename="PrintThread.h" />
 		<Unit filename="Script/Script.cpp" />
 		<Unit filename="Script/Script.h" />
 		<Unit filename="Script/SubScript.cpp" />
@@ -57,6 +58,8 @@
 		<Unit filename="render/Dice.h" />
 		<Unit filename="render/Planet.cpp" />
 		<Unit filename="render/Planet.h" />
+		<Unit filename="scenes/Menu.cpp" />
+		<Unit filename="scenes/Menu.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

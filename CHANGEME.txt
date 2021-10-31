@@ -1,16 +1,22 @@
-Personnage : Antonio
-Personnage : Emma
-Personnage : Martin
-Planet 1 : Venus
-Planet 2 : Saturne
-Planet 3 : Mars
-Planet 4 : Uranus
-Planet 5 : Terre
-Planet 6 : Pluton
-Planet 7 : jsp
-Planet 8 : jsp2
-Arme 1 : fusils
-Arme 2 : pistolet
-Arme 3 : corde
-Arme 4 : matraque
-Arme 5 : brique
+Person : Antonio
+Person : Emma
+Person : Martin
+Person : Jacquis
+Person : Michel
+Person : Marie
+
+
+Planet : Pluton
+Planet : Venus
+Planet : Saturne
+Planet : Mars
+Planet : Uranus
+Planet : Terre
+Planet : Soleil
+
+Weapon : fusils
+Weapon : pistolet
+Weapon : corde
+Weapon : matraque
+Weapon : brique
+Weapon : fouet

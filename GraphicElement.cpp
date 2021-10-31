@@ -71,5 +71,5 @@ void GraphicElement::render()
             } else
                 std::cout << color(caseDatas[0], getColor(std::stoi(caseDatas[1])));
         }
-    std::cout << std::endl;
+    std::cout << "\n";
 }

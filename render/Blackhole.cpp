@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <thread>
 #include <string>
+#include <mutex>
 #include <windows.h>
 #include "Blackhole.h"
 #include "../GraphicElement.h"
@@ -29,41 +30,47 @@ void Blackhole::setTemp(std::vector<std::string> temp) { m_temp = temp; }
 // Methods
 void Blackhole::render(std::string title = "", std::string playerName = "")
 {
-    std::thread typeWriting(renderTitle, this, title, playerName);
-    typeWriting.join();
-}
+    std::mutex lock;
 
-void Blackhole::renderBlackHole()
-{
-    while (!kbhit())
-    {
-        GraphicElement::render();
-        translateDatas();
-        Sleep(100);
-    }
-}
+    auto f1 = [&lock, this](std::string title, std::string playerName) {
+        std::string suffix = "AIE! ";
+        std::vector<std::pair<std::string, Color>> words;
+        words.push_back(std::pair<std::string, Color>(suffix, Color::Red));
+        words.push_back(std::pair<std::string, Color>(playerName, Color::Bright_Red));
+        words.push_back(std::pair<std::string, Color>(title, Color::White));
 
-void Blackhole::renderTitle(std::string title, std::string playerName)
-{
-    std::string suffix = "AIE! ";
-    std::vector<std::pair<std::string, Color>> words;
-    words.push_back(std::pair<std::string, Color>(suffix, Color::Red));
-    words.push_back(std::pair<std::string, Color>(playerName, Color::Bright_Red));
-    words.push_back(std::pair<std::string, Color>(title, Color::White));
-
-    int currentX = 0;
-    // TypeWriter's effect
-    for (const auto& word : words)
-    {
-        std::string str = word.first;
-        for (size_t i = 0; i < str.size(); i++) {
-            gotoxy(getX()*2 + getDatas()[0].size() - (suffix.size() + title.size() + playerName.size())/2 + currentX, getDatas().size() + 3);
-            std::cout << color(str[i], word.second);
-            currentX++;
-            Sleep(rand() % 50 + 25);
+        int currentX = 0;
+        // TypeWriter's effect
+        for (const auto& word : words)
+        {
+            std::string str = word.first;
+            for (size_t i = 0; i < str.size(); i++) {
+                lock.lock();
+                gotoxy(getX()*2 + getDatas()[0].size() - (suffix.size() + title.size() + playerName.size())/2 + currentX, getDatas().size() + 3);
+                std::cout << "" + color(str[i], word.second);
+                currentX++;
+                lock.unlock();
+                Sleep(rand() % 50 + 25);
+            }
         }
-    }
-    std::thread blackholeRunning(renderBlackHole, this);
+    };
+
+    auto f2 = [&lock, this]() {
+        while (!kbhit())
+        {
+            lock.lock();
+            GraphicElement::render();
+            translateDatas();
+            lock.unlock();
+            Sleep(100);
+
+        }
+    };
+
+    std::thread typeWriting(f1,title, playerName);
+    std::thread blackholeRunning(f2);
+
+    typeWriting.join();
     blackholeRunning.join();
 }
 
@@ -88,4 +95,3 @@ void Blackhole::translateDatas()
         getTemp()[j] = getDatas()[14-1][13+j];
     }
 }
-
