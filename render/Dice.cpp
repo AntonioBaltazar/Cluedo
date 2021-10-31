@@ -31,8 +31,7 @@ void Dice::render()
 void diceMenu()
 {
     system("cls");
-    //Blackhole bh(15, 2, "blackhole", "Trou noir");
-    //bh.render(" passe un tour dans le trou noir seul..", "Martin");
+
     /*Dialog d;
     Person martin("MARTIN", Color::Bright_Cyan);
     Person tonio("ANTONIO", Color::Bright_Green);
@@ -48,4 +47,8 @@ void diceMenu()
     d.displayConversation();*/
     Menu m;
     m.render();
+    system("cls");
+    Blackhole bh(15, 2, "blackhole", "Trou noir");
+    bh.render(" passe un tour dans le trou noir seul..", "Martin");
 }
+

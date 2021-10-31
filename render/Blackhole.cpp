@@ -70,8 +70,8 @@ void Blackhole::render(std::string title = "", std::string playerName = "")
     std::thread typeWriting(f1,title, playerName);
     std::thread blackholeRunning(f2);
 
-    blackholeRunning.join();
     typeWriting.join();
+    blackholeRunning.join();
 }
 
 void Blackhole::translateDatas()
