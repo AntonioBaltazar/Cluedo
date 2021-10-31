@@ -41,6 +41,8 @@ std::vector<Card> card_Shuffle(std::vector<Card> myPackage);
 void card_Package_Display(std::vector<Card> myPackage);
 void card_Management();
 
+Card card_pick(std::vector<Card> &myPackage);
+
 
 
 

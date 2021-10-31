@@ -11,7 +11,7 @@
 int main()
 {
     // Resize console, hide cursor, get title & allow colors
-    initConsole("Cluedoremifasollasi");
+    //initConsole("Cluedoremifasollasi");
 
     int saisie = 0;
     Script myScript("Tonio","Uranus","spoon");
@@ -34,8 +34,8 @@ int main()
             case 2:
                 ///Appel fct Tonio
                 //Card Package Creation, Mixture and dislpay
-                //card_Management();
-                script_Creation();
+                card_Management();
+                //script_Creation();
                 break;
             case 3:
                 ///Appel fct Martin

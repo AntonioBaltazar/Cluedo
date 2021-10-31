@@ -104,4 +104,26 @@ void card_Management()
     myPackage = card_Creation(); //Mélange
     myPackage = card_Shuffle(myPackage); //Mélange
     card_Package_Display(myPackage); //Affichage
+
+    std::cout<<"Creation, Shuffle and display over\n";
+    Card pioche;
+
+    pioche = card_pick(myPackage);
+    card_Package_Display(myPackage);
+
+}
+
+///Player picks a card and that card is removed from the package, returns the picked card
+Card card_pick(std::vector<Card> &myPackage)
+{
+    Card temp ;
+    auto picked_elem = myPackage.end()-1;
+
+    temp.setType(picked_elem->getType());
+    temp.setName(picked_elem->getName());
+
+    myPackage.erase(picked_elem);
+
+    return temp;
+
 }
