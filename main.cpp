@@ -6,6 +6,7 @@
 #include "Card/Card.h"
 #include "Script/Script.h"
 #include "ConsoleHandler.h"
+#include "Game.h"
 
 int main()
 {
@@ -22,8 +23,10 @@ int main()
         std::cout << color("1.", Color::Bright_Red) << " Emma" << std::endl;
         std::cout << color("2.", Color::Bright_Red) << " Tonio" << std::endl;
         std::cout << color("3.", Color::Bright_Red) << " Martin (bg le gars)  M'ouais" << std::endl;
-        std::cout << color("4.", Color::Bright_Red) << " Fini la seance de test" << std::endl;
+        std::cout << color("4.", Color::Bright_Red) << " Lancer une partie" << std::endl;
+        std::cout << color("5.", Color::Bright_Red) << " Fini la seance de test" << std::endl;
         std::cin >> saisie;
+        Game g;
         switch (saisie)
         {
             case 1:
@@ -39,9 +42,12 @@ int main()
                 ///Appel fct Martin
                 diceMenu();
                 break;
+            case 4:
+                g.start();
+                break;
             default: break;
         }
-    } while (saisie != 4);
+    } while (saisie != 5);
 
 
     return 0;

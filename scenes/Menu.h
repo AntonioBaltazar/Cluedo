@@ -17,6 +17,7 @@ public:
 
     void render();
     void displayFile(std::string fileName, int translateX, int translateY);
+    void renderHorizontalBar(int translateX, int translateY);
 };
 
 
