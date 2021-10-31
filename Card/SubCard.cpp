@@ -95,6 +95,22 @@ void card_Package_Display(std::vector<Card> myPackage)
     }
 }
 
+///Player picks a card and that card is removed from the package, returns the picked card
+Card card_pick(std::vector<Card> &myPackage)
+{
+    Card temp ;
+    auto picked_elem = myPackage.end()-1;
+
+    temp.setType(picked_elem->getType());
+    temp.setName(picked_elem->getName());
+
+    myPackage.erase(picked_elem);
+
+    return temp;
+
+}
+
+
 
 ///Optionnal
 void card_Management()
@@ -113,17 +129,4 @@ void card_Management()
 
 }
 
-///Player picks a card and that card is removed from the package, returns the picked card
-Card card_pick(std::vector<Card> &myPackage)
-{
-    Card temp ;
-    auto picked_elem = myPackage.end()-1;
 
-    temp.setType(picked_elem->getType());
-    temp.setName(picked_elem->getName());
-
-    myPackage.erase(picked_elem);
-
-    return temp;
-
-}

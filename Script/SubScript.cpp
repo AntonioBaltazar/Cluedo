@@ -1,5 +1,6 @@
 #include "Script.h"
 #include "../Card/Card.h"
+#include "../Utils.h"
 #include <vector>
 #include <time.h>
 #include <iostream>
@@ -35,4 +36,20 @@ void script_Creation()
     }
 
     //std::cout<<"Mr Lenoir was killed by "<<myScript.getPerson()<<" with a "<<myScript.getWeapon()<<" in "<<myScript.getRoom()<<std::endl;
+}
+
+///Verify if the hypothesis made by a player is correct, and diplsay the answer
+void hypothesis_verification(Script solution, Script hypothesis)
+{
+    bool correct;
+
+    if( (hypothesis.getPerson() == solution.getPerson()) && (hypothesis.getRoom() == solution.getRoom()) && (hypothesis.getWeapon() == solution.getWeapon()) )
+        correct = true;
+    else
+        correct = false;
+
+    if(correct)
+    {
+
+    }
 }
