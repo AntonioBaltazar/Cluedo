@@ -30,5 +30,6 @@ public:
 };
 
 void script_Creation();
+void hypothesis_verification(Script solution, Script hypothesis);
 
 #endif // SCRIPT_H_INCLUDED
