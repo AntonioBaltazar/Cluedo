@@ -53,7 +53,9 @@ public:
     // Methods
     void addMessage(Message msg);
     void displayBorders(int topY, int bottomY);
+    void displayBordersPers(int X, int X2,int Y, int Y2);
     void displayMessage();
+    void displayMessagePers(int X, int X2,int Y, int Y2);
     void displayConversation();
 
 };
