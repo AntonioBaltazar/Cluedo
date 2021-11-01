@@ -3,11 +3,13 @@
 #include <queue>
 #include <conio.h>
 #include <windows.h>
+#include <time.h>
 #include "../Utils.h"
 #include "Blackhole.h"
 #include "Dice.h"
 #include "../Dialog.h"
 #include "../scenes/Menu.h"
+#include "../AnimatedElement.h"
 
 // Constructors & Destructor
 Dice::Dice() : GraphicElement() {}
@@ -22,33 +24,40 @@ void Dice::setValue(int value) { m_value = value; }
 
 // Methods
 void Dice::random(int maxValue = 6) { setValue(rand() % maxValue + 1); }
+
+void Dice::throwing()
+{
+    AnimatedElement border(0, 0);
+    AnimatedElement value(2,1);
+    border.render("dice/border");
+    srand(time(NULL));
+    int r;
+    int v = 0;
+    for (int i = 0; i < 40; i++)
+    {
+        r = rand() % 6 + 1;
+        value.clearArea(9, 5);
+        value.render("dice/" + std::to_string(r));
+        int sleep = (float)1/(i/2+1) * 180;
+        Sleep(sleep);
+        v++;
+    }
+}
+
 void Dice::render()
 {
-    GraphicElement::loadDatasFromFile(std::to_string(getValue()));
-    GraphicElement::render();
+    throwing();
+    //GraphicElement::loadDatasFromFile(std::to_string(getValue()));
+    //GraphicElement::render();
 }
 
 void diceMenu()
 {
     system("cls");
+    Dice d;
+    d.throwing();
 
-    /*Dialog d;
-    Person martin("MARTIN", Color::Bright_Cyan);
-    Person tonio("ANTONIO", Color::Bright_Green);
-    Person emma("EMMA", Color::Bright_Magenta);
-    std::queue<Message> msgs;
-    msgs.push(Message(tonio, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ex tortor, commodo nec ligula sit amet, condimentum bibendum erat. Suspendisse potenti."));
-    msgs.push(Message(martin, "*marche dans les couloirs avec Tonio*"));
-    msgs.push(Message(emma, "bouh"));
-    msgs.push(Message(tonio, "Ouhhouhh c'est la maison de l'horreur ici.."));
+    while(!kbhit());
 
-    d.getMessages() = msgs;
-
-    d.displayConversation();*/
-    Menu m;
-    m.render();
-    system("cls");
-    Blackhole bh(15, 2, "blackhole", "Trou noir");
-    bh.render(" passe un tour dans le trou noir seul..", "Martin");
 }
 

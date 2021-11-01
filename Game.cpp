@@ -20,8 +20,10 @@ void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
 // Methods
 void Game::start()
 {
+    // Getting datas before launching new game
     askNbOfPlayers();
     askAccountOfPlayers();
+
     system("cls");
     std::cout << "Pseudos:\n";
     for (size_t i = 0; i < getPlayers().size(); i++)

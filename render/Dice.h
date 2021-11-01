@@ -21,6 +21,7 @@ public:
 
     // Methods
     void random(int);
+    void throwing();
     void render();
 };
 
