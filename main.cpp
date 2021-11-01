@@ -11,7 +11,7 @@
 int main()
 {
     // Resize console, hide cursor, get title & allow colors
-    //initConsole("Cluedoremifasollasi");
+    initConsole("Cluedoremifasollasi");
 
     int saisie = 0;
     Script myScript("Tonio","Uranus","spoon");
