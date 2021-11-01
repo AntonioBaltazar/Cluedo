@@ -20,6 +20,49 @@ void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
 void Game::start()
 {
     askNbOfPlayers();
+    askAccountOfPlayers();
+    while (!kbhit());
+}
+
+void Game::askAccountOfPlayers()
+{
+    system("cls");
+    std::string adjectives[] = {"Premier", "Second", "Troisi", "Quatri", "Cinqui", "Sixi"};
+
+    AnimatedElement sharp(16, 11);
+    AnimatedElement nb(32, 11);
+    sharp.render("numbers/sharp");
+
+    int saisie, index;
+
+    for (int i = 0; i < getNbOfPlayers(); i++)
+    {
+        std::string pseudo;
+        nb.clearArea(14, 7);
+        nb.render("numbers/" + std::to_string(i+1));
+        gotoxy(48, 12);
+        std::cout << color(adjectives[i], Color::Bright_Yellow);
+        if (i > 1) std::cout << color(char(138), Color::Bright_Yellow) << color("me", Color::Bright_Yellow);
+        std::cout << color(" joueur,", Color::Bright_White);
+        printAt(48, 13, color("saississez votre nom :", Color::Bright_White));
+
+        do
+        {
+            saisie = getInput();
+            if ((saisie >= 'a' && saisie <= 'z') || (saisie >= 'A' && saisie <= 'Z') || saisie == ' ')
+            {
+                std::cout << char(saisie);
+                pseudo[index] = (char)saisie;
+                index++;
+            } else if (saisie == 8 && index > 0)
+            {
+                 pseudo[index] = ' ';
+                 index--;
+            }
+        } while (saisie != 13 || saisie < 2);
+        std::cout << "votre pseudo: " << pseudo;
+
+    }
 }
 
 void Game::askNbOfPlayers()
@@ -46,6 +89,6 @@ void Game::askNbOfPlayers()
         saisie = getch();
         if (saisie == 72 && nbOfPlayers < 6) nbOfPlayers++;
         if (saisie == 80 && nbOfPlayers > 2) nbOfPlayers--;
-        //std::cout << nbOfPlayers << "\n";
     } while (saisie != 13);
+    setNbOfPlayers(nbOfPlayers);
 }

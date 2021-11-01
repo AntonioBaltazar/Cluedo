@@ -19,6 +19,7 @@ public:
     // Methods
     void start();
     void askNbOfPlayers();
+    void askAccountOfPlayers();
 };
 
 #endif // GAME_H_INCLUDED
