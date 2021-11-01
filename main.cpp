@@ -37,8 +37,8 @@ int main()
                 ///Appel fct Tonio
                 //Card Package Creation, Mixture and dislpay
                 //card_Management();
-                script_Creation();
                 system("cls");
+                script_Creation();
                 break;
             case 3:
                 ///Appel fct Martin

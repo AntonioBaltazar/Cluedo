@@ -43,10 +43,7 @@ void script_Creation()
 ///Verify if the hypothesis made by a player is correct, and diplsay the answer
 void hypothesis_verification(Script solution, Script hypothesis)
 {
-    bool correct;
     Person p("Cluedo",Color::Blue);
-    Message correct_answer(p,"Your guess is right !");
-    Message wrong_answer(p,"Your guess is wrong !");
 
     Dialog chat;
 
@@ -55,5 +52,6 @@ void hypothesis_verification(Script solution, Script hypothesis)
     else
         chat.addMessage(Message(p,"Your guess is wrong !"));
 
-    chat.displayConversation();
+    chat.displayBordersPers(3,113,2,24);
+    chat.displayMessagePers(3,113,2,24);
 }

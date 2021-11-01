@@ -5,7 +5,6 @@ Person : Jacquis
 Person : Michel
 Person : Marie
 
-
 Planet : Pluton
 Planet : Venus
 Planet : Saturne
