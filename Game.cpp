@@ -12,6 +12,7 @@ Game::~Game() {}
 
 // Getters
 int Game::getNbOfPlayers() const { return m_nbOfPlayers; }
+std::vector<Person>& Game::getPlayers() { return m_players; }
 
 // Setters
 void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
@@ -21,6 +22,10 @@ void Game::start()
 {
     askNbOfPlayers();
     askAccountOfPlayers();
+    system("cls");
+    std::cout << "Pseudos:\n";
+    for (size_t i = 0; i < getPlayers().size(); i++)
+        std::cout << getPlayers()[i].getName() << "\n";
     while (!kbhit());
 }
 
@@ -38,7 +43,13 @@ void Game::askAccountOfPlayers()
     for (int i = 0; i < getNbOfPlayers(); i++)
     {
         std::string pseudo;
+        index = 0;
+        // Clearing old text
         nb.clearArea(14, 7);
+        for (int i = 0; i < 28; i++)
+            for (int j = 0; j < 3; j++)
+                printAt(48+i, 12+j, " ");
+
         nb.render("numbers/" + std::to_string(i+1));
         gotoxy(48, 12);
         std::cout << color(adjectives[i], Color::Bright_Yellow);
@@ -49,19 +60,19 @@ void Game::askAccountOfPlayers()
         do
         {
             saisie = getInput();
-            if ((saisie >= 'a' && saisie <= 'z') || (saisie >= 'A' && saisie <= 'Z') || saisie == ' ')
+            if (((saisie >= 'a' && saisie <= 'z') || (saisie >= 'A' && saisie <= 'Z') || saisie == ' ') && index < 19)
             {
-                std::cout << char(saisie);
-                pseudo[index] = (char)saisie;
+                pseudo += (char)saisie;
+                printAt(48 + index, 14, std::string(1, char(saisie)));
                 index++;
             } else if (saisie == 8 && index > 0)
             {
-                 pseudo[index] = ' ';
+                 pseudo.pop_back();
                  index--;
+                 printAt(48 + index, 14, " ");
             }
         } while (saisie != 13 || saisie < 2);
-        std::cout << "votre pseudo: " << pseudo;
-
+        getPlayers().push_back(Person(pseudo, Color::Bright_Cyan));
     }
 }
 
