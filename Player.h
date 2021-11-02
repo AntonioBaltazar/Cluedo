@@ -1,6 +1,8 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
+#include "render/Square.h"
+
 class Player : public Person {
 private:
     int m_x;
@@ -21,6 +23,9 @@ public:
     void setX(int x);
     void setY(int y);
     void setWorldName(std::string worldName);
+
+    // Methods
+    bool canMoveTo(int dirX, int dirY, std::vector<Square>);
 };
 
 

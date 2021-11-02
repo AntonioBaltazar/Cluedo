@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Dialog.h"
 #include "Player.h"
+#include "render/Square.h"
 
 // Constructors & Destructor
 Player::Player() : Person() {}
@@ -19,3 +20,10 @@ void Player::setY(int y) { m_y = y; }
 void Player::setWorldName(std::string worldName) { m_worldName = worldName; }
 
 // Methods
+bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)
+{
+    for (const auto& el : world)
+        if (el.getX() == getX() + 2*dirX && el.getY() == getY() + dirY)
+            return false;
+    return true;
+}

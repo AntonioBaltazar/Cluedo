@@ -56,10 +56,10 @@ void Game::displayMap(Player p)
             printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
         }
         saisie = getInput();
-        if (saisie == 72) p.setY(p.getY()-1);
-        if (saisie == 80) p.setY(p.getY()+1);
-        if (saisie == 75) p.setX(p.getX()-2);
-        if (saisie == 77) p.setX(p.getX()+2);
+        if (saisie == 72 && p.canMoveTo(0, -1, pWorld)) p.setY(p.getY()-1);
+        if (saisie == 80 && p.canMoveTo(0, 1, pWorld)) p.setY(p.getY()+1);
+        if (saisie == 75 && p.canMoveTo(-1, 0, pWorld)) p.setX(p.getX()-2);
+        if (saisie == 77 && p.canMoveTo(1, 0, pWorld)) p.setX(p.getX()+2);
 
     } while (saisie != 13);
 
