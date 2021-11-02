@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "AnimatedElement.h"
 #include "Utils.h"
+#include "Player.h"
 
 // Constructors & Destructor
 Game::Game() {}
@@ -21,14 +22,47 @@ void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
 void Game::start()
 {
     // Getting datas before launching new game
-    askNbOfPlayers();
+    /*askNbOfPlayers();
     askAccountOfPlayers();
 
     system("cls");
     std::cout << "Pseudos:\n";
     for (size_t i = 0; i < getPlayers().size(); i++)
         std::cout << getPlayers()[i].getName() << "\n";
-    while (!kbhit());
+    while (!kbhit());*/
+    system("cls");
+    Player p("Martin", Color::Bright_Green, 2, 2, "maps/mars");
+    displayMap(p);
+    while(!kbhit());
+    //displayMap();
+}
+void Game::displayMap(Player p)
+{
+    AnimatedElement ae;
+    std::vector<Square> pWorld;
+    ae.saveAsMap(pWorld, std::string(p.getWorldName()));
+
+    int realX = 60;
+    int realY = 13;
+    int saisie;
+
+    // Print player
+
+    do {
+        system("cls");
+        printAt(realX, realY, "X");
+        for (const auto& el : pWorld)
+        {
+            printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
+        }
+        saisie = getInput();
+        if (saisie == 72) p.setY(p.getY()-1);
+        if (saisie == 80) p.setY(p.getY()+1);
+        if (saisie == 75) p.setX(p.getX()-2);
+        if (saisie == 77) p.setX(p.getX()+2);
+
+    } while (saisie != 13);
+
 }
 
 void Game::askAccountOfPlayers()

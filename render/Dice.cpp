@@ -4,16 +4,15 @@
 #include <conio.h>
 #include <windows.h>
 #include <time.h>
-#include "../Utils.h"
-#include "Blackhole.h"
+
 #include "Dice.h"
+#include "../Utils.h"
 #include "../Dialog.h"
-#include "../scenes/Menu.h"
 #include "../AnimatedElement.h"
 
 // Constructors & Destructor
-Dice::Dice() : GraphicElement() {}
-Dice::Dice(int x, int y, std::string path, int value) : GraphicElement(x, y, path), m_value(value) {}
+Dice::Dice() {}
+Dice::Dice(int value) : m_value(value) {}
 Dice::~Dice() {}
 
 // Getters
@@ -31,33 +30,26 @@ void Dice::throwing()
     AnimatedElement value(2,1);
     border.render("dice/border");
     srand(time(NULL));
-    int r;
+
     int v = 0;
     for (int i = 0; i < 40; i++)
     {
-        r = rand() % 6 + 1;
+        random(6);
         value.clearArea(9, 5);
-        value.render("dice/" + std::to_string(r));
+        value.render("dice/" + std::to_string(getValue()));
         int sleep = (float)1/(i/2+1) * 180;
         Sleep(sleep);
         v++;
     }
 }
 
-void Dice::render()
-{
-    throwing();
-    //GraphicElement::loadDatasFromFile(std::to_string(getValue()));
-    //GraphicElement::render();
-}
-
 void diceMenu()
 {
     system("cls");
     Dice d;
+
     d.throwing();
 
     while(!kbhit());
 
 }
-

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Dialog.h"
+#include "Player.h"
 
 class Game {
 private:
@@ -25,6 +26,7 @@ public:
     void start();
     void askNbOfPlayers();
     void askAccountOfPlayers();
+    void displayMap(Player p);
 };
 
 #endif // GAME_H_INCLUDED

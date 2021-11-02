@@ -1,6 +1,9 @@
 #ifndef ANIMATEDELEMENT_H_INCLUDED
 #define ANIMATEDELEMENT_H_INCLUDED
 
+#include <vector>
+#include "render/Square.h"
+
 class AnimatedElement {
 private:
     int m_translatedX;
@@ -22,6 +25,7 @@ public:
     // Methods
     void render(std::string pathName);
     void clearArea(int width, int height);
+    void saveAsMap(std::vector<Square>& world, std::string worldName);
 };
 
 

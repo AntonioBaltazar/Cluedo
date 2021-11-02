@@ -30,6 +30,7 @@ std::string color(std::string str, Color c);
 std::string color(char ch, Color c);
 std::string color(unsigned char ch, Color c);
 Color getColor(int c);
+Color getColorHex(int c);
 std::vector<std::string> strSplit(std::string str, std::string delimiter);
 int getInput();
 void printAt(int x, int y, std::string str);

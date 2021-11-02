@@ -5,12 +5,12 @@
 
 void diceMenu();
 
-class Dice : public GraphicElement {
+class Dice {
 private:
     int m_value;
 public:
     Dice();
-    Dice(int, int, std::string, int);
+    Dice(int);
     ~Dice();
 
     // Getters
@@ -22,7 +22,6 @@ public:
     // Methods
     void random(int);
     void throwing();
-    void render();
 };
 
 #endif // DICE_H_INCLUDED
