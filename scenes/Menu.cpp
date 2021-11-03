@@ -78,9 +78,6 @@ void Menu::render()
     l5.join();
     l6.join();
     renderHorizontalBar(47, 9);
-
-    while(!kbhit());
-    int ch = getch();
 }
 
 void Menu::renderHorizontalBar(int translateX, int translateY)
@@ -93,4 +90,27 @@ void Menu::renderHorizontalBar(int translateX, int translateY)
         std::cout << char(std::stoi("205"));
         Sleep(40);
     }
+}
+
+void Menu::launch()
+{
+    render();
+    int choice = 1;
+    int input;
+    std::string sentences[] = {"1. Nouvelle partie", "2. Reprendre une partie", "3. Regles du jeu", "4. Tableau des scores",
+                               "5. Credits", "6. Quitter"};
+
+    do
+    {
+        if (input == 75 && choice > 1) choice--; //flèche de gauche
+        if (input == 77 && choice < 6) choice++; //flèche de droite
+        for (int i = 0; i < 40; i++) printAt(40+i, 20, " ");
+        gotoxy(46, 20);
+        std::cout << (choice > 1 ? char(17) : ' ');
+        gotoxy(74, 20);
+        std::cout << (choice < 6 ? char(16) : ' ');
+        printAt(60 - sentences[choice-1].size()/2, 20, color(sentences[choice-1], Color::Bright_Cyan));
+        input = getInput();
+    } while (input != 13);
+
 }
