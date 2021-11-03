@@ -49,9 +49,9 @@
 		<Unit filename="Game.h" />
 		<Unit filename="GraphicElement.cpp" />
 		<Unit filename="GraphicElement.h" />
-		<Unit filename="Menu.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.h" />
 		<Unit filename="PrintThread.h" />
 		<Unit filename="Script/Script.cpp" />
 		<Unit filename="Script/Script.h" />
@@ -65,6 +65,8 @@
 		<Unit filename="render/Dice.h" />
 		<Unit filename="render/Planet.cpp" />
 		<Unit filename="render/Planet.h" />
+		<Unit filename="render/Square.cpp" />
+		<Unit filename="render/Square.h" />
 		<Unit filename="scenes/Menu.cpp" />
 		<Unit filename="scenes/Menu.h" />
 		<Extensions>

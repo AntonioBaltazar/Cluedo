@@ -23,7 +23,19 @@ void Player::setWorldName(std::string worldName) { m_worldName = worldName; }
 bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)
 {
     for (const auto& el : world)
-        if (el.getX() == getX() + 2*dirX && el.getY() == getY() + dirY)
+        if (el.getX() == getX() + 2*dirX && el.getY() == getY() + dirY && el.getType() != SquareType::TELEPORTER)
             return false;
     return true;
+}
+
+void Player::npcAround(std::vector<Square> world)
+{
+    // Searching npcs
+    std::vector<Square> npcs;
+    for (const auto& el : world)
+        if (el.getType() == SquareType::NPC)
+            npcs.push_back(el);
+
+    //for (const auto& el : npcs)
+      //  if ()
 }

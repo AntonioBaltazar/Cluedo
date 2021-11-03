@@ -25,7 +25,8 @@ public:
     void setWorldName(std::string worldName);
 
     // Methods
-    bool canMoveTo(int dirX, int dirY, std::vector<Square>);
+    bool canMoveTo(int dirX, int dirY, std::vector<Square> world);
+    void npcAround(std::vector<Square> world);
 };
 
 
