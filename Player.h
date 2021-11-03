@@ -27,6 +27,7 @@ public:
     // Methods
     bool canMoveTo(int dirX, int dirY, std::vector<Square> world);
     void npcAround(std::vector<Square> world);
+    void menuAction();
 };
 
 

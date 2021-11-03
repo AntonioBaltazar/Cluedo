@@ -95,15 +95,12 @@ void Menu::renderHorizontalBar(int translateX, int translateY)
 void Menu::launch()
 {
     render();
-    int choice = 1;
-    int input;
-    std::string sentences[] = {"1. Nouvelle partie", "2. Reprendre une partie", "3. Regles du jeu", "4. Tableau des scores",
-                               "5. Credits", "6. Quitter"};
-
+    int input, choice = 1;
+    std::string sentences[] = {"1. Nouvelle partie", "2. Reprendre une partie", "3. Regles du jeu", "4. Tableau des scores", "5. Credits", "6. Quitter"};
     do
     {
-        if (input == 75 && choice > 1) choice--; //flèche de gauche
-        if (input == 77 && choice < 6) choice++; //flèche de droite
+        if (input == 75 && choice > 1) choice--;
+        if (input == 77 && choice < 6) choice++;
         for (int i = 0; i < 40; i++) printAt(40+i, 20, " ");
         gotoxy(46, 20);
         std::cout << (choice > 1 ? char(17) : ' ');

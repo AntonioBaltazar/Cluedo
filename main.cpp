@@ -28,11 +28,13 @@ int main()
         std::cin >> saisie;
         Game g;
         Menu m;
+        Player p;
         switch (saisie)
         {
             case 1:
                 ///Appel fct Emma
-                m.launch();
+                //m.launch();
+                p.menuAction();
                 break;
             case 2:
                 ///Appel fct Tonio

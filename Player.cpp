@@ -39,3 +39,26 @@ void Player::npcAround(std::vector<Square> world)
     //for (const auto& el : npcs)
       //  if ()
 }
+
+void Player::menuAction()
+{
+    int input, choice = 1;
+    std::string sentences[] = {"1. Se deplacer", "2. Enoncer une hypothese"};
+    do
+    {
+        if (input == 72 && choice > 1) choice--;
+        if (input == 80 && choice < 2) choice++;
+        for (int i = 0; i < 40; i++) printAt(65+i, 20, " ");
+        printAt(80 - sentences[choice-1].size()/2, 20, sentences[choice-1]);
+        input = getInput();
+    } while (input != 13);
+
+    switch(choice)
+    {
+        case 1 :
+            break;
+        case 2 :
+            break;
+    }
+}
+
