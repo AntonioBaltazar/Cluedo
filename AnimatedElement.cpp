@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "AnimatedElement.h"
 #include "Utils.h"
+#include "render/Square.h"
 
 // Constructors & Destructor
 AnimatedElement::AnimatedElement() {}
@@ -21,6 +22,38 @@ void AnimatedElement::setTranslatedX(int translatedX) { m_translatedX = translat
 void AnimatedElement::setTranslatedY(int translatedY) { m_translatedY = translatedY; }
 
 // Methods
+
+void AnimatedElement::saveAsMap(std::vector<Square>& world, std::string worldName)
+{
+    std::ifstream f;
+    std::string content;
+
+    Color current = Color::Bright_White;
+
+    f.open("ressources/" + worldName + ".txt");
+
+    //Reading data from the file, line by line
+    while (std::getline(f, content))
+    {
+        if (content[0] == '%')
+        {
+            content.erase(remove(content.begin(), content.end(), '%'), content.end());
+            current = getColor(std::stoi(content));
+        } else if (content[0] == '$')
+        {
+            content.erase(remove(content.begin(), content.end(), '$'), content.end());
+            std::vector<std::string> strs = strSplit(content, ":");
+            for (int i = std::stoi(strs[0]); i < std::stoi(strs[2]); i++)
+                for (int j = std::stoi(strs[1]); j < std::stoi(strs[3]); j++)
+                    world.push_back(Square(i, j, char(std::stoi(strs[4])), current));
+        } else if (content[0] != '#') {
+            std::vector<std::string> strs = strSplit(content, ":");
+            world.push_back(Square(std::stoi(strs[0]), std::stoi(strs[1]), char(std::stoi(strs[2])), current));
+        }
+    }
+    f.close();
+}
+
 void AnimatedElement::render(std::string pathName)
 {
     std::vector<std::string> cluedo;

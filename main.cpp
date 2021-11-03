@@ -7,7 +7,7 @@
 #include "Script/Script.h"
 #include "ConsoleHandler.h"
 #include "Game.h"
-#include "Menu.cpp"
+//#include "Menu.cpp"
 
 int main()
 {
@@ -31,7 +31,7 @@ int main()
         {
             case 1:
                 ///Appel fct Emma
-                menu();
+                //menu();
                 break;
             case 2:
                 ///Appel fct Tonio

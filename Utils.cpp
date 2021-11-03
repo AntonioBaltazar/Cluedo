@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include <winuser.h>
+#include <conio.h>
 #include <string>
 #include <vector>
 
@@ -69,6 +70,19 @@ std::vector<std::string> strSplit(std::string str, std::string delimiter)
     }
     res.push_back(str);
     return res;
+}
+
+int getInput()
+{
+    while(!kbhit());
+    int c = getch();
+    return c;
+}
+
+void printAt(int x, int y, std::string str)
+{
+    gotoxy(x, y);
+    std::cout << str;
 }
 
 void gotoxy(int x, int y)
