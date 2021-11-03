@@ -40,7 +40,7 @@ void Player::npcAround(std::vector<Square> world)
       //  if ()
 }
 
-void Player::menuAction()
+void Player::actionMenu()
 {
     int input, choice = 1;
     std::string sentences[] = {"1. Se deplacer", "2. Enoncer une hypothese"};

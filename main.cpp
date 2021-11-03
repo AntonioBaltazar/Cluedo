@@ -34,7 +34,7 @@ int main()
             case 1:
                 ///Appel fct Emma
                 //m.launch();
-                p.menuAction();
+                p.actionMenu();
                 break;
             case 2:
                 ///Appel fct Tonio
