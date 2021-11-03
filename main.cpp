@@ -7,7 +7,7 @@
 #include "Script/Script.h"
 #include "ConsoleHandler.h"
 #include "Game.h"
-//#include "Menu.cpp"
+#include "scenes/Menu.h"
 
 int main()
 {
@@ -27,11 +27,12 @@ int main()
         std::cout << color("5.", Color::Bright_Red) << " Fini la seance de test" << std::endl;
         std::cin >> saisie;
         Game g;
+        Menu m;
         switch (saisie)
         {
             case 1:
                 ///Appel fct Emma
-                //menu();
+                m.launch();
                 break;
             case 2:
                 ///Appel fct Tonio
