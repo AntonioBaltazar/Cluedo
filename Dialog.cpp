@@ -162,8 +162,8 @@ void Dialog::displayMessagePers(int X, int X2,int Y, int Y2)
     gotoxy(X2-1, Y2-1);
     std::cout << " ";
 
-    int startName = ((Y2-Y)/2) - getMessages().front().getPerson().getName().size();
-    int startMsg = ((Y2-Y)/2);
+    int startName = ((Y2+Y)/2) - getMessages().front().getPerson().getName().size();
+    int startMsg = (((X+X2)/2)- getMessages().front().getContent().size());
     gotoxy(startName, (Y2-Y)/2);
     std::cout << color(getMessages().front().getPerson().getName() + " : ", getMessages().front().getPerson().getColorName());
 
@@ -171,7 +171,8 @@ void Dialog::displayMessagePers(int X, int X2,int Y, int Y2)
     int letters = 0;
     for (const auto& word : strSplit(getMessages().front().getContent(), " "))
     {
-        for (size_t i = 0; i < word.size(); i++) {
+        for (size_t i = 0; i < word.size(); i++)
+        {
             if (letters == 76)
                 gotoxy(startMsg, (Y2-Y)/2);
             if (letters == 152)
