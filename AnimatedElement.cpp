@@ -29,13 +29,17 @@ void AnimatedElement::saveAsMap(std::vector<Square>& world, std::string worldNam
     std::string content;
 
     Color current = Color::Bright_White;
-
     f.open("ressources/" + worldName + ".txt");
 
     //Reading data from the file, line by line
     while (std::getline(f, content))
     {
-        if (content[0] == '%')
+        if (content[0] == '-')
+        {
+            SquareType type = content[1] - '0' == 1 ? SquareType::TELEPORTER :
+                content[1] - '0' == 2 ? SquareType::NPC : SquareType::WALL;
+            world.back().setType(type);
+        } else if (content[0] == '%')
         {
             content.erase(remove(content.begin(), content.end(), '%'), content.end());
             current = getColor(std::stoi(content));

@@ -30,9 +30,11 @@ void Game::start()
     for (size_t i = 0; i < getPlayers().size(); i++)
         std::cout << getPlayers()[i].getName() << "\n";
     while (!kbhit());*/
+
     system("cls");
     Player p("Martin", Color::Bright_Green, 2, 2, "maps/mars");
     displayMap(p);
+
     while(!kbhit());
     //displayMap();
 }
@@ -50,16 +52,16 @@ void Game::displayMap(Player p)
 
     do {
         system("cls");
-        printAt(realX, realY, "X");
         for (const auto& el : pWorld)
-        {
-            printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
-        }
+            printAt((realX - p.getX() + el.getX())%120 , (realY - p.getY() + el.getY())%25, color(el.getContent(), el.getColor()));
+        printAt(realX, realY, "X");
         saisie = getInput();
         if (saisie == 72 && p.canMoveTo(0, -1, pWorld)) p.setY(p.getY()-1);
         if (saisie == 80 && p.canMoveTo(0, 1, pWorld)) p.setY(p.getY()+1);
         if (saisie == 75 && p.canMoveTo(-1, 0, pWorld)) p.setX(p.getX()-2);
         if (saisie == 77 && p.canMoveTo(1, 0, pWorld)) p.setX(p.getX()+2);
+
+        p.npcAround(pWorld);
 
     } while (saisie != 13);
 

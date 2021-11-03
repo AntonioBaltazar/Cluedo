@@ -6,9 +6,11 @@
 #include <time.h>
 
 #include "Dice.h"
+#include "../scenes/Menu.h"
 #include "../Utils.h"
 #include "../Dialog.h"
 #include "../AnimatedElement.h"
+#include "Blackhole.h"
 
 // Constructors & Destructor
 Dice::Dice() {}
@@ -47,7 +49,6 @@ void diceMenu()
 {
     system("cls");
     Dice d;
-
     d.throwing();
 
     while(!kbhit());

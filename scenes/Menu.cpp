@@ -78,10 +78,6 @@ void Menu::render()
     l5.join();
     l6.join();
     renderHorizontalBar(47, 9);
-    //displayFile("menu", 41, 9);
-    //displayFile("menu2", 41, 9);
-    //displayFile("menu3", 41, 9);
-    //displayFile("menu4", 41, 9);
 
     while(!kbhit());
     int ch = getch();
