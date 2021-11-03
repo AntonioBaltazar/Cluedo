@@ -113,4 +113,20 @@ void Menu::launch()
         input = getInput();
     } while (input != 13);
 
+    switch(choice)
+    {
+        case 1 :
+            break;
+        case 2 :
+            break;
+        case 3 :
+            break;
+        case 4 :
+            break;
+        case 5 :
+            break;
+        case 6 :
+            PostMessage(GetConsoleWindow(), WM_CLOSE, 0, 0);
+            break;
+    }
 }
