@@ -6,6 +6,7 @@
 #include "Card.h"
 #include "../Utils.h"
 
+
 ///Read file "CHANGEME.txt" and create a card package depending on the information of the file that will be returned
 std::vector<Card> card_Creation()
 {
@@ -27,6 +28,7 @@ std::vector<Card> card_Creation()
     }
     return myPackage;
 }
+
 
 ///Get a string wich represents a line of the file CHANGEME.txt and create a card that will be returned
 Card card_convert(std::string content)
@@ -68,6 +70,7 @@ std::vector<Card> card_Shuffle(std::vector<Card> myPackage)
     return myPackage;
 }
 
+
 ///Displays every card of the package
 void card_Package_Display(std::vector<Card> myPackage)
 {
@@ -95,6 +98,7 @@ void card_Package_Display(std::vector<Card> myPackage)
     }
 }
 
+
 ///Player picks a card and that card is removed from the package, returns the picked card
 Card card_pick(std::vector<Card> &myPackage)
 {
@@ -109,7 +113,6 @@ Card card_pick(std::vector<Card> &myPackage)
     return temp;
 
 }
-
 
 
 ///Optionnal

@@ -3,6 +3,7 @@
 
 #include <queue>
 #include "Utils.h"
+#include "Script/Script.h"
 
 class Person {
 private:
@@ -55,8 +56,9 @@ public:
     void displayBorders(int topY, int bottomY);
     void displayBordersPers(int X, int X2,int Y, int Y2);
     void displayMessage();
-    void displayMessagePers(int X, int X2,int Y, int Y2);
+    void displayMessResultHyp(int X,int Y);
     void displayConversation();
+    void displayHypothesisVerification(Script solution, Script hypothesis);
 
 };
 

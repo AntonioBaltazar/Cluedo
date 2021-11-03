@@ -4,6 +4,7 @@
 #include "Dialog.h"
 #include "Utils.h"
 #include <conio.h>
+#include "Script/Script.h"
 
 // Constructos & Destructor
 Dialog::Dialog() {}
@@ -114,7 +115,7 @@ void Dialog::displayBorders(int topY = 22, int bottomY = 28)
     }
 }
 
-
+///Display borders with customized coordinates
 void Dialog::displayBordersPers(int X, int X2,int Y, int Y2)
 {
     // Top & Bottom
@@ -146,41 +147,69 @@ void Dialog::displayBordersPers(int X, int X2,int Y, int Y2)
     }
 }
 
-
-void Dialog::displayMessagePers(int X, int X2,int Y, int Y2)
+///Display only the result of the hypothesis
+void Dialog::displayMessResultHyp(int X,int Y)
 {
-    gotoxy(X+10,Y+5);
-
-    for (int j = 0; j < 3; j++)
-    {
-        for (int i = 0; i < (X-X2); i++)
-            std::cout << " ";
-        gotoxy(X+4, Y+j);
-
-    }
-
-    gotoxy(X2-1, Y2-1);
-    std::cout << " ";
-
-    int startName = ((Y2-Y)/2) - getMessages().front().getPerson().getName().size();
-    int startMsg = ((Y2-Y)/2);
-    gotoxy(startName, (Y2-Y)/2);
-    std::cout << color(getMessages().front().getPerson().getName() + " : ", getMessages().front().getPerson().getColorName());
-
     // TypeWriter's effect
     int letters = 0;
+
+    //Color's choice
+    Color myColor = getMessages().front().getContent() == "Your guess is wrong !" ? Color::Red : Color::Green;
+
+    gotoxy(X+10, Y+3);
+    //Message Display
     for (const auto& word : strSplit(getMessages().front().getContent(), " "))
     {
-        for (size_t i = 0; i < word.size(); i++) {
-            if (letters == 76)
-                gotoxy(startMsg, (Y2-Y)/2);
-            if (letters == 152)
-                gotoxy(startMsg, (Y2-Y)/2);
-            std::cout << color(word[i], Color::White);
+
+        for (size_t i = 0; i < word.size(); i++)
+        {
+            if (letters == 36)
+                gotoxy(X+2, 12);
+            if (letters == 72)
+                gotoxy(X+2, 13);
+            std::cout << color(word[i], myColor);
             Sleep(rand() % 45 + 20);
             letters++;
         }
         std::cout << " ";
     }
+    std::cout << "\n\n\n\n\n\n\n";
+}
 
+///Verify if the hypothesis made by a player is correct, and diplsay the answer
+void Dialog::displayHypothesisVerification(Script solution, Script hypothesis)
+{
+    Person p;
+
+    if( (hypothesis.getPerson() == solution.getPerson()) && (hypothesis.getRoom() == solution.getRoom()) && (hypothesis.getWeapon() == solution.getWeapon()) )
+        addMessage(Message(p,"Your guess is right !"));
+    else
+        addMessage(Message(p,"Your guess is wrong !"));
+
+    displayBordersPers(40,80,10,16);
+
+    displayMessResultHyp(40,10);
+
+/*
+    while (!getMessages().empty())
+    {
+        displayResultHyp();
+        while (!kbhit())
+        {
+            gotoxy(115, 24);
+            std::cout << "\033[97m";
+            std::cout << char(std::stoi("31"));
+            std::cout << "\033[37m";
+            if (kbhit()) break;
+            Sleep(600);
+
+            gotoxy(115, 24);
+            std::cout << " ";
+            if (kbhit()) break;
+            Sleep(600);
+
+        }
+        char ch = getch();
+        getMessages().pop();
+    }*/
 }

@@ -11,19 +11,16 @@
 void script_Creation()
 {
     Script myScript;
-    Script guess;
     std::vector<Card> myPackage = card_Creation();
     std::vector<Card>::iterator it;
 
-    guess.setPerson("Jean");
-    guess.setRoom("Jean");
-    guess.setWeapon("Jean");
     myPackage = card_Shuffle(myPackage);
 
     ///Test if it is a person card, if yes we set this person as the murderer of Mr Lenoir
     for(it = myPackage.begin();  it != myPackage.end() ; it++ )
         if(it->getType()== "Person")
             myScript.setPerson(it->getName());
+
 
     ///Test if it is a room card, if yes we set this room as the place of the murder of Mr Lenoir
     for(it = myPackage.begin();  it != myPackage.end() ; it++ )
@@ -35,23 +32,10 @@ void script_Creation()
         if(it->getType()== "Weapon")
             myScript.setWeapon(it->getName());
 
-    hypothesis_verification(myScript,guess);
+    /// ******** Utilisé uniquement pour des tests ********* ///
+    Script jsp;
+    Dialog d;
+    d.displayHypothesisVerification(myScript,jsp );
 
     //std::cout<<"Mr Lenoir was killed by "<<myScript.getPerson()<<" with a "<<myScript.getWeapon()<<" in "<<myScript.getRoom()<<std::endl;
-}
-
-///Verify if the hypothesis made by a player is correct, and diplsay the answer
-void hypothesis_verification(Script solution, Script hypothesis)
-{
-    Person p("Cluedo",Color::Blue);
-
-    Dialog chat;
-
-    if( (hypothesis.getPerson() == solution.getPerson()) && (hypothesis.getRoom() == solution.getRoom()) && (hypothesis.getWeapon() == solution.getWeapon()) )
-        chat.addMessage(Message(p,"Your guess is right !"));
-    else
-        chat.addMessage(Message(p,"Your guess is wrong !"));
-
-    chat.displayBordersPers(3,113,2,24);
-    chat.displayMessagePers(3,113,2,24);
 }

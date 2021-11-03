@@ -5,13 +5,12 @@ Person : Jacquis
 Person : Michel
 Person : Marie
 
-Planet : Pluton
 Planet : Venus
 Planet : Saturne
 Planet : Mars
-Planet : Uranus
-Planet : Terre
-Planet : Soleil
+Planet : Mercure
+Planet : Jupiter
+Planet : Neptune
 
 Weapon : fusils
 Weapon : pistolet
