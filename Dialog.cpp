@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <conio.h>
+
 #include "Dialog.h"
 #include "Utils.h"
-#include <conio.h>
-#include "Script/Script.h"
 
 // Constructos & Destructor
 Dialog::Dialog() {}
@@ -176,17 +176,4 @@ void Dialog::displayMessResultHyp(int X,int Y)
     std::cout << "\n\n\n\n\n\n\n";
 }
 
-///Verify if the hypothesis made by a player is correct, and diplsay the answer
-void Dialog::displayHypothesisVerification(Script solution, Script hypothesis)
-{
-    Person p;
 
-    if( (hypothesis.getPerson() == solution.getPerson()) && (hypothesis.getRoom() == solution.getRoom()) && (hypothesis.getWeapon() == solution.getWeapon()) )
-        addMessage(Message(p,"Your guess is right !"));
-    else
-        addMessage(Message(p,"Your guess is wrong !"));
-
-    displayBordersPers(40,80,10,16);
-
-    displayMessResultHyp(40,10);
-}

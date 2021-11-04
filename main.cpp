@@ -15,7 +15,6 @@ int main()
     initConsole("Cluedoremifasollasi");
 
     int saisie = 0;
-    Script myScript("Tonio","Uranus","spoon");
 
     do
     {
@@ -33,15 +32,14 @@ int main()
         {
             case 1:
                 ///Appel fct Emma
-                //m.launch();
-                p.actionMenu();
+                m.launch();
+                //p.actionMenu();
                 break;
             case 2:
                 ///Appel fct Tonio
-                //Card Package Creation, Mixture and dislpay
                 //card_Management();
                 system("cls");
-                script_Creation();
+                script_management();
                 break;
             case 3:
                 ///Appel fct Martin

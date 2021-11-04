@@ -8,59 +8,82 @@
 #include <iostream>
 #include <conio.h>
 
-/// ***************** APPUYER SUR ENTRER POUR CONTINUER ******************* ///
-
-void script_Creation()
+///Manage all the subprograms concerning the script, the hypothesis and the card package
+void script_management()
 {
-    Script myScript;
+    /// Card package creation and shuffle
     std::vector<Card> myPackage = card_Creation();
-    std::vector<Card>::iterator it;
-
     myPackage = card_Shuffle(myPackage);
+
+    /// Script creation
+    Script solution = script_Creation(myPackage);
+
+    /// Player makes an hypothesis
+    Script hypothesis = make_hypothesis(myPackage);
+
+    /// We compare the solution and the hypothesis and display the result
+    HypothesisVerification(solution,hypothesis);
+
+
+}
+
+///Create the solution of the murderer and returns it in a script
+Script script_Creation(std::vector<Card> myPackage)
+{
+    Script solution;
+    std::vector<Card>::iterator it;
 
     ///Test if it is a person card, if yes we set this person as the murderer of Mr Lenoir
     for(it = myPackage.begin();  it != myPackage.end() ; it++ )
         if(it->getType()== "Person")
-            myScript.setPerson(it->getName());
+            solution.setPerson(it->getName());
 
 
     ///Test if it is a room card, if yes we set this room as the place of the murder of Mr Lenoir
     for(it = myPackage.begin();  it != myPackage.end() ; it++ )
         if(it->getType()== "Planet")
-            myScript.setRoom(it->getName());
+            solution.setRoom(it->getName());
 
     ///Test if it is a weapon card, if yes we set this weapon as the object that was used for the murder
     for(it = myPackage.begin();  it != myPackage.end() ; it++ )
         if(it->getType()== "Weapon")
-            myScript.setWeapon(it->getName());
+            solution.setWeapon(it->getName());
 
-    /// ******** Utilisé uniquement pour des tests ********* ///
-    Script hypothesis = make_hypothesis(myPackage);
-    //HypothesisVerification(myScript,hypothesis);
-
-    //std::cout<<"Mr Lenoir was killed by "<<myScript.getPerson()<<" with a "<<myScript.getWeapon()<<" in "<<myScript.getRoom()<<std::endl;
+    return solution;
 }
 
+/// Allow the player to make an hypothesis and returns it
 Script make_hypothesis(std::vector<Card> myPackage)
 {
     Script hypothesis("Tonio","Venus","gun");
+    Person accuser("Accuser",Color::Red);
 
-    display_tab_hyp(hypothesis,myPackage);
+    ///Display all choices possible
+    display_tab_hyp(hypothesis,myPackage, accuser);
 
+    ///Display the sentence of accusation
+    gotoxy(20,23);
+    std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
+    gotoxy(23+accuser.getName().size(),23);
+    std::cout<<"Mr Lenoir was killed by "<<color(hypothesis.getPerson(),Color::Yellow);
+    std::cout<<" in "<<color(hypothesis.getRoom(),Color::Blue);
+    std::cout<<" with a "<<color(hypothesis.getWeapon(),Color::Magenta);
 
+    while(!kbhit());
+    getch();
+    system("CLS");
 
-    gotoxy(5,23);
 
     return hypothesis;
 }
 
 ///Display a tab with all the card possible so that the player can make a choice
-void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage)
+void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser)
 {
     Dialog d;
     int x1=5,x2=41,x3=77,x4=115;
     int y1=2,y2=6,y3=20;
-    //11:192
+
     d.displayBordersPers(x1,x4,y1,y2);
     d.displayBordersPers(x1,x4,y2,y3);
     d.displayBordersPers(x1,x2,y1,y3);
@@ -84,10 +107,7 @@ void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage)
 
     display_elem_tab_hyp(myPackage);
 
-    gotoxy(30,21);
-    std::cout<<"Mr Lenoir was killed by "<<color(hypothesis.getPerson(),Color::Yellow);
-    std::cout<<" in "<<color(hypothesis.getRoom(),Color::Blue);
-    std::cout<<" with a "<<color(hypothesis.getWeapon(),Color::Magenta);
+
 }
 
 ///Display the elements of all cards in our hypothesis tab
@@ -119,8 +139,6 @@ void display_elem_tab_hyp(std::vector<Card> myPackage)
             cmptWeapon = cmptWeapon+2;
         }
     }
-
-
 }
 
 ///Verify if the hypothesis made by a player is wrong or right and display the result
@@ -137,4 +155,8 @@ void HypothesisVerification(Script solution, Script hypothesis)
     d.displayBordersPers(40,80,10,16);
 
     d.displayMessResultHyp(40,10);
+
+    while(!kbhit());
+    getch();
+    system("CLS");
 }

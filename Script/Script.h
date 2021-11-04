@@ -2,7 +2,10 @@
 #define SCRIPT_H_INCLUDED
 
 #include <string>
+
 #include "../Card/Card.h"
+#include "../Utils.h"
+#include "../Dialog.h"
 
 class Script
 {
@@ -30,10 +33,11 @@ public:
     void display();
 };
 
-void script_Creation();
+Script script_Creation(std::vector<Card> myPackage);
 Script make_hypothesis(std::vector<Card> myPackage);
-void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage);
+void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser);
 void display_elem_tab_hyp(std::vector<Card> myPackage);
 void HypothesisVerification(Script solution, Script hypothesis);
+void script_management();
 
 #endif // SCRIPT_H_INCLUDED

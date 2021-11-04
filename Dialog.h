@@ -3,7 +3,7 @@
 
 #include <queue>
 #include "Utils.h"
-#include "Script/Script.h"
+
 
 class Person {
 private:
@@ -58,7 +58,6 @@ public:
     void displayMessage();
     void displayMessResultHyp(int X,int Y);
     void displayConversation();
-    void displayHypothesisVerification(Script solution, Script hypothesis);
 
 };
 
