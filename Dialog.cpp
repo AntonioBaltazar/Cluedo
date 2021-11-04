@@ -189,27 +189,4 @@ void Dialog::displayHypothesisVerification(Script solution, Script hypothesis)
     displayBordersPers(40,80,10,16);
 
     displayMessResultHyp(40,10);
-
-/*
-    while (!getMessages().empty())
-    {
-        displayResultHyp();
-        while (!kbhit())
-        {
-            gotoxy(115, 24);
-            std::cout << "\033[97m";
-            std::cout << char(std::stoi("31"));
-            std::cout << "\033[37m";
-            if (kbhit()) break;
-            Sleep(600);
-
-            gotoxy(115, 24);
-            std::cout << " ";
-            if (kbhit()) break;
-            Sleep(600);
-
-        }
-        char ch = getch();
-        getMessages().pop();
-    }*/
 }

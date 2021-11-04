@@ -91,3 +91,9 @@ void gotoxy(int x, int y)
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
+
+void display_ansi(int x, int y, int cara)
+{
+    gotoxy(x,y);
+    std::cout<<char(cara);
+}

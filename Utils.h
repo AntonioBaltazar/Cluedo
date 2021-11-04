@@ -34,5 +34,6 @@ Color getColorHex(int c);
 std::vector<std::string> strSplit(std::string str, std::string delimiter);
 int getInput();
 void printAt(int x, int y, std::string str);
+void display_ansi(int x, int y, int cara);
 
 #endif // UTILS_H_INCLUDED

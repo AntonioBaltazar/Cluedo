@@ -2,6 +2,7 @@
 #define SCRIPT_H_INCLUDED
 
 #include <string>
+#include "../Card/Card.h"
 
 class Script
 {
@@ -30,6 +31,9 @@ public:
 };
 
 void script_Creation();
-void hypothesis_verification(Script solution, Script hypothesis);
+Script make_hypothesis(std::vector<Card> myPackage);
+void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage);
+void display_elem_tab_hyp(std::vector<Card> myPackage);
+void HypothesisVerification(Script solution, Script hypothesis);
 
 #endif // SCRIPT_H_INCLUDED
