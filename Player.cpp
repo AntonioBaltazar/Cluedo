@@ -28,6 +28,12 @@ bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)
     return true;
 }
 
+void Player::teleport(Square sq)
+{
+    if (sq.getType() == SquareType::TELEPORTER)
+        setWorldName(sq.getTpPath());
+}
+
 void Player::npcAround(std::vector<Square> world)
 {
     // Searching npcs

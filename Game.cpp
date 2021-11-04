@@ -53,14 +53,16 @@ void Game::displayMap(Player p)
     do {
         system("cls");
         for (const auto& el : pWorld)
-            printAt((realX - p.getX() + el.getX())%120 , (realY - p.getY() + el.getY())%25, color(el.getContent(), el.getColor()));
-        printAt(realX, realY, "X");
+            if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
+            printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
+        printAt(realX, realY, color(std::string(1, char(254)), Color::Red));
         saisie = getInput();
         if (saisie == 72 && p.canMoveTo(0, -1, pWorld)) p.setY(p.getY()-1);
         if (saisie == 80 && p.canMoveTo(0, 1, pWorld)) p.setY(p.getY()+1);
         if (saisie == 75 && p.canMoveTo(-1, 0, pWorld)) p.setX(p.getX()-2);
         if (saisie == 77 && p.canMoveTo(1, 0, pWorld)) p.setX(p.getX()+2);
 
+//        p.teleport(pWorld);
         p.npcAround(pWorld);
 
     } while (saisie != 13);

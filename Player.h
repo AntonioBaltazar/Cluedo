@@ -28,6 +28,7 @@ public:
     bool canMoveTo(int dirX, int dirY, std::vector<Square> world);
     void npcAround(std::vector<Square> world);
     void actionMenu();
+    void teleport(Square sq);
 };
 
 
