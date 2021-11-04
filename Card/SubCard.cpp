@@ -21,11 +21,13 @@ std::vector<Card> card_Creation()
             if(content != "")
                 myPackage.push_back(card_convert(content));
 
+
         file.close();
     }else //if not we warn the user
     {
         std::cout << "Cannot read " << path << std::endl;
     }
+
     return myPackage;
 }
 

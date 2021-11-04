@@ -15,6 +15,8 @@ void script_Creation()
     std::vector<Card>::iterator it;
 
     myPackage = card_Shuffle(myPackage);
+        std::cout<<"ok";
+
 
     ///Test if it is a person card, if yes we set this person as the murderer of Mr Lenoir
     for(it = myPackage.begin();  it != myPackage.end() ; it++ )

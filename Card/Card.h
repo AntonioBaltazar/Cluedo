@@ -7,7 +7,7 @@
 #define WEAPON 5
 #define ROOM 5
 #define SUSPECTS 5
-#define NBCARDS 19
+#define NBCARDS 18
 
 class Card
 {
