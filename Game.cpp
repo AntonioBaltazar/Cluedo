@@ -22,17 +22,17 @@ void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
 void Game::start()
 {
     // Getting datas before launching new game
-    askNbOfPlayers();
+    /*askNbOfPlayers();
     askAccountOfPlayers();
 
     system("cls");
     std::cout << "Pseudos:\n";
     for (size_t i = 0; i < getPlayers().size(); i++)
         std::cout << getPlayers()[i].getName() << "\n";
-    while (!kbhit());
+    while (!kbhit());*/
 
     system("cls");
-    Player p("Martin", Color::Bright_Green, 2, 2, "maps/mars");
+    Player p("Martin", Color::Bright_Green, 14, 11, "maps/main");
     displayMap(p);
 
     while(!kbhit());
