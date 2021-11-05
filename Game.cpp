@@ -55,27 +55,27 @@ void Game::start()
     addWorld(board);
 
     system("cls");
-    handlePlayerTurn(martin);
-    handlePlayerTurn(emma);
+    handlePlayerTurn(&martin);
+    handlePlayerTurn(&emma);
 
     while(!kbhit());
     //displayMap();
 }
 
-void Game::handlePlayerTurn(Player p)
+void Game::handlePlayerTurn(Player* p)
 {
     AnimatedElement ae;
     std::vector<Square> pWorld;
-    ae.saveAsWorld(pWorld, std::string(p.getWorldName()));
+    ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
 
     int saisie;
     do {
-        displayMap(p, pWorld);
+        displayMap(*p, pWorld);
         saisie = getInput();
-        if (saisie == 72 && p.canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, &p, getWorldFromName(p.getWorldName()));
-        if (saisie == 80 && p.canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, &p, getWorldFromName(p.getWorldName()));
-        if (saisie == 75 && p.canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, &p, getWorldFromName(p.getWorldName()));
-        if (saisie == 77 && p.canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, &p, getWorldFromName(p.getWorldName()));
+        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromName(p->getWorldName()));
+        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromName(p->getWorldName()));
+        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromName(p->getWorldName()));
+        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromName(p->getWorldName()));
     } while (saisie != 13);
 }
 
