@@ -1,15 +1,13 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
 
-#include <vector>
-#include "Dialog.h"
-#include "Player.h"
 #include "World.h"
+#include "Player.h"
 
 class Game {
 private:
     int m_nbOfPlayers;
-    std::vector<Person> m_players;
+    std::vector<Player> m_players;
     std::vector<World> m_worlds;
 public:
     // Constructors & Destructor
@@ -19,7 +17,7 @@ public:
 
     // Getters
     int getNbOfPlayers() const;
-    std::vector<Person>& getPlayers();
+    std::vector<Player>& getPlayers();
     std::vector<World>& getWorlds();
     World* getWorldFromName(std::string name);
 

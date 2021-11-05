@@ -4,6 +4,7 @@
 #include "../Utils.h"
 
 enum SquareType {
+    DEFAULT,
     WALL,
     TELEPORTER,
     NPC

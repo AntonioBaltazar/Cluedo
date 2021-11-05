@@ -23,7 +23,7 @@ void AnimatedElement::setTranslatedY(int translatedY) { m_translatedY = translat
 
 // Methods
 
-void AnimatedElement::saveAsMap(std::vector<Square>& world, std::string worldName)
+void AnimatedElement::saveAsWorld(std::vector<Square>& world, std::string worldName)
 {
     std::ifstream f;
     std::string content;

@@ -1,12 +1,17 @@
 #include <iostream>
-#include "Dialog.h"
-#include "Player.h"
+#include <vector>
+
+#include "Utils.h"
 #include "render/Square.h"
+
+#include "World.h"
+#include "Player.h"
 
 // Constructors & Destructor
 Player::Player() : Person() {}
 Player::Player(std::string name, Color color, int x, int y, std::string worldName)
     : Person(name, color), m_x(x), m_y(y), m_worldName(worldName) {}
+Player::Player(std::string name, Color color) : Person(name, color) {}
 Player::~Player() {}
 
 // Getters
@@ -27,6 +32,25 @@ bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)
             return false;
     return true;
 }
+
+/*void Player::moveTo(int dirX, int dirY, std::vector<Square> content, World* w)
+{
+    for (const auto& el : content)
+    {
+        if (el.getX() == getX() + 2*dirX && el.getY() == getY() + dirY && el.getType())
+        {
+            if (el.getType() == SquareType::DEFAULT)
+            {
+                setY(getY() + dirY);
+                setX(getX() + 2*dirX);
+            } else if (el.getType() == SquareType::TELEPORTER)
+            {
+                //w->addPlayer((Player*)this);
+            }
+
+        }
+    }
+}*/
 
 void Player::teleport(Square sq)
 {

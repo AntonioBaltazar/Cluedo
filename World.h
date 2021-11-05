@@ -1,6 +1,9 @@
 #ifndef WORLD_H_INCLUDED
 #define WORLD_H_INCLUDED
+
+#include <vector>
 #include "Player.h"
+#include "World.h"
 
 class World {
 private:

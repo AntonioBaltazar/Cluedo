@@ -1,10 +1,14 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
+#include <vector>
+
+#include "World.h"
+#include "Player.h"
 #include "Game.h"
+
 #include "AnimatedElement.h"
 #include "Utils.h"
-#include "Player.h"
 
 // Constructors & Destructor
 Game::Game() {}
@@ -13,7 +17,7 @@ Game::~Game() {}
 
 // Getters
 int Game::getNbOfPlayers() const { return m_nbOfPlayers; }
-std::vector<Person>& Game::getPlayers() { return m_players; }
+std::vector<Player>& Game::getPlayers() { return m_players; }
 std::vector<World>& Game::getWorlds() { return m_worlds; }
 World* Game::getWorldFromName(std::string name)
 {
@@ -60,7 +64,7 @@ void Game::displayMap(Player p)
 {
     AnimatedElement ae;
     std::vector<Square> pWorld;
-    ae.saveAsMap(pWorld, std::string(p.getWorldName()));
+    ae.saveAsWorld(pWorld, std::string(p.getWorldName()));
 
     int realX = 60;
     int realY = 13;
@@ -76,11 +80,11 @@ void Game::displayMap(Player p)
         printAt(realX, realY, color(std::string(1, char(254)), Color::Red));
 
         // Print others players
-        if (getWorldFromName(p.getWorldName()) != nullptr)
+        /*if (getWorldFromName(p.getWorldName()) != nullptr)
             for (const auto& pl : getWorldFromName(p.getWorldName())->getPlayers())
                 if (pl->getName() != p.getName())
                     printAt(realX - p.getX() + pl->getX(), realY - p.getY() + pl->getY(), color(char(254), pl->getColorName()));
-
+*/
         saisie = getInput();
         if (saisie == 72 && p.canMoveTo(0, -1, pWorld)) p.setY(p.getY()-1);
         if (saisie == 80 && p.canMoveTo(0, 1, pWorld)) p.setY(p.getY()+1);
@@ -137,7 +141,7 @@ void Game::askAccountOfPlayers()
                  printAt(48 + index, 14, " ");
             }
         } while (saisie != 13 || saisie < 2);
-        getPlayers().push_back(Person(pseudo, Color::Bright_Cyan));
+        getPlayers().push_back(Player(pseudo, Color::Bright_Cyan));
     }
 }
 

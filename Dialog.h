@@ -4,7 +4,6 @@
 #include <queue>
 #include "Utils.h"
 
-
 class Person {
 private:
     std::string m_name;

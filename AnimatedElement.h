@@ -25,7 +25,7 @@ public:
     // Methods
     void render(std::string pathName);
     void clearArea(int width, int height);
-    void saveAsMap(std::vector<Square>& world, std::string worldName);
+    void saveAsWorld(std::vector<Square>& world, std::string worldName);
 };
 
 

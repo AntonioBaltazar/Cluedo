@@ -3,7 +3,6 @@
 #include <algorithm>
 
 #include "World.h"
-#include "Player.h"
 
 // Constructors & Destructor
 World::World() {}
