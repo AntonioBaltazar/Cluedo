@@ -44,7 +44,7 @@ void Game::start()
         std::cout << getPlayers()[i].getName() << "\n";
     while (!kbhit());*/
     Player martin("Martin", Color::Bright_Green, 14, 11, "");
-    Player emma("Emma", Color::Bright_Yellow, 15,12, "");
+    Player emma("Emma", Color::Bright_Yellow, 16,12, "");
 
     World board("Board", "maps/main");
     World mars("Mars", "maps/mars");
@@ -55,47 +55,64 @@ void Game::start()
     addWorld(board);
 
     system("cls");
-    displayMap(martin);
+    handlePlayerTurn(martin);
+    handlePlayerTurn(emma);
 
     while(!kbhit());
     //displayMap();
 }
-void Game::displayMap(Player p)
+
+void Game::handlePlayerTurn(Player p)
 {
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p.getWorldName()));
 
+    int saisie;
+    do {
+        displayMap(p, pWorld);
+        saisie = getInput();
+        if (saisie == 72 && p.canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, &p, getWorldFromName(p.getWorldName()));
+        if (saisie == 80 && p.canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, &p, getWorldFromName(p.getWorldName()));
+        if (saisie == 75 && p.canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, &p, getWorldFromName(p.getWorldName()));
+        if (saisie == 77 && p.canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, &p, getWorldFromName(p.getWorldName()));
+    } while (saisie != 13);
+}
+
+void Game::displayMap(Player p, std::vector<Square> pWorld)
+{
     int realX = 60;
     int realY = 13;
-    int saisie;
 
     // Print player
+    system("cls");
+    for (const auto& el : pWorld)
+        if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
+            printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
+    printAt(realX, realY, color(std::string(1, char(254)), p.getColorName()));
 
-    do {
-        system("cls");
-        for (const auto& el : pWorld)
-            if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
-                printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
-        printAt(realX, realY, color(std::string(1, char(254)), Color::Red));
+    // Print others players
+    if (getWorldFromName(p.getWorldName()) != nullptr)
+        for (const auto& pl : getWorldFromName(p.getWorldName())->getPlayers())
+            if (pl->getName() != p.getName())
+                printAt(realX - p.getX() + pl->getX(), realY - p.getY() + pl->getY(), color(char(254), pl->getColorName()));
 
-        // Print others players
-        /*if (getWorldFromName(p.getWorldName()) != nullptr)
-            for (const auto& pl : getWorldFromName(p.getWorldName())->getPlayers())
-                if (pl->getName() != p.getName())
-                    printAt(realX - p.getX() + pl->getX(), realY - p.getY() + pl->getY(), color(char(254), pl->getColorName()));
-*/
-        saisie = getInput();
-        if (saisie == 72 && p.canMoveTo(0, -1, pWorld)) p.setY(p.getY()-1);
-        if (saisie == 80 && p.canMoveTo(0, 1, pWorld)) p.setY(p.getY()+1);
-        if (saisie == 75 && p.canMoveTo(-1, 0, pWorld)) p.setX(p.getX()-2);
-        if (saisie == 77 && p.canMoveTo(1, 0, pWorld)) p.setX(p.getX()+2);
+        //p.teleport(pWorld);
+        //p.npcAround(pWorld);
+}
 
-//        p.teleport(pWorld);
-        p.npcAround(pWorld);
+void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
+{
+    for (const auto& el : content)
+        if (el.getX() == p->getX() + 2*dirX && el.getY() == p->getY() + dirY && el.getType())
+            if (el.getType() == SquareType::TELEPORTER)
+            {
+                std::cout << el.getTpPath();
+                //getWorldFromName(el.getTpPath())->addPlayer(p);
+            }
 
-    } while (saisie != 13);
-
+    p->setX(p->getX() + 2*dirX);
+    p->setY(p->getY() + dirY);
 }
 
 void Game::askAccountOfPlayers()
@@ -111,38 +128,38 @@ void Game::askAccountOfPlayers()
 
     for (int i = 0; i < getNbOfPlayers(); i++)
     {
-        std::string pseudo;
-        index = 0;
-        // Clearing old text
-        nb.clearArea(14, 7);
-        for (int i = 0; i < 28; i++)
-            for (int j = 0; j < 3; j++)
-                printAt(48+i, 12+j, " ");
+    std::string pseudo;
+    index = 0;
+    // Clearing old text
+    nb.clearArea(14, 7);
+    for (int i = 0; i < 28; i++)
+        for (int j = 0; j < 3; j++)
+            printAt(48+i, 12+j, " ");
 
-        nb.render("numbers/" + std::to_string(i+1));
-        gotoxy(48, 12);
-        std::cout << color(adjectives[i], Color::Bright_Yellow);
-        if (i > 1) std::cout << color(char(138), Color::Bright_Yellow) << color("me", Color::Bright_Yellow);
-        std::cout << color(" joueur,", Color::Bright_White);
-        printAt(48, 13, color("saississez votre nom :", Color::Bright_White));
+    nb.render("numbers/" + std::to_string(i+1));
+    gotoxy(48, 12);
+    std::cout << color(adjectives[i], Color::Bright_Yellow);
+    if (i > 1) std::cout << color(char(138), Color::Bright_Yellow) << color("me", Color::Bright_Yellow);
+    std::cout << color(" joueur,", Color::Bright_White);
+    printAt(48, 13, color("saississez votre nom :", Color::Bright_White));
 
-        do
+    do
+    {
+        saisie = getInput();
+        if (((saisie >= 'a' && saisie <= 'z') || (saisie >= 'A' && saisie <= 'Z') || saisie == ' ') && index < 19)
         {
-            saisie = getInput();
-            if (((saisie >= 'a' && saisie <= 'z') || (saisie >= 'A' && saisie <= 'Z') || saisie == ' ') && index < 19)
-            {
-                pseudo += (char)saisie;
-                printAt(48 + index, 14, std::string(1, char(saisie)));
-                index++;
-            } else if (saisie == 8 && index > 0)
-            {
-                 pseudo.pop_back();
-                 index--;
-                 printAt(48 + index, 14, " ");
-            }
-        } while (saisie != 13 || saisie < 2);
-        getPlayers().push_back(Player(pseudo, Color::Bright_Cyan));
-    }
+            pseudo += (char)saisie;
+            printAt(48 + index, 14, std::string(1, char(saisie)));
+            index++;
+        } else if (saisie == 8 && index > 0)
+        {
+             pseudo.pop_back();
+             index--;
+             printAt(48 + index, 14, " ");
+        }
+    } while (saisie != 13 || saisie < 2);
+    getPlayers().push_back(Player(pseudo, Color::Bright_Cyan));
+}
 }
 
 void Game::askNbOfPlayers()

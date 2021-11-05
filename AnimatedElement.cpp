@@ -39,6 +39,8 @@ void AnimatedElement::saveAsWorld(std::vector<Square>& world, std::string worldN
             SquareType type = content[1] - '0' == 1 ? SquareType::TELEPORTER :
                 content[1] - '0' == 2 ? SquareType::NPC : SquareType::WALL;
             world.back().setType(type);
+            if (type == SquareType::TELEPORTER && strSplit(content, ":").size() > 1)
+                world.back().setTpPath(strSplit(content, ":")[1]);
         } else if (content[0] == '%')
         {
             content.erase(remove(content.begin(), content.end(), '%'), content.end());

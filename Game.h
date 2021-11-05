@@ -29,7 +29,9 @@ public:
     void start();
     void askNbOfPlayers();
     void askAccountOfPlayers();
-    void displayMap(Player p);
+    void displayMap(Player p, std::vector<Square> pWorld);
+    void handlePlayerTurn(Player p);
+    void movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
 };
 
 #endif // GAME_H_INCLUDED
