@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "World.h"
+#include "render/Dice.h"
 #include "Player.h"
 #include "Game.h"
 
@@ -26,9 +27,11 @@ World* Game::getWorldFromName(std::string name)
             return &world;
     return nullptr;
 }
+bool Game::isFinish() const { return m_finish; }
 
 // Setters
 void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
+void Game::setFinish(bool finish) { m_finish = finish; }
 
 // Methods
 void Game::addWorld(World w) { getWorlds().push_back(w); }
@@ -39,24 +42,25 @@ void Game::start()
     askAccountOfPlayers();
 
     system("cls");
-    std::cout << "Pseudos:\n";
-    for (size_t i = 0; i < getPlayers().size(); i++)
-        std::cout << getPlayers()[i].getName() << "\n";
-    while (!kbhit());*/
-    Player martin("Martin", Color::Bright_Green, 14, 11, "");
-    Player emma("Emma", Color::Bright_Yellow, 16,12, "");
+    */
+    getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
+    getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
 
     World board("Board", "maps/main");
     World mars("Mars", "maps/mars");
 
-    board.addPlayer(&martin);
-    board.addPlayer(&emma);
+    for (auto& p : getPlayers())
+        board.addPlayer(&p);
 
     addWorld(board);
 
-    system("cls");
-    handlePlayerTurn(&martin);
-    handlePlayerTurn(&emma);
+    int nbTurn = 0;
+    while(!isFinish())
+    {
+        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()]);
+        nbTurn++;
+    }
+
 
     while(!kbhit());
     //displayMap();
@@ -67,16 +71,25 @@ void Game::handlePlayerTurn(Player* p)
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
+    bool hasThrow = false;
+    Dice d;
 
     int saisie;
     do {
         displayMap(*p, pWorld);
+
+        if (!hasThrow)
+        {
+            p->setMovementAvailable(d.throwing());
+            hasThrow = true;
+        }
+
         saisie = getInput();
         if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromName(p->getWorldName()));
         if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromName(p->getWorldName()));
         if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromName(p->getWorldName()));
         if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromName(p->getWorldName()));
-    } while (saisie != 13);
+    } while (p->getMovementAvailable() > 0);
 }
 
 void Game::displayMap(Player p, std::vector<Square> pWorld)
@@ -113,6 +126,7 @@ void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player*
 
     p->setX(p->getX() + 2*dirX);
     p->setY(p->getY() + dirY);
+    p->setMovementAvailable(p->getMovementAvailable() - 1);
 }
 
 void Game::askAccountOfPlayers()

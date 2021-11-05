@@ -21,7 +21,7 @@ public:
 
     // Methods
     void random(int);
-    void throwing();
+    int throwing();
 };
 
 #endif // DICE_H_INCLUDED

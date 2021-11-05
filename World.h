@@ -10,6 +10,7 @@ private:
     std::string m_name;
     std::string m_path;
     std::vector<Player*> m_players;
+
 public:
     // Constructors & Destructor
     World();

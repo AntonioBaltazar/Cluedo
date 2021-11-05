@@ -18,11 +18,13 @@ Player::~Player() {}
 int Player::getX() const { return m_x; }
 int Player::getY() const { return m_y; }
 std::string Player::getWorldName() const { return m_worldName; }
+int Player::getMovementAvailable() const { return m_mvtAvailable; }
 
 // Setters
 void Player::setX(int x) { m_x = x; }
 void Player::setY(int y) { m_y = y; }
 void Player::setWorldName(std::string worldName) { m_worldName = worldName; }
+void Player::setMovementAvailable(int movement) { m_mvtAvailable = movement; }
 
 // Methods
 bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)
@@ -32,25 +34,6 @@ bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)
             return false;
     return true;
 }
-
-/*void Player::moveTo(int dirX, int dirY, std::vector<Square> content, World* w)
-{
-    for (const auto& el : content)
-    {
-        if (el.getX() == getX() + 2*dirX && el.getY() == getY() + dirY && el.getType())
-        {
-            if (el.getType() == SquareType::DEFAULT)
-            {
-                setY(getY() + dirY);
-                setX(getX() + 2*dirX);
-            } else if (el.getType() == SquareType::TELEPORTER)
-            {
-                //w->addPlayer((Player*)this);
-            }
-
-        }
-    }
-}*/
 
 void Player::teleport(Square sq)
 {

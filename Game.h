@@ -9,6 +9,7 @@ private:
     int m_nbOfPlayers;
     std::vector<Player> m_players;
     std::vector<World> m_worlds;
+    bool m_finish = false;
 public:
     // Constructors & Destructor
     Game();
@@ -20,9 +21,11 @@ public:
     std::vector<Player>& getPlayers();
     std::vector<World>& getWorlds();
     World* getWorldFromName(std::string name);
+    bool isFinish() const;
 
     // Setters
     void setNbOfPlayers(int nbOfPlayers);
+    void setFinish(bool finish);
 
     // Methods
     void addWorld(World w);

@@ -26,7 +26,7 @@ void Dice::setValue(int value) { m_value = value; }
 // Methods
 void Dice::random(int maxValue = 6) { setValue(rand() % maxValue + 1); }
 
-void Dice::throwing()
+int Dice::throwing()
 {
     AnimatedElement border(0, 0);
     AnimatedElement value(2,1);
@@ -43,13 +43,14 @@ void Dice::throwing()
         Sleep(sleep);
         v++;
     }
+    return getValue();
 }
 
 void diceMenu()
 {
     system("cls");
     Dice d;
-    d.throwing();
+
 
     while(!kbhit());
 

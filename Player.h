@@ -10,6 +10,7 @@ private:
     int m_x;
     int m_y;
     std::string m_worldName;
+    int m_mvtAvailable = 0;
 public:
     // Constructors & Destructor
     Player();
@@ -21,11 +22,13 @@ public:
     int getX() const;
     int getY() const;
     std::string getWorldName() const;
+    int getMovementAvailable() const;
 
     // Setters
     void setX(int x);
     void setY(int y);
     void setWorldName(std::string worldName);
+    void setMovementAvailable(int movement);
 
     // Methods
     bool canMoveTo(int dirX, int dirY, std::vector<Square> world);
