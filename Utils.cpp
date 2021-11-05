@@ -20,16 +20,10 @@ std::string color(std::string str, Color c)
     return "\033[" + value + std::string("m") + str + "\033[0m";
 }
 
-std::string color(unsigned char ch, Color c)
-{
-    std::string value = std::to_string(as_integer(c));
-    return "\033[" + value + std::string("m") + std::to_string((unsigned char)ch) + "\033[0m";
-}
-
 std::string color(char ch, Color c)
 {
     std::string value = std::to_string(as_integer(c));
-    return "\033[" + value + std::string("m") + ch + "\033[0m";
+    return "\033[" + value + std::string("m") + std::string(1, ch) + "\033[0m";
 }
 
 
@@ -82,6 +76,12 @@ void printAt(int x, int y, std::string str)
 {
     gotoxy(x, y);
     std::cout << str;
+}
+
+void printAt(int x, int y, char c)
+{
+    gotoxy(x, y);
+    std::cout << c;
 }
 
 void gotoxy(int x, int y)

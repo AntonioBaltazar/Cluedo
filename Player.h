@@ -2,6 +2,7 @@
 #define PLAYER_H_INCLUDED
 
 #include "render/Square.h"
+#include "Dialog.h"
 
 class Player : public Person {
 private:
