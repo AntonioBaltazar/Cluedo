@@ -6,6 +6,7 @@
 #include "../Card/Card.h"
 #include "../Utils.h"
 #include "../Dialog.h"
+#include "../Player.h"
 
 class Script
 {
@@ -42,7 +43,7 @@ void script_management();
 Script choose_elem(std::vector<Card> hyPackage, int choice, int column,Script prev);
 
 int menu_show_card();
-void show_card();
+void show_card(Player p);
 
 
 

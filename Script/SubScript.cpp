@@ -2,6 +2,7 @@
 #include "../Card/Card.h"
 #include "../Utils.h"
 #include "../Dialog.h"
+#include "../Player.h"
 
 #include <vector>
 #include <time.h>
@@ -13,6 +14,7 @@
 void script_management()
 {
     int nb_card = 0;
+    Player p;
 
     /// Card package creation and shuffle
     std::vector<Card> myPackage = card_Creation(nb_card);
@@ -29,6 +31,11 @@ void script_management()
     HypothesisVerification(solution,hypothesis);
 
 
+    ///Player p shows a card
+    show_card(p);
+
+
+    gotoxy(0,23);
 }
 
 ///Create the solution of the murderer and returns it in a script
@@ -270,27 +277,39 @@ Script choose_elem(std::vector<Card> hyPackage, int choice, int column, Script p
 }
 
 
-void show_card()
+///Player p show a card to his opponent
+void show_card(Player p)
 {
     Dialog d;
     int choice = menu_show_card();
 
+
+    ///Juste pour les test, a remplacer par les valeurs d'un vrai joueur
+    p.create_player_package("Person","Antonio");
+    p.create_player_package("Planet","Venus");
+    p.create_player_package("Weapon","matraque");
+    p.setColorName(Color::Cyan);
+    p.setName("Player 2");
+
     system("CLS");
 
-    d.displayBordersPers(35,85,10,14);
+    d.displayBordersPers(25,90,10,14);
+
+    gotoxy(40,12);
+    std::cout<<color(p.getName()+" a la carte : ",p.getColorName());
 
     switch(choice)
     {
     case 1:
-        //Affichage de la personne
+        std::cout<<color(p.getPlayerPackage()[0].getName(),p.getColorName());
         break;
 
     case 2:
-        //affichage de la planete
+        std::cout<<color(p.getPlayerPackage()[1].getName(),p.getColorName());
         break;
 
     case 3:
-        //affichage de l'arme
+        std::cout<<color(p.getPlayerPackage()[2].getName(),p.getColorName());
         break;
 
     default : break;
@@ -299,19 +318,14 @@ void show_card()
     while(kbhit()) {}
 
     getch();
-
-    gotoxy(0,23);
-
-
 }
 
-///The player can decide wich card he wants to show to the opponent
+///The player can decide which card he wants to show to the opponent
 int menu_show_card()
 {
     int choice = 0;
     int cursor = 33;
     int key = 0;
-
     Dialog d;
 
     d.displayBordersPers(20,100,9,15);
@@ -351,9 +365,6 @@ int menu_show_card()
 
         gotoxy(cursor,12);
         std::cout<<char(16);
-
-        gotoxy(50,20);
-        std::cout<<"Choice = "<<choice;
     }
 
     return choice+1;

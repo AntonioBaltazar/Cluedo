@@ -1,9 +1,10 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
+
 #include "Dialog.h"
 #include "render/Square.h"
-#include "World.h"
+#include "Card/Card.h"
 
 class Player : public Person {
 private:
@@ -11,6 +12,7 @@ private:
     int m_y;
     std::string m_worldName;
     int m_mvtAvailable = 0;
+    std::vector<Card> m_playerPackage; //[0] : person | [1] : planet | [2] : weapon
 public:
     // Constructors & Destructor
     Player();
@@ -23,12 +25,14 @@ public:
     int getY() const;
     std::string getWorldName() const;
     int getMovementAvailable() const;
+    std::vector<Card> getPlayerPackage()const;
 
     // Setters
     void setX(int x);
     void setY(int y);
     void setWorldName(std::string worldName);
     void setMovementAvailable(int movement);
+    void setPlayerPackage(Card newCard);
 
     // Methods
     bool canMoveTo(int dirX, int dirY, std::vector<Square> world);
@@ -36,6 +40,8 @@ public:
     void npcAround(std::vector<Square> world);
     void actionMenu();
     void teleport(Square sq);
+    void create_player_package(std::string type, std::string name);
+    void create_player_package(Card newCard);
 };
 
 #endif // PLAYER_H_INCLUDED
