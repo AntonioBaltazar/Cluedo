@@ -35,9 +35,10 @@ public:
 
 Script script_Creation(std::vector<Card> myPackage);
 Script make_hypothesis(std::vector<Card> myPackage);
-void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser);
-void display_elem_tab_hyp(std::vector<Card> myPackage);
+std::vector<Card> display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser);
+std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage);
 void HypothesisVerification(Script solution, Script hypothesis);
 void script_management();
+Script choose_elem(std::vector<Card> hyPackage, int choice, int column,Script prev);
 
 #endif // SCRIPT_H_INCLUDED

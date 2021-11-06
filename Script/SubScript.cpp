@@ -7,6 +7,7 @@
 #include <time.h>
 #include <iostream>
 #include <conio.h>
+#include <windows.h>
 
 ///Manage all the subprograms concerning the script, the hypothesis and the card package
 void script_management()
@@ -20,6 +21,7 @@ void script_management()
 
     /// Player makes an hypothesis
     Script hypothesis = make_hypothesis(myPackage);
+
 
     /// We compare the solution and the hypothesis and display the result
     HypothesisVerification(solution,hypothesis);
@@ -52,33 +54,82 @@ Script script_Creation(std::vector<Card> myPackage)
     return solution;
 }
 
+
 /// Allow the player to make an hypothesis and returns it
 Script make_hypothesis(std::vector<Card> myPackage)
 {
-    Script hypothesis("Tonio","Venus","gun");
+    Script hypothesis("Someone","Somewhere","Something");
     Person accuser("Accuser",Color::Red);
+    int column = 0;
+    int key = 0;
+    int x = 18;
+    int y = 8;
+    int choice = 0;
 
     ///Display all choices possible
-    display_tab_hyp(hypothesis,myPackage, accuser);
+    std::vector<Card> hyPackage = display_tab_hyp(hypothesis,myPackage, accuser);
 
+    gotoxy(x,y);
+    std::cout<<char(16);
     ///Display the sentence of accusation
     gotoxy(20,23);
     std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
     gotoxy(23+accuser.getName().size(),23);
-    std::cout<<"Mr Lenoir was killed by "<<color(hypothesis.getPerson(),Color::Yellow);
-    std::cout<<" in "<<color(hypothesis.getRoom(),Color::Blue);
-    std::cout<<" with a "<<color(hypothesis.getWeapon(),Color::Magenta);
+    std::cout<<"Mr Lenoir was killed by "<<color("someone",Color::Yellow)<<" "<<color("somewhere",Color::Blue);
+    std::cout<<" with "<<color("something",Color::Magenta)<<".";
 
-    while(!kbhit());
-    getch();
+    while(column<3)
+    {
+        key = getInput();
+        gotoxy(x,y);
+        std::cout<<" ";
+
+        if (key == 72 && choice > 0) {  y = y-2;    choice--;   }
+
+        if (key == 80 && choice < 5) {  y = y+2;    choice++;   }
+
+        if(key == 13)
+            column++;
+
+        gotoxy(5,21);
+        std::cout<<"Choice = "<<choice;
+
+        switch(column)
+        {
+        case 0 : x = 18;
+            break;
+        case 1 : x = 54;
+            break;
+        case 2 : x = 91;
+            break;
+        default: break;
+        }
+
+        gotoxy(x,y);
+        std::cout<<char(16);
+
+        gotoxy(20,23);
+        std::cout<<"Il faut effacer ";
+        hypothesis = choose_elem(hyPackage,choice, column, hypothesis);
+
+        gotoxy(20,23);
+        std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
+        gotoxy(23+accuser.getName().size(),23);
+        std::cout<<"Mr Lenoir was killed by "<<color(hypothesis.getPerson(),Color::Yellow);
+        std::cout<<" in "<<color(hypothesis.getRoom(),Color::Blue);
+        std::cout<<" with a "<<color(hypothesis.getWeapon(),Color::Magenta)<<".";
+
+    }
+
     system("CLS");
 
 
     return hypothesis;
 }
 
+
 ///Display a tab with all the card possible so that the player can make a choice
-void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser)
+std::vector<Card> display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser)
 {
     Dialog d;
     int x1=5,x2=41,x3=77,x4=115;
@@ -105,16 +156,19 @@ void display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accus
     gotoxy((x4+x3)/2-3,y2-y1);
     std::cout<<color("Weapon",Color::Magenta);
 
-    display_elem_tab_hyp(myPackage);
+    std::vector<Card> hyPackage = display_elem_tab_hyp(myPackage);
 
-
+    return hyPackage;
 }
 
 ///Display the elements of all cards in our hypothesis tab
-void display_elem_tab_hyp(std::vector<Card> myPackage)
+std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage)
 {
     int cmptPerson = 8, cmptRoom = 8, cmptWeapon = 8;
+    int i=0, j=6, k=12;
     std::vector<Card>::iterator it;
+    std::vector<Card> temp;
+    Card hyPackage[18];
 
     for(it = myPackage.begin();it!=myPackage.end();it++)
     {
@@ -123,6 +177,8 @@ void display_elem_tab_hyp(std::vector<Card> myPackage)
             gotoxy(20,cmptPerson);
             std::cout<<color(it->getName(),Color::Yellow);
             cmptPerson = cmptPerson+2;
+            hyPackage[i].setName(it->getName());
+            i++;
         }
 
         if(it->getType()=="Planet")
@@ -130,6 +186,8 @@ void display_elem_tab_hyp(std::vector<Card> myPackage)
             gotoxy(56,cmptRoom);
             std::cout<<color(it->getName(),Color::Blue);
             cmptRoom = cmptRoom+2;
+            hyPackage[j].setName(it->getName());
+            j++;
         }
 
         if(it->getType()=="Weapon")
@@ -137,9 +195,56 @@ void display_elem_tab_hyp(std::vector<Card> myPackage)
             gotoxy(93,cmptWeapon);
             std::cout<<color(it->getName(),Color::Magenta);
             cmptWeapon = cmptWeapon+2;
+            hyPackage[k].setName(it->getName());
+            k++;
         }
+
     }
+
+    for(int m = 0; m < 18; m++)
+    {
+        temp.push_back(hyPackage[m]);
+    }
+
+    return temp;
 }
+
+Script choose_elem(std::vector<Card> hyPackage, int choice, int column, Script prev)
+{
+    Script hypothesis;
+
+    int i=0, j=6, k=12;
+    int i2=0, j2=0, k2=0;
+
+    if(column == 0)
+    {
+        hypothesis.setPerson(hyPackage[i+i2].getName());
+        hypothesis.setRoom(prev.getRoom());
+        hypothesis.setWeapon(prev.getWeapon());
+        i2++;
+    }
+
+    if(column == 1)
+    {
+        hypothesis.setPerson(prev.getPerson());
+        hypothesis.setRoom(hyPackage[j+j2].getName());
+        hypothesis.setWeapon(prev.getWeapon());
+        j2++;
+    }
+
+    if(column == 2)
+    {
+        hypothesis.setPerson(prev.getPerson());
+        hypothesis.setRoom(prev.getRoom());
+        hypothesis.setWeapon(hyPackage[k+k2].getName());
+        k2++;
+    }
+
+
+    return hypothesis;
+}
+
+
 
 ///Verify if the hypothesis made by a player is wrong or right and display the result
 void HypothesisVerification(Script solution, Script hypothesis)
