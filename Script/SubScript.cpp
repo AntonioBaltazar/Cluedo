@@ -71,15 +71,16 @@ Script make_hypothesis(std::vector<Card> myPackage)
 
     gotoxy(x,y);
     std::cout<<char(16);
-    ///Display the sentence of accusation
-    gotoxy(20,23);
-    std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
-    gotoxy(23+accuser.getName().size(),23);
-    std::cout<<"Mr Lenoir was killed by "<<color("someone",Color::Yellow)<<" "<<color("somewhere",Color::Blue);
-    std::cout<<" with "<<color("something",Color::Magenta)<<".";
+
 
     while(column<3)
     {
+        std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
+        gotoxy(23+accuser.getName().size(),23);
+        std::cout<<"Mr Lenoir was killed by "<<color(hypothesis.getPerson(),Color::Yellow);
+        std::cout<<" in "<<color(hypothesis.getRoom(),Color::Blue);
+        std::cout<<" with a "<<color(hypothesis.getWeapon(),Color::Magenta)<<".       ";
+
         key = getInput();
         gotoxy(x,y);
         std::cout<<" ";
@@ -91,38 +92,21 @@ Script make_hypothesis(std::vector<Card> myPackage)
         if(key == 13)
             column++;
 
-        gotoxy(5,21);
-        std::cout<<"Choice = "<<choice;
-
         switch(column)
         {
-        case 0 : x = 18;
-            break;
-        case 1 : x = 54;
-            break;
-        case 2 : x = 91;
-            break;
+        case 0 : x = 18; break;
+        case 1 : x = 54; break;
+        case 2 : x = 91; break;
         default: break;
         }
 
         gotoxy(x,y);
         std::cout<<char(16);
 
-        gotoxy(20,23);
-        std::cout<<"Il faut effacer ";
         hypothesis = choose_elem(hyPackage,choice, column, hypothesis);
-
-        gotoxy(20,23);
-        std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
-        gotoxy(23+accuser.getName().size(),23);
-        std::cout<<"Mr Lenoir was killed by "<<color(hypothesis.getPerson(),Color::Yellow);
-        std::cout<<" in "<<color(hypothesis.getRoom(),Color::Blue);
-        std::cout<<" with a "<<color(hypothesis.getWeapon(),Color::Magenta)<<".";
-
     }
 
     system("CLS");
-
 
     return hypothesis;
 }
@@ -209,42 +193,63 @@ std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage)
     return temp;
 }
 
+///Allows to select the elements of the accusation
 Script choose_elem(std::vector<Card> hyPackage, int choice, int column, Script prev)
 {
     Script hypothesis;
-
-    int i=0, j=6, k=12;
-    int i2=0, j2=0, k2=0;
+    int i=0;
 
     if(column == 0)
     {
-        hypothesis.setPerson(hyPackage[i+i2].getName());
+        switch(choice)
+        {
+        case 0: i = 0;   break;
+        case 1: i = 1;   break;
+        case 2: i = 2;   break;
+        case 3: i = 3;   break;
+        case 4: i = 4;   break;
+        case 5: i = 5;   break;
+        }
+        hypothesis.setPerson(hyPackage[i].getName());
         hypothesis.setRoom(prev.getRoom());
         hypothesis.setWeapon(prev.getWeapon());
-        i2++;
     }
 
     if(column == 1)
     {
+        switch(choice)
+        {
+        case 0: i = 6;   break;
+        case 1: i = 7;   break;
+        case 2: i = 8;   break;
+        case 3: i = 9;   break;
+        case 4: i = 10;   break;
+        case 5: i = 11;   break;
+        }
         hypothesis.setPerson(prev.getPerson());
-        hypothesis.setRoom(hyPackage[j+j2].getName());
+        hypothesis.setRoom(hyPackage[i].getName());
         hypothesis.setWeapon(prev.getWeapon());
-        j2++;
     }
 
     if(column == 2)
     {
+        switch(choice)
+        {
+        case 0: i = 12;   break;
+        case 1: i = 13;   break;
+        case 2: i = 14;   break;
+        case 3: i = 15;   break;
+        case 4: i = 16;   break;
+        case 5: i = 17;   break;
+        }
+
         hypothesis.setPerson(prev.getPerson());
         hypothesis.setRoom(prev.getRoom());
-        hypothesis.setWeapon(hyPackage[k+k2].getName());
-        k2++;
+        hypothesis.setWeapon(hyPackage[i].getName());
     }
-
 
     return hypothesis;
 }
-
-
 
 ///Verify if the hypothesis made by a player is wrong or right and display the result
 void HypothesisVerification(Script solution, Script hypothesis)
@@ -265,3 +270,5 @@ void HypothesisVerification(Script solution, Script hypothesis)
     getch();
     system("CLS");
 }
+
+
