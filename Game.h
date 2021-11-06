@@ -20,7 +20,7 @@ public:
     int getNbOfPlayers() const;
     std::vector<Player>& getPlayers();
     std::vector<World>& getWorlds();
-    World* getWorldFromName(std::string name);
+    World* getWorldFromPath(std::string path);
     bool isFinish() const;
 
     // Setters

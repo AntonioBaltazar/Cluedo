@@ -20,10 +20,10 @@ Game::~Game() {}
 int Game::getNbOfPlayers() const { return m_nbOfPlayers; }
 std::vector<Player>& Game::getPlayers() { return m_players; }
 std::vector<World>& Game::getWorlds() { return m_worlds; }
-World* Game::getWorldFromName(std::string name)
+World* Game::getWorldFromPath(std::string path)
 {
     for (auto& world : getWorlds())
-        if (world.getPath() == name)
+        if (world.getPath() == path)
             return &world;
     return nullptr;
 }
@@ -46,13 +46,14 @@ void Game::start()
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
 
-    World board("Board", "maps/main");
-    World mars("Mars", "maps/mars");
+    World board(16, 11, "Board", "maps/main");
+    World realMars(18, 9, "Mars2", "maps/planets/mars");
 
     for (auto& p : getPlayers())
         board.addPlayer(&p);
 
     addWorld(board);
+    addWorld(realMars);
 
     int nbTurn = 0;
     while(!isFinish())
@@ -71,24 +72,21 @@ void Game::handlePlayerTurn(Player* p)
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
-    bool hasThrow = false;
     Dice d;
 
+    displayMap(*p, pWorld);
+    p->setMovementAvailable(d.throwing());
+    //p->setMovementAvailable(1000);
     int saisie;
     do {
         displayMap(*p, pWorld);
 
-        if (!hasThrow)
-        {
-            p->setMovementAvailable(d.throwing());
-            hasThrow = true;
-        }
-
+        FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
         saisie = getInput();
-        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromName(p->getWorldName()));
-        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromName(p->getWorldName()));
-        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromName(p->getWorldName()));
-        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromName(p->getWorldName()));
+        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
     } while (p->getMovementAvailable() > 0);
 }
 
@@ -105,13 +103,9 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     printAt(realX, realY, color(std::string(1, char(254)), p.getColorName()));
 
     // Print others players
-    if (getWorldFromName(p.getWorldName()) != nullptr)
-        for (const auto& pl : getWorldFromName(p.getWorldName())->getPlayers())
-            if (pl->getName() != p.getName())
-                printAt(realX - p.getX() + pl->getX(), realY - p.getY() + pl->getY(), color(char(254), pl->getColorName()));
-
-        //p.teleport(pWorld);
-        //p.npcAround(pWorld);
+    for (auto& pl : getPlayers())
+        if (pl.getWorldName() == p.getWorldName() && pl.getName() != p.getName())
+            printAt(realX - p.getX() + pl.getX(), realY - p.getY() + pl.getY(), color(char(254), pl.getColorName()));
 }
 
 void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
@@ -120,8 +114,11 @@ void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player*
         if (el.getX() == p->getX() + 2*dirX && el.getY() == p->getY() + dirY && el.getType())
             if (el.getType() == SquareType::TELEPORTER)
             {
-                std::cout << el.getTpPath();
-                //getWorldFromName(el.getTpPath())->addPlayer(p);
+                if (getWorldFromPath(el.getTpPath()) != nullptr)
+                {
+                    getWorldFromPath(el.getTpPath())->addPlayer(p);
+                    p->setMovementAvailable(0);
+                }
             }
 
     p->setX(p->getX() + 2*dirX);
