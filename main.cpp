@@ -39,7 +39,8 @@ int main()
                 ///Appel fct Tonio
                 //card_Management();
                 system("cls");
-                script_management();
+                //script_management();
+                show_card();
                 break;
             case 3:
                 ///Appel fct Martin

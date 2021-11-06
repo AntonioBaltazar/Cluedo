@@ -41,4 +41,9 @@ void HypothesisVerification(Script solution, Script hypothesis);
 void script_management();
 Script choose_elem(std::vector<Card> hyPackage, int choice, int column,Script prev);
 
+int menu_show_card();
+void show_card();
+
+
+
 #endif // SCRIPT_H_INCLUDED

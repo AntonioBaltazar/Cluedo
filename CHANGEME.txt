@@ -1,3 +1,5 @@
+Number of cards : 18
+
 Person : Antonio
 Person : Emma
 Person : Martin

@@ -12,9 +12,11 @@
 ///Manage all the subprograms concerning the script, the hypothesis and the card package
 void script_management()
 {
+    int nb_card = 0;
+
     /// Card package creation and shuffle
-    std::vector<Card> myPackage = card_Creation();
-    myPackage = card_Shuffle(myPackage);
+    std::vector<Card> myPackage = card_Creation(nb_card);
+    myPackage = card_Shuffle(myPackage, nb_card);
 
     /// Script creation
     Script solution = script_Creation(myPackage);
@@ -78,9 +80,9 @@ Script make_hypothesis(std::vector<Card> myPackage)
         gotoxy(20,23);
         std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
         gotoxy(23+accuser.getName().size(),23);
-        std::cout<<"Mr Lenoir was killed by "<<color(hypothesis.getPerson(),Color::Yellow);
-        std::cout<<" in "<<color(hypothesis.getRoom(),Color::Blue);
-        std::cout<<" with a "<<color(hypothesis.getWeapon(),Color::Magenta)<<".       ";
+        std::cout<<"Mr Lenoir a ete tue par "<<color(hypothesis.getPerson(),Color::Yellow);
+        std::cout<<" sur "<<color(hypothesis.getRoom(),Color::Blue);
+        std::cout<<" avec "<<color(hypothesis.getWeapon(),Color::Magenta)<<".       ";
 
         key = getInput();
         gotoxy(x,y);
@@ -179,7 +181,20 @@ std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage)
         if(it->getType()=="Weapon")
         {
             gotoxy(93,cmptWeapon);
-            std::cout<<color(it->getName(),Color::Magenta);
+
+            std::string temp = it->getName();
+
+            if(temp[0]=='u' && temp[1]=='n' && temp[2]==' ')
+                for(int i = 3; temp[i]!='\0'; i++)
+                    std::cout<<color(temp[i],Color::Magenta);
+
+            else if(temp[0]=='u' && temp[1]=='n' && temp[2]=='e')
+                for(int i = 4; temp[i]!='\0'; i++)
+                    std::cout<<color(temp[i],Color::Magenta);
+
+            else
+                std::cout<<color(it->getName(),Color::Magenta);
+
             cmptWeapon = cmptWeapon+2;
             hyPackage[k].setName(it->getName());
             k++;
@@ -254,6 +269,95 @@ Script choose_elem(std::vector<Card> hyPackage, int choice, int column, Script p
     return hypothesis;
 }
 
+
+void show_card()
+{
+    Dialog d;
+    int choice = menu_show_card();
+
+    system("CLS");
+
+    d.displayBordersPers(35,85,10,14);
+
+    switch(choice)
+    {
+    case 1:
+        //Affichage de la personne
+        break;
+
+    case 2:
+        //affichage de la planete
+        break;
+
+    case 3:
+        //affichage de l'arme
+        break;
+
+    default : break;
+    }
+
+    while(kbhit()) {}
+
+    getch();
+
+    gotoxy(0,23);
+
+
+}
+
+///The player can decide wich card he wants to show to the opponent
+int menu_show_card()
+{
+    int choice = 0;
+    int cursor = 33;
+    int key = 0;
+
+    Dialog d;
+
+    d.displayBordersPers(20,100,9,15);
+
+    gotoxy(42,10);
+    std::cout<<color("Quelle carte souhaitez vous montrer ?",Color::Bright_White);
+
+    ///Affichage des types de cartes
+    gotoxy(35,12);
+    std::cout<<color("1. Personne",Color::Yellow);
+    gotoxy(55,12);
+    std::cout<<color("2. Planete",Color::Blue);
+    gotoxy(75,12);
+    std::cout<<color("3. Arme",Color::Magenta);
+
+    gotoxy(cursor,12);
+    std::cout<<char(16);
+
+    while(key!=13)
+    {
+        key = getch();
+        if(key==75 && choice > 0)
+            choice--;
+        if(key==77 && choice < 2)
+            choice++;
+
+        gotoxy(cursor,12);
+        std::cout<<" ";
+
+        switch(choice)
+        {
+        case 0 : cursor = 33;  break;
+        case 1 : cursor = 53;  break;
+        case 2 : cursor = 73;  break;
+        default : break;
+        }
+
+        gotoxy(cursor,12);
+        std::cout<<char(16);
+
+        gotoxy(50,20);
+        std::cout<<"Choice = "<<choice;
+    }
+
+    return choice+1;
+}
 
 ///Verify if the hypothesis made by a player is wrong or right and display the result
 void HypothesisVerification(Script solution, Script hypothesis)
