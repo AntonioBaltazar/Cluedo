@@ -75,6 +75,7 @@ Script make_hypothesis(std::vector<Card> myPackage)
 
     while(column<3)
     {
+        gotoxy(20,23);
         std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
         gotoxy(23+accuser.getName().size(),23);
         std::cout<<"Mr Lenoir was killed by "<<color(hypothesis.getPerson(),Color::Yellow);
@@ -145,6 +146,7 @@ std::vector<Card> display_tab_hyp(Script hypothesis,std::vector<Card> myPackage,
     return hyPackage;
 }
 
+
 ///Display the elements of all cards in our hypothesis tab
 std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage)
 {
@@ -192,6 +194,7 @@ std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage)
 
     return temp;
 }
+
 
 ///Allows to select the elements of the accusation
 Script choose_elem(std::vector<Card> hyPackage, int choice, int column, Script prev)
@@ -250,6 +253,7 @@ Script choose_elem(std::vector<Card> hyPackage, int choice, int column, Script p
 
     return hypothesis;
 }
+
 
 ///Verify if the hypothesis made by a player is wrong or right and display the result
 void HypothesisVerification(Script solution, Script hypothesis)
