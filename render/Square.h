@@ -18,11 +18,12 @@ private:
     Color m_color;
     SquareType m_type;
     std::string m_tpPath;
+    std::pair<int, int> m_coord;
 public:
     // Constructors & Destructor
     Square();
     Square(int x, int y, char content, Color cl);
-    Square(int x, int y, char content, Color cl, std::string tpPath);
+    Square(int x, int y, char content, Color cl, std::string tpPath, int tpX, int tpY);
     ~Square();
 
     // Getters
@@ -32,6 +33,7 @@ public:
     Color getColor() const;
     SquareType getType() const;
     std::string getTpPath() const;
+    std::pair<int, int>& getCoord();
 
     // Setters
     void setX(int x);
