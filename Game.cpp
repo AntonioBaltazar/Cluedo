@@ -110,13 +110,15 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
 
 void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
 {
-    for (const auto& el : content)
+    for (auto& el : content)
         if (el.getX() == p->getX() + 2*dirX && el.getY() == p->getY() + dirY && el.getType())
             if (el.getType() == SquareType::TELEPORTER)
             {
                 if (getWorldFromPath(el.getTpPath()) != nullptr)
                 {
                     getWorldFromPath(el.getTpPath())->addPlayer(p);
+                    p->setX(el.getCoord().first);
+                    p->setY(el.getCoord().second);
                     p->setMovementAvailable(0);
                 }
             }

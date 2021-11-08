@@ -49,7 +49,13 @@ int Dice::throwing()
 void diceMenu()
 {
     system("cls");
-    Dice d;
+
+    Blackhole bh(15, 2, "blackhole", "Trou noir");
+    bh.render(" vient de tomber malheureusement dans un trou noir..", "Martin");
+    /*
+        Blackhole bh(14, 4, "blackhole", "bh");
+        bh.render(" vient de tomber dans un trou noir :/", "Martin");
+    */
 
 
     while(!kbhit());

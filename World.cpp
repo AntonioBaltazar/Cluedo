@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "World.h"
+#include "render/Blackhole.h"
 
 // Constructors & Destructor
 World::World() {}
