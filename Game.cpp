@@ -106,22 +106,16 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     int realX = 60;
     int realY = 13;
 
-<<<<<<< HEAD
     // Print player
-    //clearGlobal();
+    clearGlobal();
 
-    for (int j = 0; j < 22; j++)
-        printAt(40, j, std::string(60, ' '));
-=======
-    for (int i = 40; i < 100; i++)
-        for (int j = 0; j < 25; j++)
-            printAt(i, j, ' ');
->>>>>>> 74035b7522a7e26124e1522779875835293bf645
+    //for (int j = 0; j < 22; j++)
+      //  printAt(40, j, std::string(60, ' '));
 
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
         {
-            int x(realX - p.getX() + el.getX()), y(realY - p.getY() + el.getY());
+           int x(realX - p.getX() + el.getX()), y(realY - p.getY() + el.getY());
             bool deleting = true;
             for (auto& anel : getElements())
             {
@@ -147,23 +141,23 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
 void Game::clearGlobal()
 {
     int winX(120), winY(25);
-    for (int i = 0; i < winX; i++)
-        for (int j = 0; j < winY; j++)
-        {
-            bool deleting = true;
-            for (auto& el : getElements())
-            {
-                //std::cout << "DEBUGGING";
-               // std::cout << el->getMaxX() << ":" << el->getMaxY();
-                //while(1);
-                if (el->getTranslatedX() <= i && i <= el->getTranslatedX() + el->getMaxX() &&
-                     el->getTranslatedY() <= j && j <= el->getTranslatedY() + el->getMaxY())
-                    deleting = false;
+    for (int i = 0; i < winY; i++)
+    {
+        // Getting element's slices
+        std::vector<std::pair<int, int>> elementSlices;
+        for (const auto& element : getElements())
+            if (i >= element->getTranslatedY() && i <= element->getTranslatedY() + element->getMaxY() + 1)
+                elementSlices.push_back(std::pair<int, int>(element->getTranslatedX(), element->getMaxX() + 1));
 
-            }
-            if (deleting) printAt(i, j, ' ');
-            //    while(1);
+        int stringX(0), widthString(0);
+        // Printing slices of spaces char
+        for (const auto& slice : elementSlices)
+        {
+            printAt(stringX, i, std::string(slice.first, ' '));
+            stringX += slice.first + slice.second;
         }
+        printAt(stringX, i, std::string(winX - stringX, ' '));
+    }
 }
 
 void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
