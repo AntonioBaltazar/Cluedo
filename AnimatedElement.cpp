@@ -40,7 +40,12 @@ void AnimatedElement::saveAsWorld(std::vector<Square>& world, std::string worldN
                 content[1] - '0' == 2 ? SquareType::NPC : SquareType::WALL;
             world.back().setType(type);
             if (type == SquareType::TELEPORTER && strSplit(content, ":").size() > 1)
+            {
+                // If the square is an element
                 world.back().setTpPath(strSplit(content, ":")[1]);
+                world.back().getCoord().first = std::stoi(strSplit(content, ":")[2]);
+                world.back().getCoord().second = std::stoi(strSplit(content, ":")[3]);
+            }
         } else if (content[0] == '%')
         {
             content.erase(remove(content.begin(), content.end(), '%'), content.end());
@@ -67,7 +72,6 @@ void AnimatedElement::render(std::string pathName)
 
     std::ifstream f;
     std::string content;
-
     f.open("ressources/" + pathName + ".txt");
 
     //Reading data from the file, line by line

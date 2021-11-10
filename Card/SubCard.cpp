@@ -2,31 +2,34 @@
 #include <vector>
 #include <time.h>
 #include <fstream>
+#include <conio.h>
 
 #include "Card.h"
 #include "../Utils.h"
 
 
 ///Read file "CHANGEME.txt" and create a card package depending on the information of the file that will be returned
-std::vector<Card> card_Creation()
+std::vector<Card> card_Creation(int &nb_card)
 {
     std::string content;
     std::string path = "CHANGEME.txt";
     std::ifstream file(path.c_str());
     std::vector<Card> myPackage;
 
-    if(file) //If the file was well opened then we recover the information
+    if(file) //If the file was well opened then we recover the informations
     {
+        std::string nb_card_str;
+        std::getline(file, nb_card_str);
+        std::vector<std::string> newContent = strSplit(nb_card_str," : ");
+        nb_card = std::stoi(newContent[1]);
+
         while(std::getline(file,content))
             if(content != "")
                 myPackage.push_back(card_convert(content));
 
-
         file.close();
     }else //if not we warn the user
-    {
         std::cout << "Cannot read " << path << std::endl;
-    }
 
     return myPackage;
 }
@@ -48,7 +51,7 @@ Card card_convert(std::string content)
 
 
 ///Shuffle a package of cards
-std::vector<Card> card_Shuffle(std::vector<Card> myPackage)
+std::vector<Card> card_Shuffle(std::vector<Card> myPackage,int nb_card)
 {
     Card temp;
 
@@ -60,8 +63,8 @@ std::vector<Card> card_Shuffle(std::vector<Card> myPackage)
         int random1 = 0, random2 = 0;
         do
         {
-            random1 = rand()%NBCARDS;
-            random2 = rand()%NBCARDS;
+            random1 = rand()%nb_card;
+            random2 = rand()%nb_card;
         }
         while(random1 == random2);
 
@@ -121,17 +124,15 @@ Card card_pick(std::vector<Card> &myPackage)
 void card_Management()
 {
     std::vector<Card> myPackage;
-
-    myPackage = card_Creation(); //Mélange
-    myPackage = card_Shuffle(myPackage); //Mélange
-    card_Package_Display(myPackage); //Affichage
-
-    std::cout<<"Creation, Shuffle and display over\n";
     Card pioche;
+    int nb_card = 0;
+
+    myPackage = card_Creation(nb_card); //Mélange
+    myPackage = card_Shuffle(myPackage, nb_card); //Mélange
+    //card_Package_Display(myPackage); //Affichage
 
     pioche = card_pick(myPackage);
-    card_Package_Display(myPackage);
-
+    //card_Package_Display(myPackage);
 }
 
 

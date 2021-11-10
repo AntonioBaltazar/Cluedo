@@ -1,3 +1,5 @@
+Number of cards : 18
+
 Person : Antonio
 Person : Emma
 Person : Martin
@@ -12,9 +14,9 @@ Planet : Mercure
 Planet : Jupiter
 Planet : Neptune
 
-Weapon : fusils
-Weapon : pistolet
-Weapon : corde
-Weapon : matraque
-Weapon : brique
-Weapon : fouet
+Weapon : un fusil
+Weapon : un pistolet
+Weapon : une corde
+Weapon : une matraque
+Weapon : une brique
+Weapon : un fouet

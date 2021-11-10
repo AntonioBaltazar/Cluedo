@@ -40,6 +40,7 @@ int main()
                 //card_Management();
                 system("cls");
                 script_management();
+                //show_card(p);
                 break;
             case 3:
                 ///Appel fct Martin

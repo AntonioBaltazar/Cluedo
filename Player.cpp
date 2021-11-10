@@ -19,12 +19,15 @@ int Player::getX() const { return m_x; }
 int Player::getY() const { return m_y; }
 std::string Player::getWorldName() const { return m_worldName; }
 int Player::getMovementAvailable() const { return m_mvtAvailable; }
+std::vector<Card> Player::getPlayerPackage() const { return m_playerPackage;}
+
 
 // Setters
 void Player::setX(int x) { m_x = x; }
 void Player::setY(int y) { m_y = y; }
 void Player::setWorldName(std::string worldName) { m_worldName = worldName; }
 void Player::setMovementAvailable(int movement) { m_mvtAvailable = movement; }
+void Player::setPlayerPackage(Card newCard) {m_playerPackage.push_back(newCard);}
 
 // Methods
 bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)
@@ -75,3 +78,14 @@ void Player::actionMenu()
     }
 }
 
+void Player::create_player_package(std::string type, std::string name)
+{
+    Card newcard;
+
+    newcard.setName(name);
+    newcard.setType(name);
+
+    setPlayerPackage(newcard);
+}
+
+void Player::create_player_package(Card newcard) {    setPlayerPackage(newcard);    }
