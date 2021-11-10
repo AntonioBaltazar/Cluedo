@@ -102,7 +102,7 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     int realY = 13;
 
     // Print player
-    clearGlobal();
+    //clearGlobal();
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
             printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));

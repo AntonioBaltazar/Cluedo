@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Utils.h"
 
+
 using namespace std;
 /*
 72 = flèche
@@ -9,6 +10,7 @@ using namespace std;
 80 = flèche
 */
 
+/*
 ///Le but : verifier ligne par ligne que l'on est pas dans un carré et supprimer
 void effacerZone()
 {
@@ -30,4 +32,4 @@ void effacerZone()
         }
     }
 }
-
+*/
