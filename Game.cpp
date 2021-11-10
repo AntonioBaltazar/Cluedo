@@ -44,6 +44,7 @@ void Game::start()
 
     system("cls");
     */
+    system("cls");
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
 
@@ -101,11 +102,28 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     int realX = 60;
     int realY = 13;
 
-    // Print player
-    //clearGlobal();
+    for (int i = 40; i < 100; i++)
+        for (int j = 0; j < 25; j++)
+            printAt(i, j, ' ');
+
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
-            printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
+        {
+            int x(realX - p.getX() + el.getX()), y(realY - p.getY() + el.getY());
+            bool deleting = true;
+            for (auto& anel : getElements())
+            {
+                if (anel->getTranslatedX() <= x && x <= anel->getTranslatedX() + anel->getMaxX() &&
+                     anel->getTranslatedY() <= y && y <= anel->getTranslatedY() + anel->getMaxY())
+                     {
+                        deleting = false;
+                        break;
+                     }
+            }
+            if (deleting)
+                printAt(x, y, color(el.getContent(), el.getColor()));
+        }
+
     printAt(realX, realY, color(std::string(1, char(254)), p.getColorName()));
 
     // Print others players
