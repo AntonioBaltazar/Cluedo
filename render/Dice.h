@@ -1,11 +1,11 @@
 #ifndef DICE_H_INCLUDED
 #define DICE_H_INCLUDED
 
-#include "../GraphicElement.h"
+#include "../AnimatedElement.h"
 
 void diceMenu();
 
-class Dice {
+class Dice : public AnimatedElement{
 private:
     int m_value;
 public:

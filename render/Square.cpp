@@ -12,6 +12,7 @@ Square::Square(int x, int y, char content, Color cl, std::string tpPath, int tpX
     getCoord().first = tpX;
     getCoord().second = tpY;
 }
+
 Square::~Square() {}
 
 // Getters

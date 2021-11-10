@@ -20,6 +20,7 @@ Game::~Game() {}
 int Game::getNbOfPlayers() const { return m_nbOfPlayers; }
 std::vector<Player>& Game::getPlayers() { return m_players; }
 std::vector<World>& Game::getWorlds() { return m_worlds; }
+std::vector<AnimatedElement*>& Game::getElements() { return m_elements; }
 World* Game::getWorldFromPath(std::string path)
 {
     for (auto& world : getWorlds())
@@ -55,10 +56,14 @@ void Game::start()
     addWorld(board);
     addWorld(realMars);
 
+
+    // Beginning
+    Dice d;
+    getElements().push_back(&d);
     int nbTurn = 0;
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()]);
+        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
         nbTurn++;
     }
 
@@ -67,15 +72,14 @@ void Game::start()
     //displayMap();
 }
 
-void Game::handlePlayerTurn(Player* p)
+void Game::handlePlayerTurn(Player* p, Dice* d)
 {
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
-    Dice d;
 
     displayMap(*p, pWorld);
-    p->setMovementAvailable(d.throwing());
+    p->setMovementAvailable(d->throwing());
     //p->setMovementAvailable(1000);
     int saisie;
     do {
@@ -96,7 +100,7 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     int realY = 13;
 
     // Print player
-    system("cls");
+    clearGlobal();
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
             printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
@@ -106,6 +110,28 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     for (auto& pl : getPlayers())
         if (pl.getWorldName() == p.getWorldName() && pl.getName() != p.getName())
             printAt(realX - p.getX() + pl.getX(), realY - p.getY() + pl.getY(), color(char(254), pl.getColorName()));
+}
+
+void Game::clearGlobal()
+{
+    int winX(120), winY(25);
+    for (int i = 0; i < winX; i++)
+        for (int j = 0; j < winY; j++)
+        {
+            bool deleting = true;
+            for (auto& el : getElements())
+            {
+                //std::cout << "DEBUGGING";
+               // std::cout << el->getMaxX() << ":" << el->getMaxY();
+                //while(1);
+                if (el->getTranslatedX() <= i && i <= el->getTranslatedX() + el->getMaxX() &&
+                     el->getTranslatedY() <= j && j <= el->getTranslatedY() + el->getMaxY())
+                    deleting = false;
+
+            }
+            if (deleting) printAt(i, j, ' ');
+            //    while(1);
+        }
 }
 
 void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)

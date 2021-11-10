@@ -31,6 +31,7 @@ void World::addPlayer(Player* p)
     p->setY(getOriginY());
     p->setWorldName(getPath());
 }
+
 bool World::containsPlayer(Player p)
 {
     for (const auto& pl : getPlayers())

@@ -3,12 +3,14 @@
 
 #include "World.h"
 #include "Player.h"
+#include "AnimatedElement.h"
 
 class Game {
 private:
     int m_nbOfPlayers;
     std::vector<Player> m_players;
     std::vector<World> m_worlds;
+    std::vector<AnimatedElement*> m_elements;
     bool m_finish = false;
 public:
     // Constructors & Destructor
@@ -20,6 +22,7 @@ public:
     int getNbOfPlayers() const;
     std::vector<Player>& getPlayers();
     std::vector<World>& getWorlds();
+    std::vector<AnimatedElement*>& getElements();
     World* getWorldFromPath(std::string path);
     bool isFinish() const;
 
@@ -33,8 +36,9 @@ public:
     void askNbOfPlayers();
     void askAccountOfPlayers();
     void displayMap(Player p, std::vector<Square> pWorld);
-    void handlePlayerTurn(Player* p);
+    void handlePlayerTurn(Player* p, Dice* d);
     void movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
+    void clearGlobal();
 };
 
 #endif // GAME_H_INCLUDED

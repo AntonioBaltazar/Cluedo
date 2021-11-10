@@ -8,19 +8,25 @@ class AnimatedElement {
 private:
     int m_translatedX;
     int m_translatedY;
+    int m_maxX;
+    int m_maxY;
 public:
     // Constructors & Destructor
     AnimatedElement();
     AnimatedElement(int translatedX, int translatedY);
-    ~AnimatedElement();
+    virtual ~AnimatedElement();
 
     // Getters
     int getTranslatedX() const;
     int getTranslatedY() const;
+    int getMaxX() const;
+    int getMaxY() const;
 
     // Setters
     void setTranslatedX(int translatedX);
     void setTranslatedY(int translatedY);
+    void setMaxX(int maxX);
+    void setMaxY(int maxY);
 
     // Methods
     void render(std::string pathName);

@@ -28,8 +28,11 @@ void Dice::random(int maxValue = 6) { setValue(rand() % maxValue + 1); }
 
 int Dice::throwing()
 {
+    setTranslatedX(0);
+    setTranslatedY(0);
     AnimatedElement border(0, 0);
     AnimatedElement value(2,1);
+
     border.render("dice/border");
     srand(time(NULL));
 
@@ -43,6 +46,8 @@ int Dice::throwing()
         Sleep(sleep);
         v++;
     }
+    setMaxX(border.getMaxX());
+    setMaxY(border.getMaxY());
     return getValue();
 }
 

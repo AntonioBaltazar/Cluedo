@@ -16,10 +16,14 @@ AnimatedElement::~AnimatedElement() {}
 // Getters
 int AnimatedElement::getTranslatedX() const { return m_translatedX; }
 int AnimatedElement::getTranslatedY() const { return m_translatedY; }
+int AnimatedElement::getMaxX() const { return m_maxX; }
+int AnimatedElement::getMaxY() const { return m_maxY; }
 
 // Setters
 void AnimatedElement::setTranslatedX(int translatedX) { m_translatedX = translatedX; }
 void AnimatedElement::setTranslatedY(int translatedY) { m_translatedY = translatedY; }
+void AnimatedElement::setMaxX(int maxX) { m_maxX = maxX; }
+void AnimatedElement::setMaxY(int maxY) { m_maxY = maxY; }
 
 // Methods
 
@@ -68,7 +72,8 @@ void AnimatedElement::saveAsWorld(std::vector<Square>& world, std::string worldN
 void AnimatedElement::render(std::string pathName)
 {
     std::vector<std::string> cluedo;
-    int delay = 0;
+    int delay(0);
+    int maxX(0), maxY(0);
 
     std::ifstream f;
     std::string content;
@@ -97,12 +102,16 @@ void AnimatedElement::render(std::string pathName)
                 {
                     gotoxy(getTranslatedX() + i, getTranslatedY() + j);
                     std::cout << char(std::stoi(strs[4]));
+                    maxX = (maxX < i) ? i : maxX;
+                    maxY = (maxY < j) ? j : maxY;
                     Sleep(delay);
                 }
         } else if (content[0] != '#') {
             std::vector<std::string> strs = strSplit(content, ":");
             gotoxy(getTranslatedX() + std::stoi(strs[0]), getTranslatedY() + std::stoi(strs[1]));
             std::cout << char(std::stoi(strs[2]));
+            maxX = (maxX < std::stoi(strs[0])) ? std::stoi(strs[0]) : maxX;
+            maxY = (maxY < std::stoi(strs[1])) ? std::stoi(strs[1]) : maxY;
             Sleep(delay);
         }
     }
@@ -111,6 +120,8 @@ void AnimatedElement::render(std::string pathName)
     SetConsoleTextAttribute(H,0*16+15);
 
     f.close();
+    setMaxX(maxX);
+    setMaxY(maxY);
 }
 
 void AnimatedElement::clearArea(int width, int height)
