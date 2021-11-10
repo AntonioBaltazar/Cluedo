@@ -10,7 +10,7 @@ using namespace std;
 */
 
 ///Le but : verifier ligne par ligne que l'on est pas dans un carré et supprimer
-void effacerZone()
+/*void effacerZone()
 {
     std::vector < AnimatedElement > flashMcQueen;
     //longueur de la fenêtre
@@ -29,5 +29,5 @@ void effacerZone()
             }
         }
     }
-}
+}*/
 
