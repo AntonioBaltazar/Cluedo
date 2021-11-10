@@ -24,16 +24,13 @@ void script_management()
     Script solution = script_Creation(myPackage);
 
     /// Player makes an hypothesis
-    Script hypothesis = make_hypothesis(myPackage);
-
+    Script hypothesis = make_hypothesis(myPackage,true);
 
     /// We compare the solution and the hypothesis and display the result
-    HypothesisVerification(solution,hypothesis);
-
+    //HypothesisVerification(solution,hypothesis);
 
     ///Player p shows a card
-    show_card(p);
-
+    //show_card(p);
 
     gotoxy(0,23);
 }
@@ -65,10 +62,10 @@ Script script_Creation(std::vector<Card> myPackage)
 
 
 /// Allow the player to make an hypothesis and returns it
-Script make_hypothesis(std::vector<Card> myPackage)
+Script make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis)
 {
-    Script hypothesis("Someone","Somewhere","Something");
-    Person accuser("Accuser",Color::Red);
+    Script hypothesis("quelqu'un","une planete","quelque chose");
+    Person accuser("Accuseur",Color::Red);
     int column = 0;
     int key = 0;
     int x = 18;
@@ -81,9 +78,10 @@ Script make_hypothesis(std::vector<Card> myPackage)
     gotoxy(x,y);
     std::cout<<char(16);
 
-
     while(column<3)
     {
+        hypothesis = choose_elem(hyPackage,choice, column, hypothesis);
+
         gotoxy(20,23);
         std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
         gotoxy(23+accuser.getName().size(),23);
@@ -92,6 +90,7 @@ Script make_hypothesis(std::vector<Card> myPackage)
         std::cout<<" avec "<<color(hypothesis.getWeapon(),Color::Magenta)<<".       ";
 
         key = getInput();
+
         gotoxy(x,y);
         std::cout<<" ";
 
@@ -99,8 +98,11 @@ Script make_hypothesis(std::vector<Card> myPackage)
 
         if (key == 80 && choice < 5) {  y = y+2;    choice++;   }
 
-        if(key == 13)
+        if(key == 13 && finalHypothesis == false)
             column++;
+
+        if(key == 13 && finalHypothesis == true)
+            column+=2;
 
         switch(column)
         {
@@ -113,7 +115,6 @@ Script make_hypothesis(std::vector<Card> myPackage)
         gotoxy(x,y);
         std::cout<<char(16);
 
-        hypothesis = choose_elem(hyPackage,choice, column, hypothesis);
     }
 
     system("CLS");
@@ -282,41 +283,24 @@ void show_card(Player p)
 {
     Dialog d;
     int choice = menu_show_card();
-
+    std::string sentence;
 
     ///Juste pour les test, a remplacer par les valeurs d'un vrai joueur
     p.create_player_package("Person","Antonio");
     p.create_player_package("Planet","Venus");
     p.create_player_package("Weapon","matraque");
     p.setColorName(Color::Cyan);
-    p.setName("Player 2");
+    p.setName("Jean");
 
     system("CLS");
 
-    d.displayBordersPers(25,90,10,14);
+    sentence = p.getName()+" a la carte : "+p.getPlayerPackage()[choice-1].getName();
 
-    gotoxy(40,12);
-    std::cout<<color(p.getName()+" a la carte : ",p.getColorName());
-
-    switch(choice)
-    {
-    case 1:
-        std::cout<<color(p.getPlayerPackage()[0].getName(),p.getColorName());
-        break;
-
-    case 2:
-        std::cout<<color(p.getPlayerPackage()[1].getName(),p.getColorName());
-        break;
-
-    case 3:
-        std::cout<<color(p.getPlayerPackage()[2].getName(),p.getColorName());
-        break;
-
-    default : break;
-    }
+    d.displayBordersPers(50-(sentence.size()/2),70+(sentence.size()/2),12,16);
+    gotoxy(60-(sentence.size()/2),14);
+    std::cout<<color(sentence,p.getColorName());
 
     while(kbhit()) {}
-
     getch();
 }
 
