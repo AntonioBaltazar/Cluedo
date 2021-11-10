@@ -19,17 +19,17 @@ $18:13:22:14:205
 10:3:30
 -1:maps/planets/mars:18:15
 4:5:17
--1
+-1:maps/planets/jupiter:34:8
 28:6:16
--1
+-1:maps/planets/jupiter:18:15
 26:10:16
--1
+-1:maps/planets/jupiter:18:15
 2:11:17
--1
+-1:maps/planets/jupiter:18:15
 30:15:16
--1
+-1:maps/planets/jupiter:18:15
 4:16:17
--1
+-1:maps/planets/jupiter:18:15
 # Light border
 ### Around Highest Teleporter
 8:2:218

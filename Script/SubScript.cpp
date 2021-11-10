@@ -21,16 +21,16 @@ void script_management()
     myPackage = card_Shuffle(myPackage, nb_card);
 
     /// Script creation
-    //Script solution = script_Creation(myPackage);
+    Script solution = script_Creation(myPackage);
 
     /// Player makes an hypothesis
-    //Script hypothesis = make_hypothesis(myPackage,true);
+    Script hypothesis = make_hypothesis(myPackage,true);
 
     /// We compare the solution and the hypothesis and display the result
     //HypothesisVerification(solution,hypothesis);
 
     ///Player p shows a card
-    show_card(p);
+    //show_card(p);
 
     gotoxy(0,23);
 }

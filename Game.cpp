@@ -48,12 +48,14 @@ void Game::start()
 
     World board(16, 11, "Board", "maps/main");
     World realMars(18, 9, "Mars2", "maps/planets/mars");
+    World realJupiter(18, 9, "jupiter2", "maps/planets/jupiter");
 
     for (auto& p : getPlayers())
         board.addPlayer(&p);
 
     addWorld(board);
     addWorld(realMars);
+    addWorld(realJupiter);
 
     int nbTurn = 0;
     while(!isFinish())
