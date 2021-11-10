@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Utils.h"
 
 using namespace std;
 /*
@@ -7,27 +8,26 @@ using namespace std;
 75 = flèche gauche
 80 = flèche
 */
-/*
-void MenuAction()
-{
-    int input, choice = 1;
-    std::string sentences[] = {"1. Se deplacer", "2. Enoncer une hypothese"};
-    do
-    {
-        if (input == 80 && choice > 1) choice--;
-        if (input == 72 && choice < 2) choice++;
-        for (int i = 0; i < 40; i++) printAt(80+i, 20, " ");
-        printAt(80 - sentences[choice-1].size()/2, 20, sentences[choice-1]);
-        input = getInput();
-    } while (input != 13);
 
-    switch(choice)
+///Le but : verifier ligne par ligne que l'on est pas dans un carré et supprimer
+void effacerZone()
+{
+    std::vector < AnimatedElement > flashMcQueen;
+    //longueur de la fenêtre
+    for (int i = 0; i < 120; i++)
     {
-        case 1 :
-            break;
-        case 2 :
-            break;
+        //hauteur de la fenêtre
+        for (int j = 0; j < 25; j++)
+        {
+            //Pour les 2
+            for (auto& Sally : flashMcQueen) ///On parcourt le vecteur
+            {
+                if (getWidth() != " " && getHeight() != " ")
+                {
+                    printAt( i, j, " ");
+                }
+            }
+        }
     }
 }
 
-*/
