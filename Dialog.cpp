@@ -86,6 +86,10 @@ void Dialog::displayMessage()
 
 void Dialog::displayBorders(int topY = 22, int bottomY = 28)
 {
+    setMaxX(116);
+    setMaxY(bottomY - topY);
+    setTranslatedX(0);
+    setTranslatedY(topY);
     // Top & Bottom
     for (int i = 0; i < 116; i++)
     {

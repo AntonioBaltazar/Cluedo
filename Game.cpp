@@ -59,10 +59,14 @@ void Game::start()
     addWorld(realMars);
     addWorld(realJupiter);
 
+    Dialog dialogBox;
+    dialogBox.displayBorders(22, 28);
 
     // Beginning
     Dice d;
     getElements().push_back(&d);
+    getElements().push_back(&dialogBox);
+
     int nbTurn = 0;
     while(!isFinish())
     {
@@ -104,9 +108,10 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
 
     // Print player
     //clearGlobal();
-    for (int i = 40; i < 100; i++)
-        for (int j = 0; j < 25; j++)
-            printAt(i, j, ' ');
+
+    for (int j = 0; j < 22; j++)
+        printAt(40, j, std::string(60, ' '));
+
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
         {
