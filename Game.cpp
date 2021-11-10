@@ -106,11 +106,17 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     int realX = 60;
     int realY = 13;
 
+<<<<<<< HEAD
     // Print player
     //clearGlobal();
 
     for (int j = 0; j < 22; j++)
         printAt(40, j, std::string(60, ' '));
+=======
+    for (int i = 40; i < 100; i++)
+        for (int j = 0; j < 25; j++)
+            printAt(i, j, ' ');
+>>>>>>> 74035b7522a7e26124e1522779875835293bf645
 
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
