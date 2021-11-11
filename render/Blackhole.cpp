@@ -32,7 +32,7 @@ void Blackhole::render(std::string title = "", std::string playerName = "")
 {
     std::mutex lock;
 
-    auto f1 = [&lock, this](std::string title, std::string playerName) {
+    auto f1 = [&lock, this](std::string title, std::string playerName){
         std::string suffix = "AIE! ";
         std::vector<std::pair<std::string, Color>> words;
         words.push_back(std::pair<std::string, Color>(suffix, Color::Red));
