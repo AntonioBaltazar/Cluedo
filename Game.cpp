@@ -81,6 +81,17 @@ void Game::start()
     addWorld(realSaturn);
     addWorld(realVenus);
 
+<<<<<<< HEAD
+=======
+    Dialog dialogBox;
+    dialogBox.displayBorders(22, 28);
+
+    // Beginning
+    Dice d;
+    getElements().push_back(&d);
+    getElements().push_back(&dialogBox);
+
+>>>>>>> fab9eea9a3c80252c7e492553f20cb3d18ce5802
     int nbTurn = 0;
     while(!isFinish())
     {
@@ -117,17 +128,71 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
 {
     int realX = 60;
     int realY = 13;
+<<<<<<< HEAD
     // Print player
     system("cls");
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
             printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
+=======
+
+    // Print player
+    clearGlobal();
+
+    //for (int j = 0; j < 22; j++)
+      //  printAt(40, j, std::string(60, ' '));
+
+    for (const auto& el : pWorld)
+        if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
+        {
+           int x(realX - p.getX() + el.getX()), y(realY - p.getY() + el.getY());
+            bool deleting = true;
+            for (auto& anel : getElements())
+            {
+                if (anel->getTranslatedX() <= x && x <= anel->getTranslatedX() + anel->getMaxX() &&
+                     anel->getTranslatedY() <= y && y <= anel->getTranslatedY() + anel->getMaxY())
+                     {
+                        deleting = false;
+                        break;
+                     }
+            }
+            if (deleting)
+                printAt(x, y, color(el.getContent(), el.getColor()));
+        }
+
+>>>>>>> fab9eea9a3c80252c7e492553f20cb3d18ce5802
     printAt(realX, realY, color(std::string(1, char(254)), p.getColorName()));
     // Print others players
     for (auto& pl : getPlayers())
         if (pl.getWorldName() == p.getWorldName() && pl.getName() != p.getName())
             printAt(realX - p.getX() + pl.getX(), realY - p.getY() + pl.getY(), color(char(254), pl.getColorName()));
 }
+<<<<<<< HEAD
+=======
+
+void Game::clearGlobal()
+{
+    int winX(120), winY(25);
+    for (int i = 0; i < winY; i++)
+    {
+        // Getting element's slices
+        std::vector<std::pair<int, int>> elementSlices;
+        for (const auto& element : getElements())
+            if (i >= element->getTranslatedY() && i <= element->getTranslatedY() + element->getMaxY() + 1)
+                elementSlices.push_back(std::pair<int, int>(element->getTranslatedX(), element->getMaxX() + 1));
+
+        int stringX(0), widthString(0);
+        // Printing slices of spaces char
+        for (const auto& slice : elementSlices)
+        {
+            printAt(stringX, i, std::string(slice.first, ' '));
+            stringX += slice.first + slice.second;
+        }
+        printAt(stringX, i, std::string(winX - stringX, ' '));
+    }
+}
+
+>>>>>>> fab9eea9a3c80252c7e492553f20cb3d18ce5802
 void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
 {
     for (auto& el : content)

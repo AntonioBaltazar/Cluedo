@@ -3,6 +3,7 @@
 
 #include <queue>
 #include "Utils.h"
+#include "AnimatedElement.h"
 
 class Person {
 private:
@@ -35,7 +36,7 @@ public:
     void setContent(std::string content) { m_content = content; }
 };
 
-class Dialog {
+class Dialog : public AnimatedElement {
 private:
     std::queue<Message> m_messages;
 public:
