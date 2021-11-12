@@ -12,7 +12,7 @@
 int main()
 {
     // Resize console, hide cursor, get title & allow colors
-    initConsole("Cluedoremifasollasi");
+    initConsole("Cluedo - Ne vous laissez pas enculer");
 
     int saisie = 0;
 
@@ -48,7 +48,6 @@ int main()
                 break;
             case 4:
                 g.start();
-                system("cls");
                 break;
             default: break;
         }

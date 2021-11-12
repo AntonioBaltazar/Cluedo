@@ -13,7 +13,7 @@
 #include "Blackhole.h"
 
 // Constructors & Destructor
-Dice::Dice() {}
+Dice::Dice() { }
 Dice::Dice(int value) : m_value(value) {}
 Dice::~Dice() {}
 

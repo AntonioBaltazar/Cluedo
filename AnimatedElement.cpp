@@ -50,6 +50,11 @@ void AnimatedElement::saveAsWorld(std::vector<Square>& world, std::string worldN
                 world.back().getCoord().first = std::stoi(strSplit(content, ":")[2]);
                 world.back().getCoord().second = std::stoi(strSplit(content, ":")[3]);
             }
+
+            if (type == SquareType::NPC)
+            {
+
+            }
         } else if (content[0] == '%')
         {
             content.erase(remove(content.begin(), content.end(), '%'), content.end());
@@ -106,7 +111,7 @@ void AnimatedElement::render(std::string pathName)
                     maxY = (maxY < j) ? j : maxY;
                     Sleep(delay);
                 }
-        } else if (content[0] != '#') {
+        } else if (content[0] != '\0') {
             std::vector<std::string> strs = strSplit(content, ":");
             gotoxy(getTranslatedX() + std::stoi(strs[0]), getTranslatedY() + std::stoi(strs[1]));
             std::cout << char(std::stoi(strs[2]));
@@ -124,12 +129,42 @@ void AnimatedElement::render(std::string pathName)
     setMaxY(maxY);
 }
 
+void AnimatedElement::init(std::string pathName)
+{
+    std::vector<std::string> cluedo;
+    int maxX(0), maxY(0);
+
+    std::ifstream f;
+    std::string content;
+    f.open("ressources/" + pathName + ".txt");
+
+    //Reading data from the file, line by line
+    while (std::getline(f, content))
+    {
+        if (content[0] == '$')
+        {
+            content.erase(remove(content.begin(), content.end(), '$'), content.end());
+            std::vector<std::string> strs = strSplit(content, ":");
+            for (int i = std::stoi(strs[0]); i < std::stoi(strs[2]); i++)
+                for (int j = std::stoi(strs[1]); j < std::stoi(strs[3]); j++)
+                {
+                    maxX = (maxX < i) ? i : maxX;
+                    maxY = (maxY < j) ? j : maxY;
+                }
+        } else if (content[0] != '#') {
+            std::vector<std::string> strs = strSplit(content, ":");
+            maxX = (maxX < std::stoi(strs[0])) ? std::stoi(strs[0]) : maxX;
+            maxY = (maxY < std::stoi(strs[1])) ? std::stoi(strs[1]) : maxY;
+        }
+    }
+
+    f.close();
+    setMaxX(maxX);
+    setMaxY(maxY);
+}
+
 void AnimatedElement::clearArea(int width, int height)
 {
-    for (int i = 0; i < width; i++)
-        for (int j = 0; j < height; j++)
-        {
-            gotoxy(getTranslatedX() + i, getTranslatedY() + j);
-            std::cout << " ";
-        }
+    for (int i = 0; i < height; i++)
+        printAt(getTranslatedX(), getTranslatedY() + i, std::string(width, ' '));
 }

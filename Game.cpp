@@ -12,7 +12,9 @@
 #include "Utils.h"
 
 // Constructors & Destructor
-Game::Game() {}
+Game::Game() {
+    getElements().clear();
+}
 Game::Game(int nbOfPlayers) : m_nbOfPlayers(nbOfPlayers) {}
 Game::~Game() {}
 
@@ -59,13 +61,11 @@ void Game::start()
     addWorld(realMars);
     addWorld(realJupiter);
 
-    Dialog dialogBox;
-    dialogBox.displayBorders(22, 28);
-
     // Beginning
+    //Dialog dialogBox;
     Dice d;
     getElements().push_back(&d);
-    getElements().push_back(&dialogBox);
+//    getElements().push_back(&dialogBox);
 
     int nbTurn = 0;
     while(!isFinish())
@@ -74,9 +74,7 @@ void Game::start()
         nbTurn++;
     }
 
-
     while(!kbhit());
-    //displayMap();
 }
 
 void Game::handlePlayerTurn(Player* p, Dice* d)
@@ -86,8 +84,8 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
 
     displayMap(*p, pWorld);
-    p->setMovementAvailable(d->throwing());
-    //p->setMovementAvailable(1000);
+    //p->setMovementAvailable(d->throwing());
+    p->setMovementAvailable(1000);
     int saisie;
     do {
         displayMap(*p, pWorld);
@@ -106,16 +104,14 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     int realX = 60;
     int realY = 13;
 
-    // Print player
+    // Refreshing board
     clearGlobal();
 
-    //for (int j = 0; j < 22; j++)
-      //  printAt(40, j, std::string(60, ' '));
-
+    // Print for each element in the world
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
         {
-           int x(realX - p.getX() + el.getX()), y(realY - p.getY() + el.getY());
+            int x(realX - p.getX() + el.getX()), y(realY - p.getY() + el.getY());
             bool deleting = true;
             for (auto& anel : getElements())
             {
@@ -140,7 +136,7 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
 
 void Game::clearGlobal()
 {
-    int winX(120), winY(25);
+    int winX = 120, winY = 30;
     for (int i = 0; i < winY; i++)
     {
         // Getting element's slices
@@ -149,35 +145,38 @@ void Game::clearGlobal()
             if (i >= element->getTranslatedY() && i <= element->getTranslatedY() + element->getMaxY() + 1)
                 elementSlices.push_back(std::pair<int, int>(element->getTranslatedX(), element->getMaxX() + 1));
 
-        int stringX(0), widthString(0);
+        int stringX = 0;
         // Printing slices of spaces char
         for (const auto& slice : elementSlices)
         {
             printAt(stringX, i, std::string(slice.first, ' '));
             stringX += slice.first + slice.second;
         }
-        printAt(stringX, i, std::string(winX - stringX, ' '));
+
+        printAt(stringX, i, std::string(winX - (stringX > 120 ? 0 : stringX), ' '));
     }
 }
 
 void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
 {
+    bool isTping(false);
     for (auto& el : content)
         if (el.getX() == p->getX() + 2*dirX && el.getY() == p->getY() + dirY && el.getType())
             if (el.getType() == SquareType::TELEPORTER)
-            {
                 if (getWorldFromPath(el.getTpPath()) != nullptr)
                 {
                     getWorldFromPath(el.getTpPath())->addPlayer(p);
                     p->setX(el.getCoord().first);
                     p->setY(el.getCoord().second);
+                    isTping = true;
                     p->setMovementAvailable(0);
                 }
-            }
-
-    p->setX(p->getX() + 2*dirX);
-    p->setY(p->getY() + dirY);
-    p->setMovementAvailable(p->getMovementAvailable() - 1);
+    if (!isTping)
+    {
+        p->setX(p->getX() + 2*dirX);
+        p->setY(p->getY() + dirY);
+        p->setMovementAvailable(p->getMovementAvailable() - 1);
+    }
 }
 
 void Game::askAccountOfPlayers()
@@ -195,11 +194,10 @@ void Game::askAccountOfPlayers()
     {
     std::string pseudo;
     index = 0;
+
     // Clearing old text
-    nb.clearArea(14, 7);
-    for (int i = 0; i < 28; i++)
-        for (int j = 0; j < 3; j++)
-            printAt(48+i, 12+j, " ");
+    for (int j = 0; j < 3; j++)
+        printAt(48, j+i, std::string(28, ' '));
 
     nb.render("numbers/" + std::to_string(i+1));
     gotoxy(48, 12);
@@ -247,8 +245,7 @@ void Game::askNbOfPlayers()
         for (int i = 0; i < 12; i++) std::cout << " ";
         gotoxy(42, 15);
         for (int i = 0; i < nbOfPlayers; i++) std::cout << color(char(3), Color::Red) << " ";
-        while (!kbhit());
-        saisie = getch();
+        saisie = getInput();
         if (saisie == 72 && nbOfPlayers < 6) nbOfPlayers++;
         if (saisie == 80 && nbOfPlayers > 2) nbOfPlayers--;
     } while (saisie != 13);

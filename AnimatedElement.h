@@ -14,6 +14,7 @@ public:
     // Constructors & Destructor
     AnimatedElement();
     AnimatedElement(int translatedX, int translatedY);
+    AnimatedElement(std::string pathName);
     virtual ~AnimatedElement();
 
     // Getters
@@ -29,6 +30,7 @@ public:
     void setMaxY(int maxY);
 
     // Methods
+    void init(std::string pathName);
     void render(std::string pathName);
     void clearArea(int width, int height);
     void saveAsWorld(std::vector<Square>& world, std::string worldName);

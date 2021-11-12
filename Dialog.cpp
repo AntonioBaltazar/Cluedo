@@ -7,7 +7,12 @@
 #include "Utils.h"
 
 // Constructos & Destructor
-Dialog::Dialog() {}
+Dialog::Dialog() {
+    setMaxX(117);
+    setMaxY(7);
+    setTranslatedX(2);
+    setTranslatedY(22);
+}
 Dialog::Dialog(std::queue<Message> msgs) : m_messages(msgs) {}
 Dialog::~Dialog() {}
 
@@ -86,10 +91,6 @@ void Dialog::displayMessage()
 
 void Dialog::displayBorders(int topY = 22, int bottomY = 28)
 {
-    setMaxX(117);
-    setMaxY(bottomY - topY);
-    setTranslatedX(2);
-    setTranslatedY(topY);
     // Top & Bottom
     for (int i = 0; i < 116; i++)
     {
