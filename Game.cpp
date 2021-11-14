@@ -77,37 +77,27 @@ void Game::start()
     addWorld(board);
     addWorld(realMars);
     addWorld(realJupiter);
-<<<<<<< HEAD
-=======
     addWorld(realEarth);
     addWorld(realMercury);
     addWorld(realNeptun);
     addWorld(realSaturn);
     addWorld(realVenus);
 
-<<<<<<< HEAD
-=======
     Dialog dialogBox;
-    dialogBox.displayBorders(22, 28);
->>>>>>> 2981f64d8403099c599099fc752b98d254269a93
+    //dialogBox.displayBorders(22, 28);
+
 
     // Beginning
-    //Dialog dialogBox;
     Dice d;
     getElements().push_back(&d);
-//    getElements().push_back(&dialogBox);
 
->>>>>>> fab9eea9a3c80252c7e492553f20cb3d18ce5802
     int nbTurn = 0;
     while(!isFinish())
     {
         handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()]);
         nbTurn++;
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 2981f64d8403099c599099fc752b98d254269a93
     while(!kbhit());
 }
 
@@ -118,13 +108,10 @@ void Game::handlePlayerTurn(Player* p)
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
     Dice d;
     displayMap(*p, pWorld);
-<<<<<<< HEAD
-    //p->setMovementAvailable(d->throwing());
-    p->setMovementAvailable(1000);
-=======
+
     p->setMovementAvailable(d.throwing());
     //p->setMovementAvailable(1000);
->>>>>>> 2981f64d8403099c599099fc752b98d254269a93
+
     int saisie;
     do
     {
@@ -138,17 +125,18 @@ void Game::handlePlayerTurn(Player* p)
     }
     while (p->getMovementAvailable() > 0);
 }
+
 void Game::displayMap(Player p, std::vector<Square> pWorld)
 {
     int realX = 60;
     int realY = 13;
-<<<<<<< HEAD
+
     // Print player
     system("cls");
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
             printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
-=======
+
 
     // Refreshing board
     clearGlobal();
@@ -172,15 +160,13 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
                 printAt(x, y, color(el.getContent(), el.getColor()));
         }
 
->>>>>>> fab9eea9a3c80252c7e492553f20cb3d18ce5802
+
     printAt(realX, realY, color(std::string(1, char(254)), p.getColorName()));
     // Print others players
     for (auto& pl : getPlayers())
         if (pl.getWorldName() == p.getWorldName() && pl.getName() != p.getName())
             printAt(realX - p.getX() + pl.getX(), realY - p.getY() + pl.getY(), color(char(254), pl.getColorName()));
 }
-<<<<<<< HEAD
-=======
 
 void Game::clearGlobal()
 {
@@ -205,7 +191,7 @@ void Game::clearGlobal()
     }
 }
 
->>>>>>> fab9eea9a3c80252c7e492553f20cb3d18ce5802
+
 void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
 {
     bool isTping(false);
@@ -228,12 +214,13 @@ void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player*
         p->setMovementAvailable(p->getMovementAvailable() - 1);
     }
 =======
-            }
+}
     p->setX(p->getX() + 2*dirX);
     p->setY(p->getY() + dirY);
     p->setMovementAvailable(p->getMovementAvailable() - 1);
 >>>>>>> 2981f64d8403099c599099fc752b98d254269a93
 }
+
 void Game::askAccountOfPlayers()
 {
     system("cls");
