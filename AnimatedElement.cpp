@@ -111,7 +111,7 @@ void AnimatedElement::render(std::string pathName)
                     maxY = (maxY < j) ? j : maxY;
                     Sleep(delay);
                 }
-        } else if (content[0] != '\0') {
+        } else if (content[0] != '\0' && content[0] != '#') {
             std::vector<std::string> strs = strSplit(content, ":");
             gotoxy(getTranslatedX() + std::stoi(strs[0]), getTranslatedY() + std::stoi(strs[1]));
             std::cout << char(std::stoi(strs[2]));

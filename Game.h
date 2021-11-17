@@ -10,7 +10,7 @@ private:
     int m_nbOfPlayers;
     std::vector<Player> m_players;
     std::vector<World> m_worlds;
-    std::vector<AnimatedElement*> m_elements;
+    std::vector<AnimatedElement> m_elements;
     bool m_finish = false;
 public:
     // Constructors & Destructor
@@ -22,7 +22,7 @@ public:
     int getNbOfPlayers() const;
     std::vector<Player>& getPlayers();
     std::vector<World>& getWorlds();
-    std::vector<AnimatedElement*>& getElements();
+    std::vector<AnimatedElement>& getElements();
     World* getWorldFromPath(std::string path);
     bool isFinish() const;
 
