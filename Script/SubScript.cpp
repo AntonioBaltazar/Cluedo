@@ -13,6 +13,7 @@
 ///Manage all the subprograms concerning the script, the hypothesis and the card package
 void script_management()
 {
+    /*
     int nb_card = 0;
     Player p;
 
@@ -33,6 +34,7 @@ void script_management()
     //show_card(p);
 
     gotoxy(0,23);
+    */
 }
 
 ///Create the solution of the murderer and returns it in a script

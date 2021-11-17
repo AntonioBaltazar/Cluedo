@@ -9,8 +9,9 @@
 
 
 ///Read file "CHANGEME.txt" and create a card package depending on the information of the file that will be returned
-std::vector<Card> card_Creation(int &nb_card)
+std::vector<Card> Card::card_Creation(int &nb_card)
 {
+    Card temp;
     std::string content;
     std::string path = "CHANGEME.txt";
     std::ifstream file(path.c_str());
@@ -25,7 +26,7 @@ std::vector<Card> card_Creation(int &nb_card)
 
         while(std::getline(file,content))
             if(content != "")
-                myPackage.push_back(card_convert(content));
+                myPackage.push_back(temp.card_convert(content));
 
         file.close();
     }else //if not we warn the user
@@ -36,7 +37,7 @@ std::vector<Card> card_Creation(int &nb_card)
 
 
 ///Get a string wich represents a line of the file CHANGEME.txt and create a card that will be returned
-Card card_convert(std::string content)
+Card Card::card_convert(std::string content)
 {
     Card newCard;
     std::vector <std::string> newContent;
@@ -51,7 +52,7 @@ Card card_convert(std::string content)
 
 
 ///Shuffle a package of cards
-std::vector<Card> card_Shuffle(std::vector<Card> myPackage,int nb_card)
+std::vector<Card> Card::card_Shuffle(std::vector<Card> myPackage,int nb_card)
 {
     Card temp;
 
@@ -77,7 +78,7 @@ std::vector<Card> card_Shuffle(std::vector<Card> myPackage,int nb_card)
 
 
 ///Displays every card of the package
-void card_Package_Display(std::vector<Card> myPackage)
+void Card::card_Package_Display(std::vector<Card> myPackage)
 {
     std::vector<Card>::iterator it;
 
@@ -105,7 +106,7 @@ void card_Package_Display(std::vector<Card> myPackage)
 
 
 ///Player picks a card and that card is removed from the package, returns the picked card
-Card card_pick(std::vector<Card> &myPackage)
+Card Card::card_pick(std::vector<Card> &myPackage)
 {
     Card temp ;
     auto picked_elem = myPackage.end()-1;
@@ -121,18 +122,19 @@ Card card_pick(std::vector<Card> &myPackage)
 
 
 ///Optionnal
-void card_Management()
+void Card::card_Management()
 {
     std::vector<Card> myPackage;
+    Card temp;
     Card pioche;
     int nb_card = 0;
 
-    myPackage = card_Creation(nb_card); //Mélange
-    myPackage = card_Shuffle(myPackage, nb_card); //Mélange
-    //card_Package_Display(myPackage); //Affichage
+    myPackage = temp.card_Creation(nb_card); //Mélange
+    myPackage = temp.card_Shuffle(myPackage, nb_card); //Mélange
+    //temp.card_Package_Display(myPackage); //Affichage
 
     pioche = card_pick(myPackage);
-    //card_Package_Display(myPackage);
+    card_Package_Display(myPackage);
 }
 
 

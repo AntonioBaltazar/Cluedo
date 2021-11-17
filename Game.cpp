@@ -80,13 +80,14 @@ void Game::start()
     //Dice d;
     //getElements().push_back(d);
 
+    ///PACKET DE CARTE ET ON DISTRIBUE
+
     int nbTurn = 0;
     while(!isFinish())
     {
         handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()]);
         nbTurn++;
     }
-
     while(!kbhit());
 }
 
@@ -113,7 +114,6 @@ void Game::handlePlayerTurn(Player* p)
         if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-
     }
     while (p->getMovementAvailable() > 0);
 }

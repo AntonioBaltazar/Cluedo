@@ -3,7 +3,6 @@
 
 #include "Utils.h"
 #include "render/Square.h"
-
 #include "World.h"
 #include "Player.h"
 
