@@ -53,7 +53,7 @@ void AnimatedElement::saveAsWorld(std::vector<Square>& world, std::string worldN
 
             if (type == SquareType::NPC)
             {
-
+                world.back().setDialogPath(strSplit(content, ":")[1]);
             }
         } else if (content[0] == '%')
         {

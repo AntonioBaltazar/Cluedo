@@ -1,7 +1,9 @@
 #include <iostream>
 #include <windows.h>
+#include <algorithm>
 #include <conio.h>
 #include <vector>
+#include <fstream>
 #include "World.h"
 #include "render/Dice.h"
 #include "Player.h"
@@ -100,20 +102,22 @@ void Game::handlePlayerTurn(Player* p)
     p->setMovementAvailable(d.throwing());
 
     //p->setMovementAvailable(1000);
-
+    std::string dialog("");
     int saisie;
     do
     {
-        displayMap(*p, pWorld);
         FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
-
         saisie = getInput();
 
-        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-
+        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) dialog = movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        displayMap(*p, pWorld);        if (dialog != "") {
+            startDialog(dialog);
+            dialog = "";
+            displayMap(*p, pWorld);
+        }
     }
     while (p->getMovementAvailable() > 0);
 }
@@ -124,7 +128,7 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
     int realY = 13;
 
     // Print player
-    system("cls");
+    //system("cls");
     for (const auto& el : pWorld)
         if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
             printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
@@ -167,17 +171,11 @@ void Game::clearGlobal()
     for (int i = 0; i < winY; i++)
     {
         // Getting element's slices
-
         std::vector<std::pair<int, int>> elementSlices;
 
-        for (const auto& element : getElements()) {
-
-            if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1) {
-
+        for (const auto& element : getElements())
+            if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1)
                 elementSlices.push_back(std::pair<int, int>(element.getTranslatedX(), element.getMaxX() + 1));
-            }
-
-        }
 
         int stringX = 0;
         // Printing slices of spaces char
@@ -193,10 +191,11 @@ void Game::clearGlobal()
 }
 
 
-void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
+std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
 {
     bool isTping(false);
-    for (auto& el : content)
+    std::string dialogPath("");
+    for (auto& el : content) {
         if (el.getX() == p->getX() + 2*dirX && el.getY() == p->getY() + dirY && el.getType())
             if (el.getType() == SquareType::TELEPORTER)
                 if (getWorldFromPath(el.getTpPath()) != nullptr)
@@ -207,6 +206,13 @@ void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player*
                     isTping = true;
                     p->setMovementAvailable(0);
                 }
+        if (el.getType() == SquareType::NPC)
+            if ((el.getX() == p->getX() + 2 && el.getY() == p->getY() + dirY)
+                || (el.getX() == p->getX() - 2 && el.getY() == p->getY() + dirY)
+                || (el.getX() == p->getX() && el.getY() == p->getY() + 1)
+                || (el.getX() == p->getX() && el.getY() == p->getY() - 1))
+                dialogPath = el.getDialogPath();
+    }
 
     if (!isTping)
     {
@@ -214,6 +220,7 @@ void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player*
         p->setY(p->getY() + dirY);
         p->setMovementAvailable(p->getMovementAvailable() - 1);
     }
+    return dialogPath;
 }
 
 void Game::askAccountOfPlayers()
@@ -287,4 +294,22 @@ void Game::askNbOfPlayers()
         if (saisie == 80 && nbOfPlayers > 2) nbOfPlayers--;
     } while (saisie != 13);
     setNbOfPlayers(nbOfPlayers);
+}
+
+void Game::startDialog(std::string dialogPath) {
+    std::ifstream f;
+    std::string content;
+    f.open("ressources/dialogs/" + dialogPath + ".txt");
+
+    Dialog dlg;
+    //getElements().push_back(dlg);
+    while (std::getline(f, content)) {
+        if (content[0] != '\0') {
+            std::vector<std::string> splited = strSplit(content, "###");
+            dlg.addMessage(Message(Person(splited[0], getColor(std::stoi(splited[1]))), splited[2]));
+        }
+    }
+
+    f.close();
+    dlg.displayConversation();
 }

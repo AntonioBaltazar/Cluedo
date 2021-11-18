@@ -37,8 +37,9 @@ public:
     void askAccountOfPlayers();
     void displayMap(Player p, std::vector<Square> pWorld);
     void handlePlayerTurn(Player* p);
-    void movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
+    std::string movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
     void clearGlobal();
+    void startDialog(std::string dialogPath);
 };
 
 #endif // GAME_H_INCLUDED

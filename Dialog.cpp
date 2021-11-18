@@ -91,6 +91,9 @@ void Dialog::displayMessage()
 
 void Dialog::displayBorders(int topY = 22, int bottomY = 28)
 {
+    for (int i = 0; i < 8; i++)
+        printAt(3, 23+i, std::string(120, ' '));
+
     // Top & Bottom
     for (int i = 0; i < 116; i++)
     {

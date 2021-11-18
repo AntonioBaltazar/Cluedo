@@ -18,6 +18,7 @@ private:
     Color m_color;
     SquareType m_type;
     std::string m_tpPath;
+    std::string m_dialogPath;
     std::pair<int, int> m_coord;
 public:
     // Constructors & Destructor
@@ -34,6 +35,7 @@ public:
     SquareType getType() const;
     std::string getTpPath() const;
     std::pair<int, int>& getCoord();
+    std::string getDialogPath() const;
 
     // Setters
     void setX(int x);
@@ -42,6 +44,7 @@ public:
     void setColor(Color cl);
     void setType(SquareType type);
     void setTpPath(std::string tpPath);
+    void setDialogPath(std::string dialogPath);
 };
 
 
