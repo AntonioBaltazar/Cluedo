@@ -28,16 +28,20 @@ public:
 
     ///Methods
     void display();
+    void card_Management();
+    std::vector<Card> card_Creation(int &nb_card);
+    std::vector<Card> card_Shuffle(std::vector<Card> myPackage,int nb_card);
+    void card_Package_Display(std::vector<Card> myPackage);
+    Card card_convert(std::string content);
+    Card card_pick(std::vector<Card> &myPackage);
 };
 
-///Prototype
-std::vector<Card> card_Creation(int &nb_card);
-Card card_convert(std::string content);
-std::vector<Card> card_Shuffle(std::vector<Card> myPackage,int nb_card);
-void card_Package_Display(std::vector<Card> myPackage);
-void card_Management();
 
-Card card_pick(std::vector<Card> &myPackage);
+
+
+
+
+
 
 
 

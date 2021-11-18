@@ -15,6 +15,7 @@ int main()
     initConsole("Cluedo - Ne vous laissez pas enculer");
 
     int saisie = 0;
+    Card package;
 
     do
     {
@@ -37,9 +38,9 @@ int main()
                 break;
             case 2:
                 ///Appel fct Tonio
-                //card_Management();
-                system("cls");
-                script_management();
+                package.card_Management();
+                //system("cls");
+                //script_management();
                 //show_card(p);
                 break;
             case 3:
