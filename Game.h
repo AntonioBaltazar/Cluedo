@@ -4,6 +4,7 @@
 #include "World.h"
 #include "Player.h"
 #include "AnimatedElement.h"
+#include "render/Dice.h"
 
 class Game {
 private:
@@ -40,6 +41,8 @@ public:
     std::string movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
     void clearGlobal();
     void startDialog(std::string dialogPath);
+
+    void showStars();
 };
 
 #endif // GAME_H_INCLUDED
