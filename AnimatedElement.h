@@ -6,8 +6,8 @@
 
 class AnimatedElement {
 private:
-    int m_translatedX;
-    int m_translatedY;
+    int m_translatedX = 0;
+    int m_translatedY = 0;
     int m_maxX;
     int m_maxY;
 public:

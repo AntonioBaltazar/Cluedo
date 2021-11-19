@@ -40,7 +40,6 @@
 		<Unit filename="AnimatedElement.h" />
 		<Unit filename="Card/Card.cpp" />
 		<Unit filename="Card/Card.h" />
-		<Unit filename="Card/SubCard.cpp" />
 		<Unit filename="ConsoleHandler.cpp" />
 		<Unit filename="ConsoleHandler.h" />
 		<Unit filename="Dialog.cpp" />

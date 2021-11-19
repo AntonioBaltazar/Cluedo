@@ -52,8 +52,9 @@ void Game::start()
     // Getting datas before launching new game
     /*askNbOfPlayers();
     askAccountOfPlayers();
-    system("cls");
     */
+    system("cls");
+
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
 
@@ -79,29 +80,29 @@ void Game::start()
     addWorld(realVenus);
 
     // Beginning
-    //Dice d;
-    //getElements().push_back(d);
+    Dice d;
+    d.setMaxX(12);
+    d.setMaxY(6);
+    getElements().push_back(d);
 
     int nbTurn = 0;
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()]);
+        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
         nbTurn++;
     }
 
     while(!kbhit());
 }
 
-void Game::handlePlayerTurn(Player* p)
+void Game::handlePlayerTurn(Player* p, Dice* d)
 {
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
-    Dice d;
     displayMap(*p, pWorld);
-    p->setMovementAvailable(d.throwing());
+    p->setMovementAvailable(d->throwing());
 
-    //p->setMovementAvailable(1000);
     std::string dialog("");
     int saisie;
     do
@@ -126,12 +127,6 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
 {
     int realX = 60;
     int realY = 13;
-
-    // Print player
-    //system("cls");
-    for (const auto& el : pWorld)
-        if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
-            printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
 
     // Refreshing board
     clearGlobal();
@@ -172,7 +167,6 @@ void Game::clearGlobal()
     {
         // Getting element's slices
         std::vector<std::pair<int, int>> elementSlices;
-
         for (const auto& element : getElements())
             if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1)
                 elementSlices.push_back(std::pair<int, int>(element.getTranslatedX(), element.getMaxX() + 1));
