@@ -46,6 +46,8 @@
 		<Unit filename="Dialog.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.h" />
+		<Unit filename="Game/Animation.cpp" />
+		<Unit filename="Game/Animation.h" />
 		<Unit filename="GraphicElement.cpp" />
 		<Unit filename="GraphicElement.h" />
 		<Unit filename="Player.cpp" />

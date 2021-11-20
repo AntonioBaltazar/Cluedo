@@ -100,7 +100,9 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
-    displayMap(*p, pWorld);
+    ae.init(std::string(p->getWorldName()));
+
+    displayMap(*p, pWorld, ae);
     p->setMovementAvailable(d->throwing());
 
     std::string dialog("");
@@ -114,22 +116,23 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
         if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        displayMap(*p, pWorld);        if (dialog != "") {
+        displayMap(*p, pWorld, ae);        if (dialog != "") {
             startDialog(dialog);
             dialog = "";
-            displayMap(*p, pWorld);
+            displayMap(*p, pWorld, ae);
         }
     }
     while (p->getMovementAvailable() > 0);
 }
 
-void Game::displayMap(Player p, std::vector<Square> pWorld)
+void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world)
 {
     int realX = 60;
     int realY = 13;
 
     // Refreshing board
     clearGlobal();
+    showStars(world, p);
 
     // Print for each element in the world
     for (const auto& el : pWorld)
@@ -163,10 +166,11 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
 void Game::clearGlobal()
 {
     int winX = 120, winY = 30;
+        std::vector<std::pair<int, int>> elementSlices;
     for (int i = 0; i < winY; i++)
     {
         // Getting element's slices
-        std::vector<std::pair<int, int>> elementSlices;
+        elementSlices.clear();
         for (const auto& element : getElements())
             if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1)
                 elementSlices.push_back(std::pair<int, int>(element.getTranslatedX(), element.getMaxX() + 1));
@@ -177,11 +181,11 @@ void Game::clearGlobal()
         {
             printAt(stringX, i, std::string(slice.first, ' '));
             stringX += slice.first + slice.second;
+
         }
 
         printAt(stringX, i, std::string(winX - (stringX > 120 ? 0 : stringX), ' '));
     }
-
 }
 
 

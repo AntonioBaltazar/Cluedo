@@ -3,7 +3,7 @@
 
 #include "../Game.h"
 
-void Game::showStars();
+void Game::showStars(AnimatedElement world);
 
 
 #endif // ANIMATION_H_INCLUDED

@@ -26,7 +26,6 @@ void AnimatedElement::setMaxX(int maxX) { m_maxX = maxX; }
 void AnimatedElement::setMaxY(int maxY) { m_maxY = maxY; }
 
 // Methods
-
 void AnimatedElement::saveAsWorld(std::vector<Square>& world, std::string worldName)
 {
     std::ifstream f;
@@ -151,7 +150,7 @@ void AnimatedElement::init(std::string pathName)
                     maxX = (maxX < i) ? i : maxX;
                     maxY = (maxY < j) ? j : maxY;
                 }
-        } else if (content[0] != '#') {
+        } else if (content[0] != '#' && content[0] != '\0' && content[0] != '@' && content[0] != '%' && content[0] != '-') {
             std::vector<std::string> strs = strSplit(content, ":");
             maxX = (maxX < std::stoi(strs[0])) ? std::stoi(strs[0]) : maxX;
             maxY = (maxY < std::stoi(strs[1])) ? std::stoi(strs[1]) : maxY;
@@ -161,6 +160,9 @@ void AnimatedElement::init(std::string pathName)
     f.close();
     setMaxX(maxX);
     setMaxY(maxY);
+    std::cout << maxX << ":" << maxY;
+    while(!kbhit());
+    int c = getch();
 }
 
 void AnimatedElement::clearArea(int width, int height)
