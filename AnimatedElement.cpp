@@ -160,9 +160,6 @@ void AnimatedElement::init(std::string pathName)
     f.close();
     setMaxX(maxX);
     setMaxY(maxY);
-    std::cout << maxX << ":" << maxY;
-    while(!kbhit());
-    int c = getch();
 }
 
 void AnimatedElement::clearArea(int width, int height)

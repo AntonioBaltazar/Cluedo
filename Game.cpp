@@ -59,30 +59,18 @@ void Game::start()
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
 
     World board(16, 11, "Board", "maps/main");
-    World realMars(18, 9, "Mars2", "maps/planets/mars");
-    World realJupiter(18, 9, "Jupiter2", "maps/planets/jupiter");
-    World realEarth(18, 9, "Earth2", "maps/planets/earth");
-    World realMercury(18, 9, "Mercury2", "maps/planets/mercury");
-    World realNeptun(18, 9, "Neptun2", "maps/planets/neptun");
-    World realSaturn(18, 9, "Saturn2", "maps/planets/saturn");
-    World realVenus(18, 9, "Venus2", "maps/planets/venus");
-
     for (auto& p : getPlayers())
         board.addPlayer(&p);
-
+    std::vector<World> wrlds = {World(16, 11, "Board", "maps/main"), World(18, 9, "Mars2", "maps/planets/mars"),
+                                World(18, 9, "Jupiter2", "maps/planets/jupiter"), World(18, 9, "Earth2", "maps/planets/earth"),
+                                World(18, 9, "Mercury2", "maps/planets/mercury"), World(18, 9, "Neptun2", "maps/planets/neptun"),
+                                World(18, 9, "Saturn2", "maps/planets/saturn"), World(18, 9, "Venus2", "maps/planets/venus")};
     addWorld(board);
-    addWorld(realMars);
-    addWorld(realJupiter);
-    addWorld(realEarth);
-    addWorld(realMercury);
-    addWorld(realNeptun);
-    addWorld(realSaturn);
-    addWorld(realVenus);
+    for (auto& wrl : wrlds)
+        addWorld(wrl);
 
     // Beginning
-    Dice d;
-    d.setMaxX(12);
-    d.setMaxY(6);
+    Dice d(2, 1, 12, 6);
     getElements().push_back(d);
 
     int nbTurn = 0;

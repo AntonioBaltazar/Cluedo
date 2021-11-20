@@ -13,43 +13,33 @@
 #include "Blackhole.h"
 
 // Constructors & Destructor
-Dice::Dice() { }
-Dice::Dice(int value) : m_value(value) {
+Dice::Dice() {}
+Dice::Dice(int trslX, int trslY, int maxX, int maxY) {
+    setTranslatedX(trslX);
+    setTranslatedY(trslY);
+    setMaxX(maxX);
+    setMaxY(maxY);
 }
+
 Dice::~Dice() {}
-
-// Getters
-int Dice::getValue() const { return m_value; }
-
-// Setters
-void Dice::setValue(int value) { m_value = value; }
-
-// Methods
-void Dice::random(int maxValue = 6) { setValue(rand() % maxValue + 1); }
 
 int Dice::throwing()
 {
-    setTranslatedX(0);
-    setTranslatedY(0);
-    AnimatedElement border(0, 0);
-    AnimatedElement value(2,1);
+    AnimatedElement border(getTranslatedX(), getTranslatedY());
+    AnimatedElement value(getTranslatedX() + 2, getTranslatedY() + 1);
 
     border.render("dice/border");
     srand(time(NULL));
-
-    int v = 0;
-    for (int i = 0; i < 40; i++)
+    int rdm;
+    for (int i = 0; i < 14; i++)
     {
-        random(6);
+        rdm = rand() % 6 + 1;
         value.clearArea(9, 5);
-        value.render("dice/" + std::to_string(getValue()));
-        int sleep = (float)1/(i/2+1) * 180;
-        Sleep(sleep);
-        v++;
+        value.render("dice/" + std::to_string(rdm));
+        Sleep(rand()%180 + 80);
     }
-    setMaxX(border.getMaxX());
-    setMaxY(border.getMaxY());
-    return getValue();
+
+    return rdm;
 }
 
 void diceMenu()
@@ -62,8 +52,6 @@ void diceMenu()
         Blackhole bh(14, 4, "blackhole", "bh");
         bh.render(" vient de tomber dans un trou noir :/", "Martin");
     */
-
-
     while(!kbhit());
 
 }
