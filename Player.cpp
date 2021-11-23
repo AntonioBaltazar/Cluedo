@@ -87,4 +87,5 @@ void Player::create_player_package(std::string type, std::string name)
     setPlayerPackage(newcard);
 }
 
-void Player::create_player_package(Card newcard) {    setPlayerPackage(newcard);    }
+void Player::create_player_package(Card newcard)
+{    setPlayerPackage(newcard);    }
