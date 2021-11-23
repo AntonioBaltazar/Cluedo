@@ -13,12 +13,9 @@ private:
     std::vector<Player> m_players;
     std::vector<World> m_worlds;
     std::vector<AnimatedElement> m_elements;
-<<<<<<< HEAD
     Dashboard m_dashboard;
-=======
     std::vector<Card> m_gamePackage;
     int m_nbCard;
->>>>>>> 6ff70f6d688c2a57c326c560125c12ff3bba915c
     bool m_finish = false;
 public:
     // Constructors & Destructor

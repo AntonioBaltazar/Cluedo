@@ -10,36 +10,7 @@
 #include "Game.h"
 #include "AnimatedElement.h"
 #include "Utils.h"
-<<<<<<< HEAD
 #include "Dashboard/Dashboard.h"
-=======
-// Constructors & Destructor
-Game::Game()
-{
-    //getElements().clear();
-}
-Game::Game(int nbOfPlayers) : m_nbOfPlayers(nbOfPlayers) {}
-Game::~Game() {}
-// Getters
-int Game::getNbOfPlayers() const { return m_nbOfPlayers; }
-std::vector<AnimatedElement>& Game::getElements() { return m_elements; }
-std::vector<Player>& Game::getPlayers() { return m_players; }
-std::vector<World>& Game::getWorlds() { return m_worlds; }
-World* Game::getWorldFromPath(std::string path)
-{
-    for (auto& world : getWorlds())
-        if (world.getPath() == path)
-            return &world;
-    return nullptr;
-}
-bool Game::isFinish() const
-{
-    return m_finish;
-}
-// Setters
-void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
-void Game::setFinish(bool finish) {  m_finish = finish;  }
->>>>>>> 6ff70f6d688c2a57c326c560125c12ff3bba915c
 
 // Methods
 void Game::addWorld(World w) {   getWorlds().push_back(w);  }
@@ -184,34 +155,6 @@ void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement worl
 
 }
 
-<<<<<<< HEAD
-=======
-void Game::clearGlobal()
-{
-    int winX = 120, winY = 30;
-        std::vector<std::pair<int, int>> elementSlices;
-    for (int i = 0; i < winY; i++)
-    {
-        // Getting element's slices
-        elementSlices.clear();
-        for (const auto& element : getElements())
-            if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1)
-                elementSlices.push_back(std::pair<int, int>(element.getTranslatedX(), element.getMaxX() + 1));
-
-        int stringX = 0;
-        // Printing slices of spaces char
-        for (const auto& slice : elementSlices)
-        {
-            printAt(stringX, i, std::string(slice.first, ' '));
-            stringX += slice.first + slice.second;
-
-        }
-
-        printAt(stringX, i, std::string(winX - (stringX > 120 ? 0 : stringX), ' '));
-    }
-}
-
->>>>>>> 6ff70f6d688c2a57c326c560125c12ff3bba915c
 std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
 {
     bool isTping(false);
