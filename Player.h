@@ -40,8 +40,7 @@ public:
     void npcAround(std::vector<Square> world);
     void actionMenu();
     void teleport(Square sq);
-    void create_player_package(std::string type, std::string name);
-    void create_player_package(Card newCard);
+    void create_player_package(std::vector<Card> &gamePackage);
 };
 
 #endif // PLAYER_H_INCLUDED

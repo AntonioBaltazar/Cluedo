@@ -51,6 +51,8 @@
 		<Unit filename="Game/Animation.cpp" />
 		<Unit filename="Game/Animation.h" />
 		<Unit filename="Game/CGSD.cpp" />
+		<Unit filename="Game/Card.h" />
+		<Unit filename="Game/GameCard.cpp" />
 		<Unit filename="GraphicElement.cpp" />
 		<Unit filename="GraphicElement.h" />
 		<Unit filename="Menu.cpp" />

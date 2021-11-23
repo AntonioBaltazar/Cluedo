@@ -13,28 +13,29 @@
 ///Manage all the subprograms concerning the script, the hypothesis and the card package
 void script_management()
 {
-    /*
+
     int nb_card = 0;
     Player p;
-
+    Card temp;
+system("CLS");
     /// Card package creation and shuffle
-    std::vector<Card> myPackage = card_Creation(nb_card);
-    myPackage = card_Shuffle(myPackage, nb_card);
+    std::vector<Card> myPackage = temp.card_Creation(nb_card);
+    myPackage = temp.card_Shuffle(myPackage, nb_card);
 
     /// Script creation
     Script solution = script_Creation(myPackage);
 
     /// Player makes an hypothesis
-    Script hypothesis = make_hypothesis(myPackage,true);
+    Script hypothesis = make_hypothesis(myPackage,false);
 
     /// We compare the solution and the hypothesis and display the result
-    //HypothesisVerification(solution,hypothesis);
+    HypothesisVerification(solution,hypothesis);
 
     ///Player p shows a card
-    //show_card(p);
+    show_card(p);
 
     gotoxy(0,23);
-    */
+
 }
 
 ///Create the solution of the murderer and returns it in a script
@@ -288,9 +289,9 @@ void show_card(Player p)
     std::string sentence;
 
     ///Juste pour les test, a remplacer par les valeurs d'un vrai joueur
-    p.create_player_package("Person","Antonio");
-    p.create_player_package("Planet","Venus");
-    p.create_player_package("Weapon","matraque");
+//    p.create_player_package("Person","Antonio");
+//    p.create_player_package("Planet","Venus");
+//    p.create_player_package("Weapon","matraque");
     p.setColorName(Color::Cyan);
     p.setName("Jean");
 
