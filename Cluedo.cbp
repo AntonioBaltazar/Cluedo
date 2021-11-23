@@ -53,6 +53,7 @@
 		<Unit filename="Game/CGSD.cpp" />
 		<Unit filename="GraphicElement.cpp" />
 		<Unit filename="GraphicElement.h" />
+		<Unit filename="Menu.cpp" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
 		<Unit filename="Script/Script.cpp" />
