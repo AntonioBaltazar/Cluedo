@@ -10,17 +10,9 @@ private:
     int m_value;
 public:
     Dice();
-    Dice(int);
+    Dice(int trslX, int trslY, int maxX, int maxY);
     ~Dice();
-
-    // Getters
-    int getValue() const;
-
-    // Setters
-    void setValue(int);
-
     // Methods
-    void random(int);
     int throwing();
 };
 

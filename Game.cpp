@@ -69,31 +69,22 @@ void Game::start()
     // Getting datas before launching new game
     /*askNbOfPlayers();
     askAccountOfPlayers();
-    system("cls");
     */
+    system("cls");
+
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
 
     World board(16, 11, "Board", "maps/main");
-    World realMars(18, 9, "Mars2", "maps/planets/mars");
-    World realJupiter(18, 9, "Jupiter2", "maps/planets/jupiter");
-    World realEarth(18, 9, "Earth2", "maps/planets/earth");
-    World realMercury(18, 9, "Mercury2", "maps/planets/mercury");
-    World realNeptun(18, 9, "Neptun2", "maps/planets/neptun");
-    World realSaturn(18, 9, "Saturn2", "maps/planets/saturn");
-    World realVenus(18, 9, "Venus2", "maps/planets/venus");
-
     for (auto& p : getPlayers())
         board.addPlayer(&p);
-
+    std::vector<World> wrlds = {World(16, 11, "Board", "maps/main"), World(18, 9, "Mars2", "maps/planets/mars"),
+                                World(18, 9, "Jupiter2", "maps/planets/jupiter"), World(18, 9, "Earth2", "maps/planets/earth"),
+                                World(18, 9, "Mercury2", "maps/planets/mercury"), World(18, 9, "Neptun2", "maps/planets/neptun"),
+                                World(18, 9, "Saturn2", "maps/planets/saturn"), World(18, 9, "Venus2", "maps/planets/venus")};
     addWorld(board);
-    addWorld(realMars);
-    addWorld(realJupiter);
-    addWorld(realEarth);
-    addWorld(realMercury);
-    addWorld(realNeptun);
-    addWorld(realSaturn);
-    addWorld(realVenus);
+    for (auto& wrl : wrlds)
+        addWorld(wrl);
 
     ///Creer le packet de cartes
 
@@ -105,29 +96,29 @@ void Game::start()
     ///J'aurai besoin de, un set card dans player, un create package dans Game.cpp
 
     // Beginning
-    //Dice d;
-    //getElements().push_back(d);
+    Dice d(2, 1, 12, 6);
+    getElements().push_back(d);
 
     int nbTurn = 0;
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()]);
+        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
         nbTurn++;
     }
 
     while(!kbhit());
 }
 
-void Game::handlePlayerTurn(Player* p)
+void Game::handlePlayerTurn(Player* p, Dice* d)
 {
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
-    Dice d;
-    displayMap(*p, pWorld);
-    p->setMovementAvailable(d.throwing());
+    ae.init(std::string(p->getWorldName()));
 
-    //p->setMovementAvailable(1000);
+    displayMap(*p, pWorld, ae);
+    p->setMovementAvailable(d->throwing());
+
     std::string dialog("");
     int saisie;
     do
@@ -139,28 +130,23 @@ void Game::handlePlayerTurn(Player* p)
         if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        displayMap(*p, pWorld);        if (dialog != "") {
+        displayMap(*p, pWorld, ae);        if (dialog != "") {
             startDialog(dialog);
             dialog = "";
-            displayMap(*p, pWorld);
+            displayMap(*p, pWorld, ae);
         }
     }
     while (p->getMovementAvailable() > 0);
 }
 
-void Game::displayMap(Player p, std::vector<Square> pWorld)
+void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world)
 {
     int realX = 60;
     int realY = 13;
 
-    // Print player
-    //system("cls");
-    for (const auto& el : pWorld)
-        if ((realX - p.getX() + el.getX())%120 >= 0 && (realY - p.getY() + el.getY())%25 >= 0)
-            printAt(realX - p.getX() + el.getX(), realY - p.getY() + el.getY(), color(el.getContent(), el.getColor()));
-
     // Refreshing board
     clearGlobal();
+    showStars(world, p);
 
     // Print for each element in the world
     for (const auto& el : pWorld)
@@ -194,11 +180,11 @@ void Game::displayMap(Player p, std::vector<Square> pWorld)
 void Game::clearGlobal()
 {
     int winX = 120, winY = 30;
+        std::vector<std::pair<int, int>> elementSlices;
     for (int i = 0; i < winY; i++)
     {
         // Getting element's slices
-        std::vector<std::pair<int, int>> elementSlices;
-
+        elementSlices.clear();
         for (const auto& element : getElements())
             if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1)
                 elementSlices.push_back(std::pair<int, int>(element.getTranslatedX(), element.getMaxX() + 1));
@@ -209,11 +195,11 @@ void Game::clearGlobal()
         {
             printAt(stringX, i, std::string(slice.first, ' '));
             stringX += slice.first + slice.second;
+
         }
 
         printAt(stringX, i, std::string(winX - (stringX > 120 ? 0 : stringX), ' '));
     }
-
 }
 
 std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)

@@ -4,6 +4,7 @@
 #include "World.h"
 #include "Player.h"
 #include "AnimatedElement.h"
+#include "render/Dice.h"
 
 class Game {
 private:
@@ -44,11 +45,13 @@ public:
     void start();
     void askNbOfPlayers();
     void askAccountOfPlayers();
-    void displayMap(Player p, std::vector<Square> pWorld);
-    void handlePlayerTurn(Player* p);
+    void displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world);
+    void handlePlayerTurn(Player* p, Dice* d);
     std::string movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
     void clearGlobal();
     void startDialog(std::string dialogPath);
+
+    void showStars(AnimatedElement world, Player p);
 
 };
 
