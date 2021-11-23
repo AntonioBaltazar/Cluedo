@@ -63,8 +63,7 @@ void Game::displayPackage(std::vector<Card> Gamepackage)
 void Game::start()
 {
     //Card package creation and shuffle
-    setGamePackage();
-
+    //setGamePackage();
     //displayPackage(getGamePackage()); //AFFICHAGE DU PAQUET DE CARTE INITIALE
 
     // Getting datas before launching new game
@@ -72,49 +71,49 @@ void Game::start()
     askAccountOfPlayers();
     system("cls");
     */
-//    getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
-//    getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
-//
-//    World board(16, 11, "Board", "maps/main");
-//    World realMars(18, 9, "Mars2", "maps/planets/mars");
-//    World realJupiter(18, 9, "Jupiter2", "maps/planets/jupiter");
-//    World realEarth(18, 9, "Earth2", "maps/planets/earth");
-//    World realMercury(18, 9, "Mercury2", "maps/planets/mercury");
-//    World realNeptun(18, 9, "Neptun2", "maps/planets/neptun");
-//    World realSaturn(18, 9, "Saturn2", "maps/planets/saturn");
-//    World realVenus(18, 9, "Venus2", "maps/planets/venus");
-//
-//    for (auto& p : getPlayers())
-//        board.addPlayer(&p);
-//
-//    addWorld(board);
-//    addWorld(realMars);
-//    addWorld(realJupiter);
-//    addWorld(realEarth);
-//    addWorld(realMercury);
-//    addWorld(realNeptun);
-//    addWorld(realSaturn);
-//    addWorld(realVenus);
-//
-//    ///Creer le packet de cartes
-//
-//    ///Le mélanger
-//
-//    ///Comme handlePlayerTurn, chaque jours pick une carte de chaque type
-//
-//
-//    ///J'aurai besoin de, un set card dans player, un create package dans Game.cpp
-//
-//    // Beginning
-//    //Dice d;
-//    //getElements().push_back(d);
-//
-//    int nbTurn = 0;
-//    while(!isFinish())
-//    {
-//        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()]);
-//        nbTurn++;
-//    }
+    getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
+    getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
+
+    World board(16, 11, "Board", "maps/main");
+    World realMars(18, 9, "Mars2", "maps/planets/mars");
+    World realJupiter(18, 9, "Jupiter2", "maps/planets/jupiter");
+    World realEarth(18, 9, "Earth2", "maps/planets/earth");
+    World realMercury(18, 9, "Mercury2", "maps/planets/mercury");
+    World realNeptun(18, 9, "Neptun2", "maps/planets/neptun");
+    World realSaturn(18, 9, "Saturn2", "maps/planets/saturn");
+    World realVenus(18, 9, "Venus2", "maps/planets/venus");
+
+    for (auto& p : getPlayers())
+        board.addPlayer(&p);
+
+    addWorld(board);
+    addWorld(realMars);
+    addWorld(realJupiter);
+    addWorld(realEarth);
+    addWorld(realMercury);
+    addWorld(realNeptun);
+    addWorld(realSaturn);
+    addWorld(realVenus);
+
+    ///Creer le packet de cartes
+
+    ///Le mélanger
+
+    ///Comme handlePlayerTurn, chaque jours pick une carte de chaque type
+
+
+    ///J'aurai besoin de, un set card dans player, un create package dans Game.cpp
+
+    // Beginning
+    //Dice d;
+    //getElements().push_back(d);
+
+    int nbTurn = 0;
+    while(!isFinish())
+    {
+        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()]);
+        nbTurn++;
+    }
 
     while(!kbhit());
 }
