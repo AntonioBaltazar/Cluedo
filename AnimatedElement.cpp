@@ -22,8 +22,18 @@ int AnimatedElement::getMaxY() const { return m_maxY; }
 // Setters
 void AnimatedElement::setTranslatedX(int translatedX) { m_translatedX = translatedX; }
 void AnimatedElement::setTranslatedY(int translatedY) { m_translatedY = translatedY; }
+void AnimatedElement::setTranslated(int trslX, int trslY)
+{
+    m_translatedX = trslX;
+    m_translatedY = trslY;
+}
 void AnimatedElement::setMaxX(int maxX) { m_maxX = maxX; }
 void AnimatedElement::setMaxY(int maxY) { m_maxY = maxY; }
+void AnimatedElement::setMax(int maxX, int maxY)
+{
+    m_maxX = maxX;
+    m_maxY = maxY;
+}
 
 // Methods
 void AnimatedElement::saveAsWorld(std::vector<Square>& world, std::string worldName)

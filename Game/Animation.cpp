@@ -1,7 +1,35 @@
 #include <iostream>
 #include "../Game.h"
 #include <conio.h>
+#include <algorithm>
 #include <time.h>
+
+void Game::clearGlobal()
+{
+    int winX(120), winY(30);
+    std::vector<std::pair<int, int>> elementSlices;
+    for (int i = 0; i < winY; i++)
+    {
+        // Getting element's slices
+        elementSlices.clear();
+        for (const auto& element : getElements())
+            if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1)
+                elementSlices.push_back(std::pair<int, int>(element.getTranslatedX(), element.getMaxX() + 1));
+
+        int stringX(0);
+        // Sort vector
+        sort(elementSlices.begin(), elementSlices.end());
+
+        // Printing slices of spaces char
+        for (const auto& slice : elementSlices)
+        {
+            printAt(stringX, i, std::string(slice.first, ' '));
+            stringX += slice.first + slice.second;
+        }
+        if (stringX < 120)
+            printAt(stringX, i, std::string((stringX == 0 ? winX : 120 - stringX), ' '));
+    }
+}
 
 void Game::showStars(AnimatedElement world, Player p)
 {
@@ -10,7 +38,7 @@ void Game::showStars(AnimatedElement world, Player p)
     srand(NULL);
     int nbOfStars(15);
     std::vector<char> shapesStars({'*', '.', '`'});
-    std::vector<Color> colorsStars({Color::White, Color::Bright_Yellow, Color::Bright_White, Color::Bright_Black});
+    std::vector<Color> colorsStars({Color::White, Color::Bright_Yellow, Color::Bright_White, Color::Bright_Black, Color::Bright_Cyan});
     // Add world to not print start on planet
     AnimatedElement aeTemp = world;
     std::vector<AnimatedElement> temp;
@@ -21,7 +49,7 @@ void Game::showStars(AnimatedElement world, Player p)
     aeTemp.setTranslatedY(13 - p.getY());
     temp.push_back(aeTemp);
 
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < 242; i++)
     {
         int x, y;
         bool found(false);

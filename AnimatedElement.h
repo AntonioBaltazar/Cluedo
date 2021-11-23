@@ -24,6 +24,8 @@ public:
     int getMaxY() const;
 
     // Setters
+    void setTranslated(int trslX, int trslY);
+    void setMax(int maxX, int maxY);
     void setTranslatedX(int translatedX);
     void setTranslatedY(int translatedY);
     void setMaxX(int maxX);

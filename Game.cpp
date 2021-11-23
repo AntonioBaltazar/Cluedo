@@ -10,38 +10,8 @@
 #include "Game.h"
 #include "AnimatedElement.h"
 #include "Utils.h"
-// Constructors & Destructor
-Game::Game()
-{
-    //getElements().clear();
-}
-Game::Game(int nbOfPlayers) : m_nbOfPlayers(nbOfPlayers) {}
-Game::~Game() {}
-// Getters
-int Game::getNbOfPlayers() const { return m_nbOfPlayers; }
-std::vector<AnimatedElement>& Game::getElements() { return m_elements; }
-std::vector<Player>& Game::getPlayers() { return m_players; }
-std::vector<World>& Game::getWorlds() { return m_worlds; }
-World* Game::getWorldFromPath(std::string path)
-{
-    for (auto& world : getWorlds())
-        if (world.getPath() == path)
-            return &world;
-    return nullptr;
-}
-bool Game::isFinish() const
-{
-    return m_finish;
-}
-// Setters
-void Game::setNbOfPlayers(int nbOfPlayers)
-{
-    m_nbOfPlayers = nbOfPlayers;
-}
-void Game::setFinish(bool finish)
-{
-    m_finish = finish;
-}
+#include "Dashboard/Dashboard.h"
+
 // Methods
 void Game::addWorld(World w)
 {
@@ -71,7 +41,11 @@ void Game::start()
 
     // Beginning
     Dice d(2, 1, 12, 6);
+    Dashboard db(90, 3, 25, 10);
+    getDashboard() = db;
+
     getElements().push_back(d);
+    getElements().push_back(db);
 
     int nbTurn = 0;
     while(!isFinish())
@@ -85,6 +59,7 @@ void Game::start()
 
 void Game::handlePlayerTurn(Player* p, Dice* d)
 {
+    getDashboard().renderTurn(p);
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
@@ -104,7 +79,7 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
         if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        displayMap(*p, pWorld, ae);        if (dialog != "") {
+        if (dialog != "") {
             startDialog(dialog);
             dialog = "";
             displayMap(*p, pWorld, ae);
@@ -129,14 +104,12 @@ void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement worl
             int x(realX - p.getX() + el.getX()), y(realY - p.getY() + el.getY());
             bool deleting = true;
             for (auto& anel : getElements())
-            {
                 if (anel.getTranslatedX() <= x && x <= anel.getTranslatedX() + anel.getMaxX() &&
                         anel.getTranslatedY() <= y && y <= anel.getTranslatedY() + anel.getMaxY())
                 {
                     deleting = false;
                     break;
                 }
-            }
             if (deleting)
                 printAt(x, y, color(el.getContent(), el.getColor()));
         }
@@ -150,32 +123,6 @@ void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement worl
 
 
 }
-
-void Game::clearGlobal()
-{
-    int winX = 120, winY = 30;
-        std::vector<std::pair<int, int>> elementSlices;
-    for (int i = 0; i < winY; i++)
-    {
-        // Getting element's slices
-        elementSlices.clear();
-        for (const auto& element : getElements())
-            if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1)
-                elementSlices.push_back(std::pair<int, int>(element.getTranslatedX(), element.getMaxX() + 1));
-
-        int stringX = 0;
-        // Printing slices of spaces char
-        for (const auto& slice : elementSlices)
-        {
-            printAt(stringX, i, std::string(slice.first, ' '));
-            stringX += slice.first + slice.second;
-
-        }
-
-        printAt(stringX, i, std::string(winX - (stringX > 120 ? 0 : stringX), ' '));
-    }
-}
-
 
 std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
 {
@@ -205,6 +152,9 @@ std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, 
         p->setX(p->getX() + 2*dirX);
         p->setY(p->getY() + dirY);
         p->setMovementAvailable(p->getMovementAvailable() - 1);
+        AnimatedElement ae;
+        ae.init(std::string(p->getWorldName()));
+        displayMap(*p, content, ae);
     }
     return dialogPath;
 }

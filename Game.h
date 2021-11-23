@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "AnimatedElement.h"
 #include "render/Dice.h"
+#include "Dashboard/Dashboard.h"
 
 class Game {
 private:
@@ -12,6 +13,7 @@ private:
     std::vector<Player> m_players;
     std::vector<World> m_worlds;
     std::vector<AnimatedElement> m_elements;
+    Dashboard m_dashboard;
     bool m_finish = false;
 public:
     // Constructors & Destructor
@@ -24,6 +26,7 @@ public:
     std::vector<Player>& getPlayers();
     std::vector<World>& getWorlds();
     std::vector<AnimatedElement>& getElements();
+    Dashboard& getDashboard();
     World* getWorldFromPath(std::string path);
     bool isFinish() const;
 
