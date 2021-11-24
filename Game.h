@@ -46,6 +46,7 @@ public:
     // Methods
     void addWorld(World w);
     void start();
+    void start2();
     void askNbOfPlayers();
     void askAccountOfPlayers();
     void displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world);

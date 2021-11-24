@@ -174,6 +174,13 @@ void AnimatedElement::init(std::string pathName)
 
 void AnimatedElement::clearArea(int width, int height)
 {
-    for (int i = 0; i < height; i++)
-        printAt(getTranslatedX(), getTranslatedY() + i, std::string(width, ' '));
+    if (width != 0 && height != 0)
+    {
+        for (int i = 0; i < height; i++)
+            printAt(getTranslatedX(), getTranslatedY() + i, std::string(width, ' '));
+    } else
+    {
+        for (int i = 0;  i < getMaxY() + 1; i++)
+            printAt(getTranslatedX(), getTranslatedY() + i, std::string(getMaxX() + 1, ' '));
+    }
 }

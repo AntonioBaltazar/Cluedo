@@ -35,6 +35,7 @@ void Game::displayPackage(std::vector<Card> Gamepackage)
 
     temp.card_Package_Display(Gamepackage);
 }
+
 void Game::start()
 {
     //Card package creation and shuffle
@@ -42,7 +43,8 @@ void Game::start()
     //displayPackage(getGamePackage()); //AFFICHAGE DU PAQUET DE CARTE INITIALE
 
     // Getting datas before launching new game
-    /*askNbOfPlayers();
+    /*
+    askNbOfPlayers();
     askAccountOfPlayers();
     */
     system("cls");

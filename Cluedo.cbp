@@ -36,6 +36,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Account.cpp" />
+		<Unit filename="Account.h" />
 		<Unit filename="AnimatedElement.cpp" />
 		<Unit filename="AnimatedElement.h" />
 		<Unit filename="Card/Card.cpp" />
@@ -51,6 +53,7 @@
 		<Unit filename="Game/Animation.cpp" />
 		<Unit filename="Game/Animation.h" />
 		<Unit filename="Game/CGSD.cpp" />
+		<Unit filename="Game/Setup.cpp" />
 		<Unit filename="GraphicElement.cpp" />
 		<Unit filename="GraphicElement.h" />
 		<Unit filename="Menu.cpp" />
