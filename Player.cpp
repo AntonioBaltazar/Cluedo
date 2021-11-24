@@ -77,15 +77,23 @@ void Player::actionMenu()
     }
 }
 
-void Player::create_player_package(std::string type, std::string name)
+void Player::create_player_package(std::vector<Card> &gamePackage)
 {
-    Card newcard;
+    Card person;
+    Card planet;
+    Card weapon;
+    Card temp;
 
-    newcard.setName(name);
-    newcard.setType(name);
+    person = temp.card_pick(gamePackage,"Person");
+    planet = temp.card_pick(gamePackage,"Planet");
+    weapon = temp.card_pick(gamePackage,"Weapon");
 
-    setPlayerPackage(newcard);
+    person.display();
+    planet.display();
+    weapon.display();
+
+    setPlayerPackage(person);
+    setPlayerPackage(planet);
+    setPlayerPackage(weapon);
 }
 
-void Player::create_player_package(Card newcard)
-{    setPlayerPackage(newcard);    }

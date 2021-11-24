@@ -38,15 +38,18 @@ void Game::displayPackage(std::vector<Card> Gamepackage)
 
 void Game::start()
 {
-    //Card package creation and shuffle
-    //setGamePackage();
-    //displayPackage(getGamePackage()); //AFFICHAGE DU PAQUET DE CARTE INITIALE
-
     // Getting datas before launching new game
     /*
     askNbOfPlayers();
     askAccountOfPlayers();
     */
+
+    //Card package creation and shuffle
+    setGamePackage();
+
+    //Card distribution to all the players
+    cardDistrib();
+
     system("cls");
 
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));

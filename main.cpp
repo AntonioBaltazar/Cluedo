@@ -38,10 +38,7 @@ int main()
                 break;
             case 2:
                 ///Appel fct Tonio
-                package.card_Management();
-                //system("cls");
-                //script_management();
-                //show_card(p);
+                g.cardDistrib();
                 break;
             case 3:
                 ///Appel fct Martin

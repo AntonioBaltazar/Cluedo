@@ -35,27 +35,35 @@ public:
     // Setters
     void setNbOfPlayers(int nbOfPlayers);
     void setFinish(bool finish);
-
     void setNbCard(int nbCard);
-
     void setGamePackage();
     std::vector<Card> getGamePackage();
-    std::vector<Card> createGamePackage();
-    void displayPackage(std::vector<Card> Gamepackage);
+
 
     // Methods
-    void addWorld(World w);
+
+    //Setup
     void start();
+<<<<<<< HEAD
     void start2();
+=======
+    void addWorld(World w);
+>>>>>>> e30c388c4dd6af09fd92dc9253ddc1a885f4b641
     void askNbOfPlayers();
     void askAccountOfPlayers();
+    std::vector<Card> createGamePackage();
+    void cardDistrib();
+
+    //In-game
     void displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world);
     void handlePlayerTurn(Player* p, Dice* d);
     std::string movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
     void clearGlobal();
     void startDialog(std::string dialogPath);
-
     void showStars(AnimatedElement world, Player p);
+
+    //Extra
+    void displayPackage(std::vector<Card> Gamepackage);
 
 };
 

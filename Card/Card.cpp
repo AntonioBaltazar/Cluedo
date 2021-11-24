@@ -7,7 +7,8 @@
 #include "Card.h"
 #include "../Utils.h"
 
-///Constructor's and Destructor's Implementation
+
+/// *********************       Constructor's and destructor's implementation        *********************** ///
 
 Card::Card()
      : m_type("Default Type"), m_name("Default Name")   {}
@@ -18,21 +19,20 @@ Card::Card(std::string type, std::string name)
 Card::~Card()   {}
 
 
-///Getter's Implementation
+/// *********************       getter's implementation        *********************** ///
 
 std::string Card::getType()const  { return m_type ; }
 
 std::string Card::getName()const  { return m_name ; }
 
-///Getter's Implementation
+
+/// *********************       Setters's implementation        *********************** ///
 void Card::setType(std::string type)  { m_type = type ; }
 
 void Card::setName(std::string name)  { m_name = name ; }
 
 
         /// *********************       Method's implementation        *********************** ///
-
-
 
 ///Read file "CHANGEME.txt" and create a card package depending on the information of the file that will be returned
 std::vector<Card> Card::card_Creation(int &nb_card)
@@ -132,20 +132,33 @@ void Card::card_Package_Display(std::vector<Card> myPackage)
 
 
 ///Player picks a card and that card is removed from the package, returns the picked card
-Card Card::card_pick(std::vector<Card> &myPackage)
+Card Card::card_pick(std::vector<Card> &myPackage,std::string type)
 {
     Card temp ;
-    auto picked_elem = myPackage.end()-1;
+    std::vector<Card>::iterator it;
+    std::vector<Card>::iterator it2;
 
-    temp.setType(picked_elem->getType());
-    temp.setName(picked_elem->getName());
+    for(it = myPackage.begin(); it != myPackage.end(); it++)
+    {
+       if(it->getType()==type)
+           it2 = it;
+    }
+    temp.setType(it2->getType());
+    temp.setName(it2->getName());
 
-    myPackage.erase(picked_elem);
+    myPackage.erase(it2);
+
+    //temp.card_Package_Display(myPackage);
 
     return temp;
-
 }
 
+
+///Displays the information of a single card
+void Card::display()
+{
+    std::cout<<"Type : "<<getType()<<"  Name : "<<getName()<<std::endl;
+}
 
 ///Optionnal
 void Card::card_Management()
@@ -159,7 +172,7 @@ void Card::card_Management()
     myPackage = temp.card_Shuffle(myPackage, nb_card); //Mélange
     //temp.card_Package_Display(myPackage); //Affichage
 
-    pioche = card_pick(myPackage);
+    pioche = card_pick(myPackage,"person");
     card_Package_Display(myPackage);
 }
 

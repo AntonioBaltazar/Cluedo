@@ -33,7 +33,7 @@ public:
     std::vector<Card> card_Shuffle(std::vector<Card> myPackage,int nb_card);
     void card_Package_Display(std::vector<Card> myPackage);
     Card card_convert(std::string content);
-    Card card_pick(std::vector<Card> &myPackage);
+    Card card_pick(std::vector<Card> &myPackage,std::string type);
 };
 
 
