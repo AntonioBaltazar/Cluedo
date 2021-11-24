@@ -44,11 +44,8 @@ public:
 
     //Setup
     void start();
-<<<<<<< HEAD
     void start2();
-=======
     void addWorld(World w);
->>>>>>> e30c388c4dd6af09fd92dc9253ddc1a885f4b641
     void askNbOfPlayers();
     void askAccountOfPlayers();
     std::vector<Card> createGamePackage();

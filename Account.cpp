@@ -7,7 +7,9 @@
 
 // Constructors & Destructor
 Account::Account() {}
-Account::~Account() {}
+Account::~Account() {
+    writingDatas();
+}
 
 // Getters
 std::vector<std::pair<std::string, std::string>>& Account::getLogins() { return m_logins; }
@@ -42,6 +44,15 @@ void Account::loadingDatas()
     }
     f.close();
 }
+
+void Account::writingDatas()
+{
+    std::ofstream f("account.txt");
+    for (auto& acc : getLogins())
+        f << acc.first << ":" << acc.second << "\n";
+    f.close();
+}
+
 
 std::string Account::askLogs(int x, int y) {
     int saisie(0), index(0);

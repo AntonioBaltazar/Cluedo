@@ -14,6 +14,7 @@ public:
     std::vector<std::pair<std::string, std::string>>& getLogins();
     // Methods
     void loadingDatas();
+    void writingDatas();
     bool accountExists(std::string username);
     bool matches(std::string username, std::string password);
     std::string askLogs(int x, int y);
