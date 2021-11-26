@@ -23,6 +23,7 @@ std::vector<AnimatedElement>& Game::getElements() { return m_elements; }
 std::vector<Player>& Game::getPlayers() { return m_players; }
 std::vector<World>& Game::getWorlds() { return m_worlds; }
 Dashboard& Game::getDashboard() { return m_dashboard; }
+Notepad& Game::getNotepad() { return m_notepad; }
 World* Game::getWorldFromPath(std::string path)
 {
     for (auto& world : getWorlds())

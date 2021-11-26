@@ -51,16 +51,14 @@ void Game::start()
     // Beginning
     Dice d(2, 1, 12, 6);
     //Dashboard db(100, 4, 25, 14);
-<<<<<<< HEAD
     Dashboard db(94, 4, 25, 18);
     getDashboard() = db;
-=======
-    //Dashboard db(94, 4, 25, 14);
-    //getDashboard() = db;
->>>>>>> dbe41be2b4f62e5cd221d3052cda563064dec706
+    Notepad np(2, 25, 25, 3);
+    np.renderTurn();
 
-    //getElements().push_back(d);
-    //getElements().push_back(db);
+    getElements().push_back(d);
+    getElements().push_back(db);
+    getElements().push_back(np);
 
     int nbTurn = 0;
     while(!isFinish())

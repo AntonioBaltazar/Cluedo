@@ -7,6 +7,7 @@
 #include "render/Dice.h"
 #include "Dashboard/Dashboard.h"
 #include "Script/Script.h"
+#include "Notepad/Notepad.h"
 
 class Game {
 private:
@@ -15,6 +16,7 @@ private:
     std::vector<World> m_worlds;
     std::vector<AnimatedElement> m_elements;
     Dashboard m_dashboard;
+    Notepad m_notepad;
     std::vector<Card> m_gamePackage;
     std::vector<Card> m_allCards;
     Script m_solution;
@@ -32,6 +34,7 @@ public:
     std::vector<World>& getWorlds();
     std::vector<AnimatedElement>& getElements();
     Dashboard& getDashboard();
+    Notepad& getNotepad();
     World* getWorldFromPath(std::string path);
     bool isFinish() const;
     std::vector<Card> getGamePackage()const;

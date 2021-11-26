@@ -13,6 +13,7 @@ public:
     std::string getContent();
     // Setters
     void setContent(std::string content);
+    void renderTurn();
 };
 
 
