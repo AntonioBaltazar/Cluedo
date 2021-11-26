@@ -15,26 +15,6 @@
 // Methods
 void Game::addWorld(World w) {   getWorlds().push_back(w);  }
 
-void Game::setNbCard( int nbCard)   { m_nbCard = nbCard; }
-void Game::setGamePackage()
- {
-    Card temp;
-    int nbCard;
-    m_gamePackage = temp.card_Creation(nbCard);
-    m_gamePackage = temp.card_Shuffle(getGamePackage(),nbCard);
-    setNbCard(nbCard);
- }
-
-std::vector<Card> Game::getGamePackage()    {  return m_gamePackage;}
-
-std::vector<Card> Game::createGamePackage() { setGamePackage(); return m_gamePackage;}
-
-void Game::displayPackage(std::vector<Card> Gamepackage)
-{
-    Card temp;
-
-    temp.card_Package_Display(Gamepackage);
-}
 void Game::start()
 {
     // Getting datas before launching new game
@@ -43,10 +23,13 @@ void Game::start()
     */
 
     //Card package creation and shuffle
-    setGamePackage();
+    setAllPackages();
 
     //Card distribution to all the players
     cardDistrib();
+
+    //We create a new script for the game
+    setSolution();
 
     system("cls");
 
@@ -64,15 +47,6 @@ void Game::start()
     for (auto& wrl : wrlds)
         addWorld(wrl);
 
-    ///Creer le packet de cartes
-
-    ///Le mélanger
-
-    ///Comme handlePlayerTurn, chaque jours pick une carte de chaque type
-
-
-    ///J'aurai besoin de, un set card dans player, un create package dans Game.cpp
-
     // Beginning
     Dice d(2, 1, 12, 6);
     Dashboard db(90, 3, 25, 10);
@@ -85,6 +59,11 @@ void Game::start()
     while(!isFinish())
     {
         handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
+
+        //Hypothese
+        getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());
+        HypothesisVerification(getPlayers()[nbTurn % getPlayers().size()],true);
+
         nbTurn++;
     }
 

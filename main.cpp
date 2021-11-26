@@ -38,7 +38,9 @@ int main()
                 break;
             case 2:
                 ///Appel fct Tonio
-                g.cardDistrib();
+                //g.cardDistrib();
+                g.start3();
+                //script_management();
                 break;
             case 3:
                 ///Appel fct Martin

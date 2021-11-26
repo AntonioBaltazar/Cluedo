@@ -56,7 +56,7 @@ public:
     void displayBorders(int topY, int bottomY);
     void displayBordersPers(int X, int X2,int Y, int Y2);
     void displayMessage();
-    void displayMessResultHyp(int X,int Y);
+    void displayMessResultHyp(int X,int Y,bool longText);
     void displayConversation();
 
 };

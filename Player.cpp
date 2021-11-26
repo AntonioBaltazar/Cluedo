@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <conio.h>
 
 #include "Utils.h"
 #include "render/Square.h"
 #include "World.h"
 #include "Player.h"
+#include "Script/Script.h"
 
 // Constructors & Destructor
 Player::Player() : Person() {}
@@ -88,12 +90,82 @@ void Player::create_player_package(std::vector<Card> &gamePackage)
     planet = temp.card_pick(gamePackage,"Planet");
     weapon = temp.card_pick(gamePackage,"Weapon");
 
-    person.display();
-    planet.display();
-    weapon.display();
-
     setPlayerPackage(person);
     setPlayerPackage(planet);
     setPlayerPackage(weapon);
 }
 
+
+void Player::setHypothesis(std::vector<Card> allCards)  {   m_hypothesis.make_hypothesis(allCards,false);   }
+
+Script Player::getHypothesis()const {  return m_hypothesis;}
+
+///Player p show a card to his opponent
+void Player::show_card()
+{
+    Dialog d;
+    int choice = menu_show_card();
+    std::string sentence;
+
+    system("CLS");
+
+    sentence = getName()+" a la carte : "+getPlayerPackage()[choice-1].getName();
+
+    d.displayBordersPers(50-(sentence.size()/2),70+(sentence.size()/2),12,16);
+    gotoxy(60-(sentence.size()/2),14);
+    std::cout<<color(sentence,getColorName());
+
+    while(kbhit()) {}
+    getch();
+}
+
+
+///The player can decide which card he wants to show to the opponent
+int Player::menu_show_card()
+{
+    int choice = 0;
+    int cursor = 33;
+    int key = 0;
+    Dialog d;
+
+    d.displayBordersPers(20,100,9,15);
+
+    gotoxy(42,10);
+    std::cout<<color("Quelle carte souhaitez vous montrer ?",Color::Bright_White);
+
+    ///Affichage des types de cartes
+    gotoxy(35,12);
+    std::cout<<color("1. Personne",Color::Yellow);
+    gotoxy(55,12);
+    std::cout<<color("2. Planete",Color::Blue);
+    gotoxy(75,12);
+    std::cout<<color("3. Arme",Color::Magenta);
+
+    gotoxy(cursor,12);
+    std::cout<<char(16);
+
+    while(key!=13)
+    {
+        key = getch();
+        if(key==75 && choice > 0)
+            choice--;
+        if(key==77 && choice < 2)
+            choice++;
+
+        gotoxy(cursor,12);
+        std::cout<<" ";
+
+        switch(choice)
+        {
+        case 0 : cursor = 33;  break;
+        case 1 : cursor = 53;  break;
+        case 2 : cursor = 73;  break;
+        default : break;
+        }
+
+        gotoxy(cursor,12);
+        std::cout<<char(16);
+    }
+
+    return choice+1;
+}
