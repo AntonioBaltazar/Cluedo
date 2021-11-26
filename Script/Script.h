@@ -6,7 +6,6 @@
 #include "../Card/Card.h"
 #include "../Utils.h"
 #include "../Dialog.h"
-#include "../Player.h"
 
 class Script
 {
@@ -32,18 +31,17 @@ public:
 
     ///Methods
     void display();
+    void script_Creation(std::vector<Card> myPackage);
+    void make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis);
+    Script choose_elem(std::vector<Card> hyPackage, int choice, int column,Script prev);
+    std::vector<Card> display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser);
+    std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage);
 };
 
-Script script_Creation(std::vector<Card> myPackage);
-Script make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis);
-std::vector<Card> display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser);
-std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage);
-void HypothesisVerification(Script solution, Script hypothesis);
-void script_management();
-Script choose_elem(std::vector<Card> hyPackage, int choice, int column,Script prev);
 
-int menu_show_card();
-void show_card(Player p);
+void script_management();
+
+
 
 
 

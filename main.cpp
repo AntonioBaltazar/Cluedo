@@ -38,12 +38,14 @@ int main()
                 break;
             case 2:
                 ///Appel fct Tonio
-                g.cardDistrib();
+                //g.cardDistrib();
+                g.start3();
+                //script_management();
                 break;
             case 3:
                 ///Appel fct Martin
                 //diceMenu();
-                g.start2();
+               // g.start2();
                 break;
             case 4:
                 g.start();

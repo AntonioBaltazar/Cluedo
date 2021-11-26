@@ -6,6 +6,7 @@
 #include "AnimatedElement.h"
 #include "render/Dice.h"
 #include "Dashboard/Dashboard.h"
+#include "Script/Script.h"
 
 class Game {
 private:
@@ -15,6 +16,8 @@ private:
     std::vector<AnimatedElement> m_elements;
     Dashboard m_dashboard;
     std::vector<Card> m_gamePackage;
+    std::vector<Card> m_allCards;
+    Script m_solution;
     int m_nbCard;
     bool m_finish = false;
 public:
@@ -31,13 +34,17 @@ public:
     Dashboard& getDashboard();
     World* getWorldFromPath(std::string path);
     bool isFinish() const;
+    std::vector<Card> getGamePackage()const;
+    std::vector<Card> getAllCard()const;
+    Script getSolution()const;
 
     // Setters
     void setNbOfPlayers(int nbOfPlayers);
     void setFinish(bool finish);
     void setNbCard(int nbCard);
     void setGamePackage();
-    std::vector<Card> getGamePackage();
+    void setAllPackages();
+    void setSolution();
 
 
     // Methods
@@ -58,10 +65,12 @@ public:
     void clearGlobal();
     void startDialog(std::string dialogPath);
     void showStars(AnimatedElement world, Player p);
+    void HypothesisVerification(Player p, bool finalPlace);
 
     //Extra
     void displayPackage(std::vector<Card> Gamepackage);
-
+    void displaySolution();
+    void start3();
 };
 
 #endif // GAME_H_INCLUDED

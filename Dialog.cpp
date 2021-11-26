@@ -156,24 +156,27 @@ void Dialog::displayBordersPers(int X, int X2,int Y, int Y2)
 }
 
 ///Display only the result of the hypothesis
-void Dialog::displayMessResultHyp(int X,int Y)
+void Dialog::displayMessResultHyp(int X,int Y, bool longText)
 {
     // TypeWriter's effect
     int letters = 0;
+    int limX1 = longText== true ? 50:36;
+    int limX2 = longText== true ? 100:72;
 
     //Color's choice
-    Color myColor = getMessages().front().getContent() == "Your guess is wrong !" ? Color::Red : Color::Green;
+    Color myColor = getMessages().front().getContent() == "Votre hypothese est fausse !"
+                    || getMessages().front().getContent() == "Helas ce n'est pas la bonne reponse, vous avez perdu !"
+                     ? Color::Red : Color::Green;
 
     gotoxy(X+10, Y+3);
     //Message Display
     for (const auto& word : strSplit(getMessages().front().getContent(), " "))
     {
-
         for (size_t i = 0; i < word.size(); i++)
         {
-            if (letters == 36)
+            if (letters == limX1)
                 gotoxy(X+2, 12);
-            if (letters == 72)
+            if (letters == limX2)
                 gotoxy(X+2, 13);
             std::cout << color(word[i], myColor);
             Sleep(rand() % 45 + 20);

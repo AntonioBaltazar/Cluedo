@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <vector>
 #include <fstream>
+
 #include "../World.h"
 #include "../render/Dice.h"
 #include "../Player.h"
@@ -15,6 +16,7 @@
 Game::Game() {}
 Game::Game(int nbOfPlayers) : m_nbOfPlayers(nbOfPlayers) {}
 Game::~Game() {}
+
 // Getters
 int Game::getNbOfPlayers() const { return m_nbOfPlayers; }
 std::vector<AnimatedElement>& Game::getElements() { return m_elements; }
@@ -29,6 +31,7 @@ World* Game::getWorldFromPath(std::string path)
     return nullptr;
 }
 bool Game::isFinish() const { return m_finish; }
+
 // Setters
 void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
 void Game::setFinish(bool finish) { m_finish = finish; }

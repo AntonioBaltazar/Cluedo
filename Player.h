@@ -5,6 +5,7 @@
 #include "Dialog.h"
 #include "render/Square.h"
 #include "Card/Card.h"
+#include "Script/Script.h"
 
 class Player : public Person {
 private:
@@ -13,6 +14,7 @@ private:
     std::string m_worldName;
     int m_mvtAvailable = 0;
     std::vector<Card> m_playerPackage; //[0] : person | [1] : planet | [2] : weapon
+    Script m_hypothesis;
 public:
     // Constructors & Destructor
     Player();
@@ -26,6 +28,7 @@ public:
     std::string getWorldName() const;
     int getMovementAvailable() const;
     std::vector<Card> getPlayerPackage()const;
+    Script getHypothesis()const;
 
     // Setters
     void setX(int x);
@@ -33,6 +36,7 @@ public:
     void setWorldName(std::string worldName);
     void setMovementAvailable(int movement);
     void setPlayerPackage(Card newCard);
+    void setHypothesis(std::vector<Card> allCards);
 
     // Methods
     bool canMoveTo(int dirX, int dirY, std::vector<Square> world);
@@ -41,6 +45,7 @@ public:
     void actionMenu();
     void teleport(Square sq);
     void create_player_package(std::vector<Card> &gamePackage);
+    void show_card();
+    int menu_show_card();
 };
-
 #endif // PLAYER_H_INCLUDED
