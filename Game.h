@@ -51,6 +51,7 @@ public:
 
     //Setup
     void start();
+    void start2();
     void addWorld(World w);
     void askNbOfPlayers();
     void askAccountOfPlayers();

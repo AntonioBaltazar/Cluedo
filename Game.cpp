@@ -18,7 +18,8 @@ void Game::addWorld(World w) {   getWorlds().push_back(w);  }
 void Game::start()
 {
     // Getting datas before launching new game
-    /*askNbOfPlayers();
+    /*
+    askNbOfPlayers();
     askAccountOfPlayers();
     */
 
@@ -49,11 +50,12 @@ void Game::start()
 
     // Beginning
     Dice d(2, 1, 12, 6);
-    Dashboard db(90, 3, 25, 10);
-    getDashboard() = db;
+    //Dashboard db(100, 4, 25, 14);
+    //Dashboard db(94, 4, 25, 14);
+    //getDashboard() = db;
 
-    getElements().push_back(d);
-    getElements().push_back(db);
+    //getElements().push_back(d);
+    //getElements().push_back(db);
 
     int nbTurn = 0;
     while(!isFinish())
@@ -61,8 +63,8 @@ void Game::start()
         handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
 
         //Hypothese
-        getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());
-        HypothesisVerification(getPlayers()[nbTurn % getPlayers().size()],true);
+        //getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());
+        //HypothesisVerification(getPlayers()[nbTurn % getPlayers().size()],true);
 
         nbTurn++;
     }
@@ -80,6 +82,7 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
 
     displayMap(*p, pWorld, ae);
     p->setMovementAvailable(d->throwing());
+    getDashboard().renderTurn(p);
 
     std::string dialog("");
     int saisie;
@@ -168,6 +171,7 @@ std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, 
         AnimatedElement ae;
         ae.init(std::string(p->getWorldName()));
         displayMap(*p, content, ae);
+        getDashboard().renderTurn(p);
     }
     return dialogPath;
 }

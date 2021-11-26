@@ -26,7 +26,7 @@ void Game::start3()
     //displaySolution();
     //getPlayers()[0].getHypothesis().display();
 
-//    HypothesisVerification(getPlayers()[0]);
+    HypothesisVerification(getPlayers()[0],true);
 
     //getPlayers()[0].show_card();
 }

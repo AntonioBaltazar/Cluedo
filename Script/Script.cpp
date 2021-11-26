@@ -100,12 +100,13 @@ void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis)
     int y = 8;
     int choice = 0;
 
+    system("cls");
+
     ///Display all choices possible
     std::vector<Card> hyPackage = display_tab_hyp(hypothesis,myPackage, accuser);
 
     gotoxy(x,y);
     std::cout<<char(16);
-
     while(column<3)
     {
         hypothesis = choose_elem(hyPackage,choice, column, hypothesis);
