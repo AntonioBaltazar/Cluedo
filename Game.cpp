@@ -104,6 +104,7 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
 
     displayMap(*p, pWorld, ae);
     p->setMovementAvailable(d->throwing());
+    getDashboard().renderTurn(p);
 
     std::string dialog("");
     int saisie;
@@ -192,6 +193,7 @@ std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, 
         AnimatedElement ae;
         ae.init(std::string(p->getWorldName()));
         displayMap(*p, content, ae);
+        getDashboard().renderTurn(p);
     }
     return dialogPath;
 }

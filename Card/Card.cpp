@@ -16,7 +16,7 @@ Card::Card()
 Card::Card(std::string type, std::string name)
      : m_type(type), m_name(name)   {}
 
-Card::~Card()   {}
+Card::~Card() {}
 
 
 /// *********************       getter's implementation        *********************** ///
