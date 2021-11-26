@@ -49,14 +49,14 @@ void Game::showStars(AnimatedElement world, Player p)
     aeTemp.setTranslatedY(13 - p.getY());
     temp.push_back(aeTemp);
 
-    for (int i = 0; i < 242; i++)
+    for (int i = 0; i < 176; i++)
     {
         int x, y;
         bool found(false);
         do
         {
-            x = rand() % 120;
-            y = rand() % 25;
+            x = rand() % 125;
+            y = rand() % 30;
 
             bool freeSlot(true);
             for (const auto& el : temp) {

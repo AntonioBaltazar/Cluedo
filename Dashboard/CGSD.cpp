@@ -29,24 +29,21 @@ void Dashboard::renderTurn(Player* p)
     printBackToLine(strSplit("c'est \x85 votre tour !", " "), paddingX, paddingY, 22, p->getName().size() + 1, Color::Bright_White);
 
     // Commands list
-    int padCmd(4);
+    int padCmd(3);
     printAt(paddingX, paddingY + padCmd, color("\x18 \x19 \x1a <-", Color::Bright_Cyan) + color(" Se d\x82placer", Color::White));
     printAt(paddingX, paddingY + padCmd + 1, color("Espace", Color::Bright_Cyan) + color(" Int\x82ragir", Color::White));
     printAt(paddingX, paddingY + padCmd + 2, color("Touche H", Color::Bright_Cyan) + color(" Hypoth\x8Ase", Color::White));
     printAt(paddingX, paddingY + padCmd + 3, color("Touche N", Color::Bright_Cyan) + color(" Notes", Color::White));
 
-    int padCard(9);
+    // Cards
+    int padCard(8);
     printAt(paddingX, paddingY + padCard, color("Vos cartes :", Color::Bright_White));
-    printAt(paddingX, paddingY + padCard + 1, color("-", Color::White) + color(" " + p->getPlayerPackage()[0].getName(), Color::Yellow));
-    printAt(paddingX, paddingY + padCard + 1, color("-", Color::White) + color(" " + p->getPlayerPackage()[1].getName(), Color::Blue));
-    printAt(paddingX, paddingY + padCard + 1, color("-", Color::White) + color(" " + p->getPlayerPackage()[2].getName(), Color::Magenta));
-    //printAt(paddingX, paddingY + padCard, color("Vos cartes :");
-    //printAt(paddingX, paddingY + padCard, color("Vos cartes :");
-
-
-
+   /* printAt(paddingX, paddingY + padCard + 1, color("-", Color::White) + color(" " + p->getPlayerPackage()[0].getName(), Color::Yellow));
+    printAt(paddingX, paddingY + padCard + 2, color("-", Color::White) + color(" " + p->getPlayerPackage()[1].getName(), Color::Blue));
+    printAt(paddingX, paddingY + padCard + 3, color("-", Color::White) + color(" " + p->getPlayerPackage()[2].getName(), Color::Magenta));
+*/
     // Number of possible movement
-    int padMvt(11);
+    int padMvt(getMaxY() - 3);
     if (p->getMovementAvailable() == 0)
         printBackToLine(strSplit("Aucun d\x82placement", " "), paddingX, paddingY + padMvt + 1, 22, 0, Color::White);
     else {
