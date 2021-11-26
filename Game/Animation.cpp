@@ -23,7 +23,7 @@ void Game::clearGlobal()
         // Printing slices of spaces char
         for (const auto& slice : elementSlices)
         {
-            printAt(stringX, i, std::string(slice.first, ' '));
+            printAt(stringX, i, std::string(slice.first - stringX, ' '));
             stringX += slice.first + slice.second;
         }
         if (stringX < 120)

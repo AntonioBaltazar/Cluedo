@@ -77,7 +77,8 @@ void Game::start()
 
     // Beginning
     Dice d(2, 1, 12, 6);
-    Dashboard db(90, 3, 25, 10);
+    //Dashboard db(100, 4, 25, 14);
+    Dashboard db(94, 4, 25, 14);
     getDashboard() = db;
 
     getElements().push_back(d);
