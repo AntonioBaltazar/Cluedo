@@ -13,6 +13,7 @@ private:
     int m_y;
     std::string m_worldName;
     int m_mvtAvailable = 0;
+    std::string m_notes;
     std::vector<Card> m_playerPackage; //[0] : person | [1] : planet | [2] : weapon
     Script m_hypothesis;
 public:
@@ -27,6 +28,7 @@ public:
     int getY() const;
     std::string getWorldName() const;
     int getMovementAvailable() const;
+    std::string getNotes() const;
     std::vector<Card> getPlayerPackage()const;
     Script getHypothesis()const;
 
@@ -35,6 +37,7 @@ public:
     void setY(int y);
     void setWorldName(std::string worldName);
     void setMovementAvailable(int movement);
+    void setNotes(std::string notes);
     void setPlayerPackage(Card newCard);
     void setHypothesis(std::vector<Card> allCards);
 

@@ -20,6 +20,7 @@ int Player::getX() const { return m_x; }
 int Player::getY() const { return m_y; }
 std::string Player::getWorldName() const { return m_worldName; }
 int Player::getMovementAvailable() const { return m_mvtAvailable; }
+std::string Player::getNotes() const { return m_notes; }
 std::vector<Card> Player::getPlayerPackage() const { return m_playerPackage;}
 
 
@@ -28,6 +29,7 @@ void Player::setX(int x) { m_x = x; }
 void Player::setY(int y) { m_y = y; }
 void Player::setWorldName(std::string worldName) { m_worldName = worldName; }
 void Player::setMovementAvailable(int movement) { m_mvtAvailable = movement; }
+void Player::setNotes(std::string notes) { m_notes = notes; }
 void Player::setPlayerPackage(Card newCard) {m_playerPackage.push_back(newCard);}
 
 // Methods

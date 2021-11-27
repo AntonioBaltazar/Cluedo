@@ -45,7 +45,7 @@ int main()
             case 3:
                 ///Appel fct Martin
                 //diceMenu();
-               // g.start2();
+                g.start2();
                 break;
             case 4:
                 g.start();

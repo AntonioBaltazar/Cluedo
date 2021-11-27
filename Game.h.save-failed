@@ -14,7 +14,7 @@ private:
     int m_nbOfPlayers;
     std::vector<Player> m_players;
     std::vector<World> m_worlds;
-    std::vector<AnimatedElement*> m_elements;
+    std::vector<std::unique_ptr<AnimatedElement>> m_elements;
     Dashboard m_dashboard;
     Notepad m_notepad;
     std::vector<Card> m_gamePackage;
@@ -32,7 +32,7 @@ public:
     int getNbOfPlayers() const;
     std::vector<Player>& getPlayers();
     std::vector<World>& getWorlds();
-    std::vector<AnimatedElement*>& getElements();
+    std::vector<AnimatedElement>& getElements();
     Dashboard& getDashboard();
     Notepad& getNotepad();
     World* getWorldFromPath(std::string path);

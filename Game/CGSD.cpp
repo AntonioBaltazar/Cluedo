@@ -19,7 +19,7 @@ Game::~Game() {}
 
 // Getters
 int Game::getNbOfPlayers() const { return m_nbOfPlayers; }
-std::vector<AnimatedElement>& Game::getElements() { return m_elements; }
+std::vector<AnimatedElement*>& Game::getElements() { return m_elements; }
 std::vector<Player>& Game::getPlayers() { return m_players; }
 std::vector<World>& Game::getWorlds() { return m_worlds; }
 Dashboard& Game::getDashboard() { return m_dashboard; }

@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <vector>
 #include <fstream>
+#include <typeinfo>
 #include "World.h"
 #include "render/Dice.h"
 #include "Player.h"
@@ -56,9 +57,9 @@ void Game::start()
     Notepad np(2, 25, 25, 3);
     np.renderTurn();
 
-    getElements().push_back(d);
-    getElements().push_back(db);
-    getElements().push_back(np);
+    getElements().push_back(&d);
+    getElements().push_back(&db);
+    getElements().push_back(&np);
 
     int nbTurn = 0;
     while(!isFinish())
@@ -98,6 +99,7 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
         if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 110 || saisie == 78) handleNotepad(p);
         if (dialog != "") {
             startDialog(dialog);
             dialog = "";
@@ -123,8 +125,8 @@ void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement worl
             int x(realX - p.getX() + el.getX()), y(realY - p.getY() + el.getY());
             bool deleting = true;
             for (auto& anel : getElements())
-                if (anel.getTranslatedX() <= x && x <= anel.getTranslatedX() + anel.getMaxX() &&
-                        anel.getTranslatedY() <= y && y <= anel.getTranslatedY() + anel.getMaxY())
+                if (anel->getTranslatedX() <= x && x <= anel->getTranslatedX() + anel->getMaxX() &&
+                        anel->getTranslatedY() <= y && y <= anel->getTranslatedY() + anel->getMaxY())
                 {
                     deleting = false;
                     break;
@@ -179,7 +181,30 @@ std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, 
     return dialogPath;
 }
 
-void Game::startDialog(std::string dialogPath) {
+template<typename T, typename K>
+inline bool isType(const K &k) {
+    return typeid(T).hash_code() == typeid(k).hash_code();
+}
+
+void Game::handleNotepad(Player* p)
+{
+    for (auto& el : getElements())
+        if (isType<Notepad>(*el)) {
+            Notepad* np = dynamic_cast<Notepad*>(el);
+            np->setTranslated(2, 17);
+            np->setMax(25, 7);
+            np->renderTurn();
+            std::cout << "yes" << "\n";
+        }
+    std::cout << "WELL" << "\n";
+    int c = getInput();
+    //p->setNotes(getNotepad().open(p->getNotes()));
+}
+
+
+
+void Game::startDialog(std::string dialogPath)
+{
     std::ifstream f;
     std::string content;
     f.open("ressources/dialogs/" + dialogPath + ".txt");

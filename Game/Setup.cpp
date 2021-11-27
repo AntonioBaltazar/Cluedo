@@ -9,6 +9,10 @@
 #include "../Account.h"
 
 void Game::start2() {
+    while (1) {
+        int c = getInput();
+        std::cout << c << "\n";
+    }
     askNbOfPlayers();
     askAccountOfPlayers();
 }

@@ -14,6 +14,7 @@ public:
     // Setters
     void setContent(std::string content);
     void renderTurn();
+    std::string open(std::string str);
 };
 
 

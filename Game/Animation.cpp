@@ -13,8 +13,8 @@ void Game::clearGlobal()
         // Getting element's slices
         elementSlices.clear();
         for (const auto& element : getElements())
-            if (i >= element.getTranslatedY() && i <= element.getTranslatedY() + element.getMaxY() + 1)
-                elementSlices.push_back(std::pair<int, int>(element.getTranslatedX(), element.getMaxX() + 1));
+            if (i >= element->getTranslatedY() && i <= element->getTranslatedY() + element->getMaxY() + 1)
+                elementSlices.push_back(std::pair<int, int>(element->getTranslatedX(), element->getMaxX() + 1));
 
         int stringX(0);
         // Sort vector
@@ -43,7 +43,7 @@ void Game::showStars(AnimatedElement world, Player p)
     AnimatedElement aeTemp = world;
     std::vector<AnimatedElement> temp;
     for (auto& el : getElements())
-        temp.push_back(el);
+        temp.push_back(*el);
 
     aeTemp.setTranslatedX(60 - p.getX());
     aeTemp.setTranslatedY(13 - p.getY());

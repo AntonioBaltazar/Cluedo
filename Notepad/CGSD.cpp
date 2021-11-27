@@ -18,6 +18,15 @@ std::string Notepad::getContent() { return m_content; }
 // Setters
 void Notepad::setContent(std::string content) { m_content = content; }
 // Methods!
-void Notepad::renderTurn() {
+void Notepad::renderTurn()
+{
     printAt(getTranslatedX() + 2, getTranslatedY() + 1, color("Bloc-notes", Color::White));
+}
+
+std::string Notepad::open(std::string str)
+{
+    setTranslated(2, 17);
+    setMax(25, 7);
+
+    return str;
 }
