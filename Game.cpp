@@ -99,7 +99,10 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
         if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 110 || saisie == 78) handleNotepad(p);
+        if (saisie == 110 || saisie == 78) {
+            handleNotepad(p);
+            displayMap(*p, pWorld, ae);
+        }
         if (dialog != "") {
             startDialog(dialog);
             dialog = "";
@@ -194,12 +197,13 @@ void Game::handleNotepad(Player* p)
             np->setTranslated(2, 14);
             np->setMax(25, 14);
             np->renderTurn();
+            p->setNotes(np->open(p->getNotes()));
+            np->setTranslated(2, 25);
+            np->setMax(25, 3);
+            np->renderTurn();
             break;
         }
-    p->setNotes(getNotepad().open(p->getNotes()));
 }
-
-
 
 void Game::startDialog(std::string dialogPath)
 {
