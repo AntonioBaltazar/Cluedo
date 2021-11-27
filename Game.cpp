@@ -191,14 +191,12 @@ void Game::handleNotepad(Player* p)
     for (auto& el : getElements())
         if (isType<Notepad>(*el)) {
             Notepad* np = dynamic_cast<Notepad*>(el);
-            np->setTranslated(2, 17);
-            np->setMax(25, 7);
+            np->setTranslated(2, 14);
+            np->setMax(25, 14);
             np->renderTurn();
-            std::cout << "yes" << "\n";
+            break;
         }
-    std::cout << "WELL" << "\n";
-    int c = getInput();
-    //p->setNotes(getNotepad().open(p->getNotes()));
+    p->setNotes(getNotepad().open(p->getNotes()));
 }
 
 

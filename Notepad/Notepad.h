@@ -14,6 +14,8 @@ public:
     // Setters
     void setContent(std::string content);
     void renderTurn();
+    // Methods
+    void init(int trslX, int trslY, int maxX, int maxY);
     std::string open(std::string str);
 };
 
