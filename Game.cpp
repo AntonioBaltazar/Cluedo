@@ -17,17 +17,11 @@
 #include "render/Blackhole.h"
 
 // Methods
-void Game::addWorld(World w) {   getWorlds().push_back(w);  }
+void Game::addWorld(World w) { getWorlds().push_back(w); }
 
 void Game::start()
 {
     // Getting datas before launching new game
-    /*
-    askNbOfPlayers();
-    askAccountOfPlayers();
-    */
-
-
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
     //Card package creation and shuffle
@@ -54,7 +48,6 @@ void Game::start()
 
     // Beginning
     Dice d(2, 1, 12, 6);
-    //Dashboard db(100, 4, 25, 14);
     Dashboard db(94, 3, 25, 17);
     getDashboard() = db;
     Notepad np(2, 25, 25, 3);
@@ -68,19 +61,15 @@ void Game::start()
     int nbTurn = 0;
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
-
-        //Hypothese
-        //getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());
-        //HypothesisVerification(getPlayers()[nbTurn % getPlayers().size()],true);
-
+        if(getPlayers()[nbTurn % getPlayers().size()].getCanPlay())
+            handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d, getPlayers()[(nbTurn+1) % getPlayers().size()]);
         nbTurn++;
     }
 
     while(!kbhit());
 }
 
-void Game::handlePlayerTurn(Player* p, Dice* d)
+void Game::handlePlayerTurn(Player* p, Dice* d, Player nextPlayer)
 {
     for (auto& w : getWorlds())
         if (w.getPath() == p->getWorldName())
@@ -117,6 +106,10 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
         {
             findDialog(pWorld, p);
             displayMap(*p, pWorld, ae);
+        }else if(saisie == 104) //Hypothesis
+        {
+            setFinish(handleHypothesis(p,nextPlayer));
+            p->setMovementAvailable(0);
         } else if (saisie == 27)
         {
             // Go back to the menu
