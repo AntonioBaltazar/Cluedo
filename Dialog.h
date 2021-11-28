@@ -42,6 +42,7 @@ private:
 public:
     // Constructors & Destructor
     Dialog();
+    Dialog(int trslX, int trslY, int maxX, int maxY);
     Dialog(std::queue<Message> msgs);
     ~Dialog();
 

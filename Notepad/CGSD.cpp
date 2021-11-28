@@ -35,20 +35,27 @@ void Notepad::renderTurn()
 
 std::string Notepad::open(std::string str)
 {
+    int i = 0;
+    for (auto& s : str) {
+        printAt(getTranslatedX() + 2 + i%(getMaxX() - 3), getTranslatedY() + 2 + i/(getMaxX() - 3), s);
+        i++;
+    }
+
     int input(0);
     do {
-        int indexX(str.size() % (getMaxX() - 2)), indexY(str.size() / (getMaxX() - 2));
+        int indexX((str.size() - 1) % (getMaxX() - 3)), indexY((str.size() - 1) / (getMaxX() - 3)%getMaxY());
         input = getInput();
 
-        if (((input >= 'a' && input <= 'z') || (input >= 'A' && input <= 'Z') || input == ' '))
+        if (((input >= 'a' && input <= 'z') || (input >= 'A' && input <= 'Z') || input == ' ') && !(indexX + 1 == getMaxX() - 3 && indexY == getMaxY() - 3))
         {
             str += (char)input;
-            printAt(getTranslatedX() + indexX + 1, getTranslatedY() + indexY, std::string(1, char(input)));
-        }
-        else if (input == 8 && indexX > 0)
+            indexX = (str.size() - 1) % (getMaxX() - 3);
+            indexY = (str.size() - 1) / (getMaxX() - 3);
+            printAt(getTranslatedX() + indexX + 2, getTranslatedY() + indexY + 2, std::string(1, char(input)));
+        } else if (input == 8 && str.size() > 0)
         {
             str.pop_back();
-            printAt(getTranslatedX() + indexX - 1, getTranslatedY() + indexY, " ");
+            printAt(getTranslatedX() + indexX + 2, getTranslatedY() + indexY + 2, " ");
         }
 
     } while (input != 27);

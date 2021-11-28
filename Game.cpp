@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include <typeinfo>
+#include <time.h>
 #include "World.h"
 #include "render/Dice.h"
 #include "Player.h"
@@ -12,6 +13,7 @@
 #include "AnimatedElement.h"
 #include "Utils.h"
 #include "Dashboard/Dashboard.h"
+#include "render/Blackhole.h"
 
 // Methods
 void Game::addWorld(World w) {   getWorlds().push_back(w);  }
@@ -37,11 +39,10 @@ void Game::start()
 
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
-    getPlayers().push_back(Player("Tonio", Color::Bright_Magenta, 15,13, ""));
 
     World board(16, 11, "Board", "maps/main");
     for (auto& p : getPlayers())
-        board.addPlayer(&p);
+        board.addPlayer(&p, false);
     std::vector<World> wrlds = {World(16, 11, "Board", "maps/main"), World(18, 9, "Mars2", "maps/planets/mars"),
                                 World(18, 9, "Jupiter2", "maps/planets/jupiter"), World(18, 9, "Earth2", "maps/planets/earth"),
                                 World(18, 9, "Mercury2", "maps/planets/mercury"), World(18, 9, "Neptun2", "maps/planets/neptun"),
@@ -53,7 +54,7 @@ void Game::start()
     // Beginning
     Dice d(2, 1, 12, 6);
     //Dashboard db(100, 4, 25, 14);
-    Dashboard db(94, 4, 25, 18);
+    Dashboard db(94, 3, 25, 17);
     getDashboard() = db;
     Notepad np(2, 25, 25, 3);
     np.renderTurn();
@@ -65,8 +66,11 @@ void Game::start()
     int nbTurn = 0;
     while(!isFinish())
     {
-
         handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
+
+        //Hypothese
+        //getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());
+        //HypothesisVerification(getPlayers()[nbTurn % getPlayers().size()],true);
 
         nbTurn++;
     }
@@ -83,31 +87,32 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
     ae.init(std::string(p->getWorldName()));
 
     displayMap(*p, pWorld, ae);
-    p->setMovementAvailable(d->throwing());
+    if (p->getWorldName() == "maps/main")
+        p->setMovementAvailable(d->throwing());
+    else
+        p->setMovementAvailable(-1);
     getDashboard().renderTurn(p);
 
-    std::string dialog("");
     int saisie;
     do
     {
         FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
         saisie = getInput();
 
-        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) dialog = movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 110 || saisie == 78) handleNotepad(p);
-        if (dialog != "") {
-            startDialog(dialog);
-            dialog = "";
+        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 110 || saisie == 78) {
+            handleNotepad(p);
             displayMap(*p, pWorld, ae);
         }
-
-        gotoxy(10,22);
-        //std::cout<<"X : "<<p->getX()<<std::endl<<"Y : "<<p->getY();
+        else if (saisie == 32) {
+            findDialog(pWorld, p);
+            displayMap(*p, pWorld, ae);
+        }
     }
-    while (p->getMovementAvailable() > 0);
+    while (p->getMovementAvailable() > 0 || p->getMovementAvailable() == -1);
 }
 
 void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world)
@@ -146,40 +151,47 @@ void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement worl
 
 }
 
-std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
+void Game::movePlayerTo(int dirX, int dirY, std::vector<Square>& content, Player* p, World* w)
 {
     bool isTping(false);
-    std::string dialogPath("");
-    for (auto& el : content) {
+    for (auto& el : content)
         if (el.getX() == p->getX() + 2*dirX && el.getY() == p->getY() + dirY && el.getType())
             if (el.getType() == SquareType::TELEPORTER)
                 if (getWorldFromPath(el.getTpPath()) != nullptr)
                 {
-                    getWorldFromPath(el.getTpPath())->addPlayer(p);
+                    getWorldFromPath(el.getTpPath())->addPlayer(p, true);
                     p->setX(el.getCoord().first);
                     p->setY(el.getCoord().second);
                     isTping = true;
                     p->setMovementAvailable(0);
+                    if (el.getTpPath() != "maps/main")
+                    {
+                        srand(time(NULL));
+                        if (rand() % 3 == 0)  {
+                            system("cls");
+                            Blackhole bh(15, 2, "blackhole", "Trou noir");
+                            bh.render(" voyage un peu trop proche d'un trou noir..", p->getName());
+                            break;
+                        }
+                        p->setMovementAvailable(-1);
+                        AnimatedElement ae;
+                        content.clear();
+                        ae.saveAsWorld(content, std::string(el.getTpPath()));
+                    }
+                    break;
                 }
-        if (el.getType() == SquareType::NPC)
-            if ((el.getX() == p->getX() + 2 && el.getY() == p->getY() + dirY)
-                || (el.getX() == p->getX() - 2 && el.getY() == p->getY() + dirY)
-                || (el.getX() == p->getX() && el.getY() == p->getY() + 1)
-                || (el.getX() == p->getX() && el.getY() == p->getY() - 1))
-                dialogPath = el.getDialogPath();
-    }
-
     if (!isTping)
     {
         p->setX(p->getX() + 2*dirX);
         p->setY(p->getY() + dirY);
-        p->setMovementAvailable(p->getMovementAvailable() - 1);
-        AnimatedElement ae;
-        ae.init(std::string(p->getWorldName()));
-        displayMap(*p, content, ae);
+        if (p->getMovementAvailable() != - 1)
+            p->setMovementAvailable(p->getMovementAvailable() - 1);
+
         getDashboard().renderTurn(p);
     }
-    return dialogPath;
+    AnimatedElement ae;
+    ae.init(std::string(p->getWorldName()));
+    displayMap(*p, content, ae);
 }
 
 template<typename T, typename K>
@@ -195,12 +207,28 @@ void Game::handleNotepad(Player* p)
             np->setTranslated(2, 14);
             np->setMax(25, 14);
             np->renderTurn();
+            p->setNotes(np->open(p->getNotes()));
+            np->setTranslated(2, 25);
+            np->setMax(25, 3);
+            np->renderTurn();
             break;
         }
-    p->setNotes(getNotepad().open(p->getNotes()));
 }
 
-
+void Game::findDialog(std::vector<Square> content, Player* p)
+{
+    std::string dialogPath("");
+    for (auto& el : content) {
+        if (el.getType() == SquareType::NPC)
+            if ((el.getX() == p->getX() + 2 && el.getY() == p->getY())
+                || (el.getX() == p->getX() - 2 && el.getY() == p->getY())
+                || (el.getX() == p->getX() && el.getY() == p->getY() + 1)
+                || (el.getX() == p->getX() && el.getY() == p->getY() - 1))
+                dialogPath = el.getDialogPath();
+    }
+    if (dialogPath != "")
+         startDialog(dialogPath);
+}
 
 void Game::startDialog(std::string dialogPath)
 {
@@ -208,7 +236,7 @@ void Game::startDialog(std::string dialogPath)
     std::string content;
     f.open("ressources/dialogs/" + dialogPath + ".txt");
 
-    Dialog dlg;
+    Dialog dlg(30, 22, 89, 6);
     //getElements().push_back(dlg);
     while (std::getline(f, content)) {
         if (content[0] != '\0') {
@@ -220,3 +248,4 @@ void Game::startDialog(std::string dialogPath)
     f.close();
     dlg.displayConversation();
 }
+

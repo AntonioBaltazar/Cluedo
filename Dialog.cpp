@@ -13,6 +13,11 @@ Dialog::Dialog() {
     setTranslatedX(2);
     setTranslatedY(22);
 }
+Dialog::Dialog(int trslX, int trslY, int maxX, int maxY)
+{
+    setTranslated(trslX, trslY);
+    setMax(maxX, maxY);
+}
 Dialog::Dialog(std::queue<Message> msgs) : m_messages(msgs) {}
 Dialog::~Dialog() {}
 
@@ -27,20 +32,23 @@ void Dialog::addMessage(Message msg) { getMessages().push(msg); }
 
 void Dialog::displayConversation()
 {
-    displayBorders(22, 28);
+    for (int i = 0; i < getMaxY(); i++)
+        printAt(getTranslatedX(), getTranslatedY() + i, std::string(getMaxX(), ' '));
+    displayBordersPers(getTranslatedX(), getTranslatedX() + getMaxX(), getTranslatedY(), getTranslatedY() + getMaxY());
     while (!getMessages().empty())
     {
         displayMessage();
+        // Arrow
         while (!kbhit())
         {
-            gotoxy(115, 24);
+            gotoxy(getTranslatedX() + getMaxX() - 4, getTranslatedY() + 2);
             std::cout << "\033[97m";
             std::cout << char(std::stoi("31"));
             std::cout << "\033[37m";
             if (kbhit()) break;
             Sleep(600);
 
-            gotoxy(115, 24);
+            gotoxy(getTranslatedX() + getMaxX() - 4, getTranslatedY() + 2);
             std::cout << " ";
             if (kbhit()) break;
             Sleep(600);
@@ -53,22 +61,13 @@ void Dialog::displayConversation()
 
 void Dialog::displayMessage()
 {
-    gotoxy(12, 24);
-    for (int j = 0; j < 3; j++)
-    {
-        for (int i = 0; i < 100; i++)
-            std::cout << " ";
-        gotoxy(8, 24+j);
+    // Clearing old area
+    for (int i = 0; i < getMaxY() - 2; i++)
+        printAt(getTranslatedX() + 1, getTranslatedY() + i + 1, std::string(getMaxX() - 2, ' '));
 
-    }
-
-    gotoxy(115, 26);
-    std::cout << " ";
-
-    int startName = 18 - getMessages().front().getPerson().getName().size();
-    int startMsg = 18 + 3;
-    gotoxy(startName, 24);
-    std::cout << color(getMessages().front().getPerson().getName() + " : ", getMessages().front().getPerson().getColorName());
+    int startName = 10 - getMessages().front().getPerson().getName().size();
+    int startMsg = 10 + 3;
+    printAt(getTranslatedX() + 2 + startName, getTranslatedY() + 2, color(getMessages().front().getPerson().getName() + " : ", getMessages().front().getPerson().getColorName()));
 
     // TypeWriter's effect
     int letters = 0;
@@ -76,9 +75,9 @@ void Dialog::displayMessage()
     {
         for (size_t i = 0; i < word.size(); i++) {
             if (letters == 76)
-                gotoxy(startMsg, 25);
+                gotoxy(getTranslatedX() + startMsg, getTranslatedY() + 2);
             if (letters == 152)
-                gotoxy(startMsg, 26);
+                gotoxy(getTranslatedX() + startMsg, getTranslatedY() + 3);
             std::cout << color(word[i], Color::White);
             Sleep(rand() % 45 + 20);
             letters++;

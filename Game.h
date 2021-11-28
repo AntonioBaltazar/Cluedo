@@ -49,7 +49,6 @@ public:
     void setAllPackages();
     void setSolution();
 
-
     // Methods
 
     //Setup
@@ -64,9 +63,10 @@ public:
     //In-game
     void displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world);
     void handlePlayerTurn(Player* p, Dice* d);
-    std::string movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
+    void movePlayerTo(int dirX, int dirY, std::vector<Square>& content, Player* p, World* w);
     void clearGlobal();
     void startDialog(std::string dialogPath);
+    void findDialog(std::vector<Square> content, Player* p);
     void showStars(AnimatedElement world, Player p);
 
     // Notepad
@@ -82,6 +82,8 @@ public:
     void displayPackage(std::vector<Card> Gamepackage);
     void displaySolution();
     void start3();
+    void rules();
+    void credits();
 };
 
 #endif // GAME_H_INCLUDED

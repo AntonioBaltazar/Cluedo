@@ -31,11 +31,13 @@ void Game::handlePlayerTurn2(Player* p, Dice* d)
         FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
         saisie = getInput();
 
-        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) dialog = movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 110 || saisie == 78) handleNotepad(p);
+         if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 110 || saisie == 78) {
+            handleNotepad(p);
+            displayMap(*p, pWorld, ae); }
 
         //Hypothesis
         if(saisie == 104)
@@ -50,6 +52,7 @@ void Game::handlePlayerTurn2(Player* p, Dice* d)
             dialog = "";
             displayMap(*p, pWorld, ae);
         }
+
     }
     while (p->getMovementAvailable() > 0);
 }
@@ -121,7 +124,7 @@ void Game::start3()
 
     World board(16, 11, "Board", "maps/main");
     for (auto& p : getPlayers())
-        board.addPlayer(&p);
+        board.addPlayer(&p, false);
     std::vector<World> wrlds = {World(16, 11, "Board", "maps/main"), World(18, 9, "Mars2", "maps/planets/mars"),
                                 World(18, 9, "Jupiter2", "maps/planets/jupiter"), World(18, 9, "Earth2", "maps/planets/earth"),
                                 World(18, 9, "Mercury2", "maps/planets/mercury"), World(18, 9, "Neptun2", "maps/planets/neptun"),

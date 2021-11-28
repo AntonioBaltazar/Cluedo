@@ -32,7 +32,7 @@ public:
     void setPath(std::string path);
 
     // Methods
-    void addPlayer(Player* p);
+    void addPlayer(Player* p, bool keepPlayerCoord);
     bool containsPlayer(Player p);
 };
 
