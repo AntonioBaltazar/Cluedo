@@ -258,7 +258,7 @@ std::vector<Card> Script::display_elem_tab_hyp(std::vector<Card> myPackage)
 
     }
 
-    for(int m = 0; m < 19; m++)
+    for(int m = 0; m < 21; m++)
     {
         temp.push_back(hyPackage[m]);
     }
@@ -275,16 +275,7 @@ Script Script::choose_elem(std::vector<Card> hyPackage, int choice, int column, 
 
     if(column == 0)
     {
-        switch(choice)
-        {
-        case 0: i = 0;   break;
-        case 1: i = 1;   break;
-        case 2: i = 2;   break;
-        case 3: i = 3;   break;
-        case 4: i = 4;   break;
-        case 5: i = 5;   break;
-        case 6: i = 6;   break;
-        }
+        i = choice;
         hypothesis.setPerson(hyPackage[i].getName());
         hypothesis.setRoom(prev.getRoom());
         hypothesis.setWeapon(prev.getWeapon());
@@ -292,16 +283,7 @@ Script Script::choose_elem(std::vector<Card> hyPackage, int choice, int column, 
 
     if(column == 1)
     {
-        switch(choice)
-        {
-        case 0: i = 7;   break;
-        case 1: i = 8;   break;
-        case 2: i = 9;   break;
-        case 3: i = 10;   break;
-        case 4: i = 11;   break;
-        case 5: i = 12;   break;
-        case 6: i = 13;   break;
-        }
+        i = choice +7;
         hypothesis.setPerson(prev.getPerson());
         hypothesis.setRoom(hyPackage[i].getName());
         hypothesis.setWeapon(prev.getWeapon());
@@ -309,20 +291,19 @@ Script Script::choose_elem(std::vector<Card> hyPackage, int choice, int column, 
 
     if(column == 2)
     {
-        switch(choice)
-        {
-        case 0: i = 14;   break;
-        case 1: i = 15;   break;
-        case 2: i = 16;   break;
-        case 3: i = 17;   break;
-        case 4: i = 18;   break;
-        case 5: i = 19;   break;
-        case 6: i = 20;   break;
-        }
+        i = choice +14;
         hypothesis.setPerson(prev.getPerson());
         hypothesis.setRoom(prev.getRoom());
         hypothesis.setWeapon(hyPackage[i].getName());
     }
+
+//    for(auto& e:hyPackage)
+//    {
+//        e.display();
+//
+//    }
+//    getInput();
+
     return hypothesis;
 }
 

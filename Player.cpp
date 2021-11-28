@@ -136,8 +136,8 @@ int Player::menu_show_card()
 
     d.displayBordersPers(20,100,9,15);
 
-    gotoxy(42,10);
-    std::cout<<color("Quelle carte souhaitez vous montrer ?",Color::Bright_White);
+    gotoxy(40,10);
+    std::cout<<color(getName()+", quelle carte souhaitez vous montrer ?",Color::Bright_White);
 
     ///Affichage des types de cartes
     gotoxy(35,12);

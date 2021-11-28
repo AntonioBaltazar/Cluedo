@@ -44,7 +44,7 @@ void Game::start2() {
     int nbTurn = 0;
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
+        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d,getPlayers()[nbTurn % getPlayers().size()+1]);
 
         //Hypothese
         //getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());

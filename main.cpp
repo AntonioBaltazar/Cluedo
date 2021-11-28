@@ -38,7 +38,7 @@ int main()
             case 2:
                 ///Appel fct Tonio
                 //g.cardDistrib();
-                g.start3();
+                //g.start3();
                 //std::cout<<"En \x88tes vous sur ?";
                 //script_management();
                 break;
