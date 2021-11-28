@@ -8,6 +8,7 @@
 #include <thread>
 #include "Menu.h"
 #include "../Utils.h"
+#include "../Game.h"
 
 void Menu::render()
 {
@@ -95,6 +96,7 @@ void Menu::renderHorizontalBar(int translateX, int translateY)
 void Menu::launch()
 {
     render();
+    Game g;
     int input, choice = 1;
     std::string sentences[] = {"1. Nouvelle partie", "2. Reprendre une partie", "3. Regles du jeu", "4. Tableau des scores", "5. Credits", "6. Quitter"};
     do
@@ -117,10 +119,12 @@ void Menu::launch()
         case 2 :
             break;
         case 3 :
+            g.rules();
             break;
         case 4 :
             break;
         case 5 :
+            g.credits();
             break;
         case 6 :
             PostMessage(GetConsoleWindow(), WM_CLOSE, 0, 0);

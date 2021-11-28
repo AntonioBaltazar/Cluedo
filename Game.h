@@ -77,6 +77,8 @@ public:
     void displayPackage(std::vector<Card> Gamepackage);
     void displaySolution();
     void start3();
+    void rules();
+    void credits();
 };
 
 #endif // GAME_H_INCLUDED
