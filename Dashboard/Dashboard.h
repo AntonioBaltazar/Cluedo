@@ -13,7 +13,7 @@ public:
     ~Dashboard();
 
     // Methods
-    void renderTurn(Player* p);
+    void renderTurn(Player* p, std::string location);
     void printBackToLine(std::vector<std::string> strs, int x, int y, int maxLenght, int length, Color cl);
 };
 

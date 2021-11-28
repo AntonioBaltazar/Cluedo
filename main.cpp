@@ -12,7 +12,7 @@
 int main()
 {
     // Resize console, hide cursor, get title & allow colors
-    initConsole("Cluedo - Ne vous laissez pas enculer");
+    initConsole("Cluedo - Menu");
 
     int saisie = 0;
     Card package;
@@ -28,7 +28,6 @@ int main()
         std::cin >> saisie;
         Game g;
         Menu m;
-        Player p;
         switch (saisie)
         {
             case 1:
@@ -39,7 +38,7 @@ int main()
             case 2:
                 ///Appel fct Tonio
                 //g.cardDistrib();
-                g.start3();
+                //g.start3();
                 //std::cout<<"En \x88tes vous sur ?";
                 //script_management();
                 break;

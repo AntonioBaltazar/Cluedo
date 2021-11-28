@@ -1,0 +1,9 @@
+La partie commence dans le hall. Le premier joueur lance le des et avance dans le couloir d’autant de cases que son score le lui permet. 
+Objectif : entrer dans une des planetes pour pouvoir enqueter. Par exemple si vous vous trouvez sur Mars vous pouvez emettre cette hypothese : « Je pense que c’est Martin avec la matraque, sur Mars». 
+Si un des autres joueurs possède une des cartes de votre hypothese il doit vous la montrer discretement. Ainsi vous pouvez rayer une arme, un lieu ou un suspect et vous rapprocher de la résolution de l’énigme.\n 
+Au prochain tour, vous pourrez ressortir par la porte de votre choix et ainsi se diriger vers la prochaine salle.\n\n
+Attention aux trous noirs qui vous font sauter des tours...\n\n
+Lorsqu’un joueur pense avoir trouve la réponse de l’enigme, il doit formuler son accusation. Il note discrètement sur un papier le lieu du meurtre, l’arme du crime et l’assassin, puis verifie dans l’etui a enigme son accusation.Attention, vous ne pouvez faire qu’une seule accusation par partie !!\n\n
+Si le joueur a raison, il annonce les trois cartes de l’enigme aux autres joueurs. Ainsi, la partie se termine et le joueur est déclaré vainqueur.\n
+Si le joueur a tort, il doit remettre les 3 cartes dans l’étui à énigme, sans rien dire, et la partie continue pour les autres joueurs.Le joueur qui s’est trompe est hors du jeu cependant il doit toujours montrer ses cartes pour contredire l'hypothese d’un autre joueur.\n\n
+Ne vous faites pas avoir...

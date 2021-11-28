@@ -11,57 +11,6 @@
 #include "../scenes/Menu.h"
 
 
-void Game::handlePlayerTurn2(Player* p, Dice* d)
-{
-    getDashboard().renderTurn(p);
-    AnimatedElement ae;
-    std::vector<Square> pWorld;
-    ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
-    ae.init(std::string(p->getWorldName()));
-
-    displayMap(*p, pWorld, ae);
-
-    if (p->getWorldName() == "maps/main")
-        p->setMovementAvailable(d->throwing());
-    else
-        p->setMovementAvailable(-1);
-
-    getDashboard().renderTurn(p);
-
-    std::string dialog("");
-    int saisie;
-    do
-    {
-
-        FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
-        saisie = getInput();
-
-         if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        else if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        else if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        else if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        else if (saisie == 110 || saisie == 78) {
-            handleNotepad(p);
-            displayMap(*p, pWorld, ae); }
-
-        //Hypothesis
-        if(saisie == 104)
-        {
-            //setFinish(handleHypothesis(p));
-            p->setMovementAvailable(0);
-        }
-
-
-        if (dialog != "") {
-            startDialog(dialog);
-            dialog = "";
-            displayMap(*p, pWorld, ae);
-        }
-
-    }
-    while (p->getMovementAvailable() > 0);
-}
-
 bool Game::handleHypothesis(Player *p, Player nextP)
 {
     int possibilities = 0;
@@ -105,69 +54,6 @@ bool Game::handleHypothesis(Player *p, Player nextP)
 
 }
 
-void Game::start3()
-{
-
-    // Getting datas before launching new game
-    /*
-    askNbOfPlayers();
-    askAccountOfPlayers();
-    */
-
-    //Card package creation and shuffle
-    setAllPackages();
-
-    //We create a new script for the game
-    setSolution();
-
-    //Card distribution to all the players
-    cardDistrib();
-
-
-    system("cls");
-
-    getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
-    getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
-    getPlayers().push_back(Player("Tonio", Color::Bright_Magenta, 15,13, ""));
-
-    World board(16, 11, "Board", "maps/main");
-    for (auto& p : getPlayers())
-        board.addPlayer(&p, false);
-    std::vector<World> wrlds = {World(16, 11, "Board", "maps/main"), World(18, 9, "Mars2", "maps/planets/mars"),
-                                World(18, 9, "Jupiter2", "maps/planets/jupiter"), World(18, 9, "Earth2", "maps/planets/earth"),
-                                World(18, 9, "Mercury2", "maps/planets/mercury"), World(18, 9, "Neptun2", "maps/planets/neptun"),
-                                World(18, 9, "Saturn2", "maps/planets/saturn"), World(18, 9, "Venus2", "maps/planets/venus")};
-    addWorld(board);
-    for (auto& wrl : wrlds)
-        addWorld(wrl);
-
-    // Beginning
-    Dice d(2, 1, 12, 6);
-    //Dashboard db(100, 4, 25, 14);
-    Dashboard db(94, 4, 25, 18);
-    getDashboard() = db;
-    Notepad np(2, 25, 25, 3);
-    np.renderTurn();
-
-    getElements().push_back(&d);
-    getElements().push_back(&db);
-    getElements().push_back(&np);
-
-    int nbTurn = 0;
-    while(!isFinish())
-    {
-
-        if(getPlayers()[nbTurn % getPlayers().size()].getCanPlay())
-            handlePlayerTurn2(&getPlayers()[nbTurn % getPlayers().size()], &d);
-
-
-        nbTurn++;
-    }
-
-
-    //getPlayers()[0].show_card();
-//*/
-}
 
 void Game::CanMakeHypothesis(Player &p)
 {
