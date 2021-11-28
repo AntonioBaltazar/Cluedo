@@ -40,7 +40,7 @@ void Game::start()
 
     World board(16, 11, "Board", "maps/main");
     for (auto& p : getPlayers())
-        board.addPlayer(&p);
+        board.addPlayer(&p, false);
     std::vector<World> wrlds = {World(16, 11, "Board", "maps/main"), World(18, 9, "Mars2", "maps/planets/mars"),
                                 World(18, 9, "Jupiter2", "maps/planets/jupiter"), World(18, 9, "Earth2", "maps/planets/earth"),
                                 World(18, 9, "Mercury2", "maps/planets/mercury"), World(18, 9, "Neptun2", "maps/planets/neptun"),
@@ -95,19 +95,19 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
         saisie = getInput();
 
         if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 110 || saisie == 78) {
+        else if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        else if (saisie == 110 || saisie == 78) {
             handleNotepad(p);
             displayMap(*p, pWorld, ae);
         }
-        if (saisie == 32) {
+        else if (saisie == 32) {
             findDialog(pWorld, p);
             displayMap(*p, pWorld, ae);
         }
     }
-    while (p->getMovementAvailable() > 0);
+    while (p->getMovementAvailable() > 0 || p->getMovementAvailable() == -1);
 }
 
 void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world)
@@ -146,7 +146,7 @@ void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement worl
 
 }
 
-void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
+void Game::movePlayerTo(int dirX, int dirY, std::vector<Square>& content, Player* p, World* w)
 {
     bool isTping(false);
     for (auto& el : content)
@@ -154,22 +154,32 @@ void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player*
             if (el.getType() == SquareType::TELEPORTER)
                 if (getWorldFromPath(el.getTpPath()) != nullptr)
                 {
-                    getWorldFromPath(el.getTpPath())->addPlayer(p);
+                    getWorldFromPath(el.getTpPath())->addPlayer(p, true);
                     p->setX(el.getCoord().first);
                     p->setY(el.getCoord().second);
                     isTping = true;
                     p->setMovementAvailable(0);
+                    if (el.getTpPath() != "maps/main")
+                    {
+                        p->setMovementAvailable(-1);
+                        AnimatedElement ae;
+                        content.clear();
+                        ae.saveAsWorld(content, std::string(el.getTpPath()));
+                    }
+                    break;
                 }
     if (!isTping)
     {
         p->setX(p->getX() + 2*dirX);
         p->setY(p->getY() + dirY);
-        p->setMovementAvailable(p->getMovementAvailable() - 1);
-        AnimatedElement ae;
-        ae.init(std::string(p->getWorldName()));
-        displayMap(*p, content, ae);
+        if (p->getMovementAvailable() != - 1)
+            p->setMovementAvailable(p->getMovementAvailable() - 1);
+
         getDashboard().renderTurn(p);
     }
+    AnimatedElement ae;
+    ae.init(std::string(p->getWorldName()));
+    displayMap(*p, content, ae);
 }
 
 template<typename T, typename K>

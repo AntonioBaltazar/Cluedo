@@ -63,7 +63,7 @@ public:
     //In-game
     void displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world);
     void handlePlayerTurn(Player* p, Dice* d);
-    void movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w);
+    void movePlayerTo(int dirX, int dirY, std::vector<Square>& content, Player* p, World* w);
     void clearGlobal();
     void startDialog(std::string dialogPath);
     void findDialog(std::vector<Square> content, Player* p);

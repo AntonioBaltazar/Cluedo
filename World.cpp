@@ -24,11 +24,13 @@ void World::setName(std::string name) { m_name = name; }
 void World::setPath(std::string path) { m_path = path; }
 
 // Methods
-void World::addPlayer(Player* p)
+void World::addPlayer(Player* p, bool keepPlayerCoord)
 {
     getPlayers().push_back(p);
-    p->setX(getOriginX());
-    p->setY(getOriginY());
+    if (!keepPlayerCoord) {
+        p->setX(getOriginX());
+        p->setY(getOriginY());
+    }
     p->setWorldName(getPath());
 }
 
