@@ -98,36 +98,44 @@ void Menu::launch()
     render();
     Game g;
     int input, choice = 1;
-    std::string sentences[] = {"1. Nouvelle partie", "2. Reprendre une partie", "3. Regles du jeu", "4. Tableau des scores", "5. Credits", "6. Quitter"};
-    do
-    {
-        if (input == 75 && choice > 1) choice--;
-        if (input == 77 && choice < 6) choice++;
-        for (int i = 0; i < 40; i++) printAt(40+i, 20, " ");
-        gotoxy(46, 20);
-        std::cout << (choice > 1 ? char(17) : ' ');
-        gotoxy(74, 20);
-        std::cout << (choice < 6 ? char(16) : ' ');
-        printAt(60 - sentences[choice-1].size()/2, 20, color(sentences[choice-1], Color::Bright_Cyan));
-        input = getInput();
-    } while (input != 13);
+    std::string sentences[] = {"1. Nouvelle partie", "2. Reprendre une partie", "3. R\x8agles du jeu", "4. Tableau des scores", "5. Cr\x82\dits", "6. Quitter"};
 
-    switch(choice)
+    while (1)
     {
-        case 1 :
-            break;
-        case 2 :
-            break;
-        case 3 :
-            g.rules();
-            break;
-        case 4 :
-            break;
-        case 5 :
-            g.credits();
-            break;
-        case 6 :
-            PostMessage(GetConsoleWindow(), WM_CLOSE, 0, 0);
-            break;
+        do
+        {
+            if (input == 75 && choice > 1) choice--;
+            if (input == 77 && choice < 6) choice++;
+            for (int i = 0; i < 40; i++) printAt(40+i, 20, " ");
+            gotoxy(46, 20);
+            std::cout << (choice > 1 ? char(17) : ' ');
+            gotoxy(74, 20);
+            std::cout << (choice < 6 ? char(16) : ' ');
+            printAt(60 - sentences[choice-1].size()/2, 20, color(sentences[choice-1], Color::Bright_Cyan));
+            input = getInput();
+        } while (input != 13);
+
+        switch(choice)
+        {
+            case 1 :
+                g.start2();
+                break;
+            case 2 :
+                break;
+            case 3 :
+                g.rules();
+                break;
+            case 4 :
+                break;
+            case 5 :
+                g.credits();
+                break;
+            case 6 :
+                PostMessage(GetConsoleWindow(), WM_CLOSE, 0, 0);
+                break;
+        }
+        system("cls");
+        render();
+        input = 0;
     }
 }

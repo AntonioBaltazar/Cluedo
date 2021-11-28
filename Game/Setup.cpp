@@ -21,15 +21,21 @@ void Game::start2() {
     system("cls");
 
     // Setup board
-    World board(16, 11, "Board", "maps/main");
+    std::vector<World> wrlds = {World(16, 11, "Plateau", "maps/main"), World(18, 9, "Mars", "maps/planets/mars"),
+        World(18, 9, "Jupiter", "maps/planets/jupiter"), World(18, 9, "Terre", "maps/planets/earth"),
+        World(18, 9, "Mercure", "maps/planets/mercury"), World(18, 9, "Neptune", "maps/planets/neptun"),
+        World(18, 9, "Saturne", "maps/planets/saturn"), World(18, 9, "Venus", "maps/planets/venus")};
     for (auto& p : getPlayers())
-        board.addPlayer(&p, true);
+        wrlds[0].addPlayer(&p, true);
+    for (auto& wrl : wrlds)
+        addWorld(wrl);
 
     // Setup animated element : dice, notepad & dashboard
     Dice d(2, 1, 12, 6);
     Dashboard db(94, 3, 25, 17);
     getDashboard() = db;
     Notepad np(2, 25, 25, 3);
+    getNotepad() = np;
     np.renderTurn();
     getElements().push_back(&d);
     getElements().push_back(&db);

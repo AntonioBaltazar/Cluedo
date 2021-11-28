@@ -3,6 +3,7 @@
 #include <conio.h>
 #include "../Utils.h"
 #include "../Dialog.h"
+#include "../World.h"
 
 // Constructors & Destructor
 Dashboard::Dashboard() {}
@@ -10,14 +11,15 @@ Dashboard::Dashboard(int trslX, int trslY, int maxX, int maxY)
 {
     setTranslated(trslX, trslY);
     setMax(maxX, maxY);
-    Dialog dTemp;
-    dTemp.displayBordersPers(trslX, trslX + maxX, trslY, trslY + maxY);
+
 }
 Dashboard::~Dashboard() {}
 
 // Methods
-void Dashboard::renderTurn(Player* p)
+void Dashboard::renderTurn(Player* p, std::string location)
 {
+    Dialog dTemp;
+    dTemp.displayBordersPers(getTranslatedX(), getTranslatedX() + getMaxX(), getTranslatedY(), getTranslatedY() + getMaxY());
     // Clearing old area
     int paddingX = 2 + getTranslatedX();
     int paddingY = 1 + getTranslatedY();
@@ -38,10 +40,13 @@ void Dashboard::renderTurn(Player* p)
     // Cards
     int padCard(8);
     printAt(paddingX, paddingY + padCard, color("Vos cartes :", Color::Bright_White));
-   /* printAt(paddingX, paddingY + padCard + 1, color("-", Color::White) + color(" " + p->getPlayerPackage()[0].getName(), Color::Yellow));
+    printAt(paddingX, paddingY + padCard + 1, color("-", Color::White) + color(" " + p->getPlayerPackage()[0].getName(), Color::Yellow));
     printAt(paddingX, paddingY + padCard + 2, color("-", Color::White) + color(" " + p->getPlayerPackage()[1].getName(), Color::Blue));
     printAt(paddingX, paddingY + padCard + 3, color("-", Color::White) + color(" " + p->getPlayerPackage()[2].getName(), Color::Magenta));
-*/
+
+    // Location
+    printAt(paddingX, paddingY + 13, color("Lieu : ", Color::Bright_White) +  color(location, Color::Bright_Yellow));
+
     // Number of possible movement
     int padMvt(getMaxY() - 3);
     if (p->getMovementAvailable() == -1)

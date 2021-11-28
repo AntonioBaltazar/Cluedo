@@ -12,7 +12,7 @@
 int main()
 {
     // Resize console, hide cursor, get title & allow colors
-    initConsole("Cluedo - Ne vous laissez pas enculer");
+    initConsole("Cluedo - Menu");
 
     int saisie = 0;
     Card package;
@@ -28,7 +28,6 @@ int main()
         std::cin >> saisie;
         Game g;
         Menu m;
-        Player p;
         switch (saisie)
         {
             case 1:

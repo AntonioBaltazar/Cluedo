@@ -32,6 +32,7 @@ std::string color(char ch, Color c);
 Color getColor(int c);
 Color getColorHex(int c);
 std::vector<std::string> strSplit(std::string str, std::string delimiter);
+void eraseAllSubStr(std::string & mainStr, const std::string & toErase);
 int getInput();
 void printAt(int x, int y, std::string str);
 void printAt(int x, int y, char c);
