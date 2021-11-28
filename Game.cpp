@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include <typeinfo>
+#include <time.h>
 #include "World.h"
 #include "render/Dice.h"
 #include "Player.h"
@@ -12,6 +13,7 @@
 #include "AnimatedElement.h"
 #include "Utils.h"
 #include "Dashboard/Dashboard.h"
+#include "render/Blackhole.h"
 
 // Methods
 void Game::addWorld(World w) {   getWorlds().push_back(w);  }
@@ -85,7 +87,10 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
     ae.init(std::string(p->getWorldName()));
 
     displayMap(*p, pWorld, ae);
-    p->setMovementAvailable(d->throwing());
+    if (p->getWorldName() == "maps/main")
+        p->setMovementAvailable(d->throwing());
+    else
+        p->setMovementAvailable(-1);
     getDashboard().renderTurn(p);
 
     int saisie;
@@ -161,6 +166,13 @@ void Game::movePlayerTo(int dirX, int dirY, std::vector<Square>& content, Player
                     p->setMovementAvailable(0);
                     if (el.getTpPath() != "maps/main")
                     {
+                        srand(time(NULL));
+                        if (rand() % 3 == 0)  {
+                            system("cls");
+                            Blackhole bh(15, 2, "blackhole", "Trou noir");
+                            bh.render(" voyage un peu trop proche d'un trou noir..", p->getName());
+                            break;
+                        }
                         p->setMovementAvailable(-1);
                         AnimatedElement ae;
                         content.clear();
