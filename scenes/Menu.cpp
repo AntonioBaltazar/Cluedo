@@ -121,6 +121,8 @@ void Menu::launch()
                 g.start2();
                 break;
             case 2 :
+                g.lunchFromSave();
+                g.run();
                 break;
             case 3 :
                 g.rules();

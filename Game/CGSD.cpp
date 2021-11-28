@@ -24,6 +24,8 @@ std::vector<Player>& Game::getPlayers() { return m_players; }
 std::vector<World>& Game::getWorlds() { return m_worlds; }
 Dashboard& Game::getDashboard() { return m_dashboard; }
 Notepad& Game::getNotepad() { return m_notepad; }
+Dice& Game::getDice() { return m_dice; }
+int Game::getTurn() const { return m_turn; }
 World* Game::getWorldFromPath(std::string path)
 {
     for (auto& world : getWorlds())
@@ -36,3 +38,4 @@ bool Game::isFinish() const { return m_finish; }
 // Setters
 void Game::setNbOfPlayers(int nbOfPlayers) { m_nbOfPlayers = nbOfPlayers; }
 void Game::setFinish(bool finish) { m_finish = finish; }
+void Game::newTurn() { m_turn++; }

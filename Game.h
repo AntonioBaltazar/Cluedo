@@ -17,11 +17,13 @@ private:
     std::vector<AnimatedElement*> m_elements;
     Dashboard m_dashboard;
     Notepad m_notepad;
+    Dice m_dice;
     std::vector<Card> m_gamePackage;
     std::vector<Card> m_allCards;
     Script m_solution;
     int m_nbCard;
     bool m_finish = false;
+    int m_turn = 0;
 public:
     // Constructors & Destructor
     Game();
@@ -35,11 +37,13 @@ public:
     std::vector<AnimatedElement*>& getElements();
     Dashboard& getDashboard();
     Notepad& getNotepad();
+    Dice& getDice();
     World* getWorldFromPath(std::string path);
     bool isFinish() const;
     std::vector<Card> getGamePackage()const;
     std::vector<Card> getAllCard()const;
     Script getSolution()const;
+    int getTurn() const;
 
     // Setters
     void setNbOfPlayers(int nbOfPlayers);
@@ -48,8 +52,12 @@ public:
     void setGamePackage();
     void setAllPackages();
     void setSolution();
+    void newTurn();
 
     // Methods
+    void lunchFromSave();
+    void saveCurrentGame();
+    void run();
 
     //Setup
     void start();

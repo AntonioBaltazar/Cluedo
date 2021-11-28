@@ -8,7 +8,8 @@
 #include "../Game.h"
 #include "../Account.h"
 
-void Game::start2() {
+void Game::start2()
+{
     // Getting datas of game
     askNbOfPlayers();
     askAccountOfPlayers();
@@ -32,6 +33,7 @@ void Game::start2() {
 
     // Setup animated element : dice, notepad & dashboard
     Dice d(2, 1, 12, 6);
+    getDice() = d;
     Dashboard db(94, 3, 25, 17);
     getDashboard() = db;
     Notepad np(2, 25, 25, 3);
@@ -40,20 +42,16 @@ void Game::start2() {
     getElements().push_back(&d);
     getElements().push_back(&db);
     getElements().push_back(&np);
+    run();
+}
 
-    int nbTurn = 0;
+void Game::run()
+{
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d,getPlayers()[nbTurn % getPlayers().size()+1]);
-
-        //Hypothese
-        //getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());
-        //HypothesisVerification(getPlayers()[nbTurn % getPlayers().size()],true);
-
-        nbTurn++;
+        handlePlayerTurn(&getPlayers()[getTurn()  % getPlayers().size()], &getDice(), getPlayers()[getTurn() % getPlayers().size()+1]);
+        newTurn();
     }
-
-    while(!kbhit());
 }
 
 void Game::askAccountOfPlayers()
