@@ -83,7 +83,7 @@ public:
     //Hypothesis
     void handlePlayerTurn2(Player* p, Dice* d);
     bool handleHypothesis(Player* p, Player nextP);
-    void CanMakeHypothesis(Player &p);
+    void CanMakeHypothesis(Player &p, bool &finalPlace);
     bool HypothesisVerification(Player &p, bool finalPlace);
     void gameOver();
 
@@ -92,6 +92,7 @@ public:
     void displaySolution();
     void rules();
     void credits();
+    void scores();
 };
 
 #endif // GAME_H_INCLUDED

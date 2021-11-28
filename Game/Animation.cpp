@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "../Game.h"
+#include "../Account.h"
 #include <conio.h>
 #include <windows.h>
 #include <algorithm>
@@ -32,6 +33,55 @@ void Game::clearGlobal()
         if (stringX < 120)
             printAt(stringX, i, std::string((stringX == 0 ? winX : 120 - stringX), ' '));
     }
+}
+
+void Game::scores() {
+    Account acc;
+    acc.loadingDatas();
+
+     system("cls");
+    //Animation: stars in the background
+    Player p;
+    AnimatedElement world;
+    showStars(world,p);
+
+    std::string title = "SCORES";
+    std::string under = "-=-=-=-=-=-=-=-=-=-=-=-";
+    printAt(60 - under.size()/2, 2, color(under, Color::Bright_Yellow));
+    printAt(60 - title.size()/2, 3, color(title, Color::Bright_White));
+    printAt(60 - under.size()/2, 4, color(under, Color::Bright_Yellow));
+
+    /*
+    1. Retour au menu
+    2. Affichage du texte
+    3. Encadrement du texte
+    */
+
+    int index(0);
+    for (auto& p : acc.getScores()) {
+        printAt(20, 6 + index, color(p.first + " ", Color::Bright_White) + color(std::to_string(p.second), Color::Bright_Yellow));
+        index++;
+    }
+
+    //Animation of text to flash
+    std::string text = "Pour retourner au menu, appuyez sur une touche";
+
+    while (!kbhit())
+    {
+        gotoxy(60 - text.size()/2, 24);
+        std::cout << "\033[97m";
+        std::cout << text;
+        std::cout << "\033[37m";
+        if (kbhit()) break;
+        Sleep(600);
+
+        gotoxy(60 - text.size()/2, 24);
+        std::cout << std::string(text.size(), ' ');
+        if (kbhit()) break;
+        Sleep(600);
+    }
+    getch();
+
 }
 
 void Game::showStars(AnimatedElement world, Player p)

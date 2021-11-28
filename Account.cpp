@@ -14,6 +14,7 @@ Account::~Account() {
 // Getters
 std::vector<std::pair<std::string, std::string>>& Account::getLogins(int &score) { score = m_score; return m_logins; }
 int Account::getScore()const {return m_score;};
+std::vector<std::pair<std::string, int>>& Account::getScores() { return m_scores; }
 
 //Setter
 void Account::setScore(int score) {m_score = score;};
@@ -39,6 +40,7 @@ bool Account::matches(std::string username, std::string password)
 
 void Account::loadingDatas()
 {
+    loadingScores();
     std::ifstream f;
     std::string content;
     int score;
@@ -53,12 +55,31 @@ void Account::loadingDatas()
     f.close();
 }
 
+void Account::loadingScores()
+{
+    std::ifstream f;
+    std::string content;
+    int score;
+    f.open("account.txt");
+    while (std::getline(f, content)) {
+        std::pair<std::string, int> log;
+        log.first = strSplit(content, ":")[0];
+        log.second = stoi(strSplit(content, ":")[2]);
+        getScores().push_back(log);
+    }
+    f.close();
+}
+
 void Account::writingDatas()
 {
     std::ofstream f("account.txt");
     int score = 0;
+    int index = 0;
     for (auto& acc : getLogins(score))
-        f << acc.first << ":" << acc.second <<score<<"\n";
+    {
+        f << acc.first << ":" << acc.second << ":" << std::to_string(getScores()[index].second) << "\n";
+        index++;
+    }
     f.close();
 }
 

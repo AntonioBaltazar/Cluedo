@@ -25,7 +25,7 @@ void Game::setGamePackage()
 ///Gives one card of each type to every player
 void Game::cardDistrib()
 {
-     std::vector<Player>::iterator it;
+    std::vector<Player>::iterator it;
 
     for(it = m_players.begin(); it != m_players.end();it++)
        it->create_player_package(m_gamePackage);

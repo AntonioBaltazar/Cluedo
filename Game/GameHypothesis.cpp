@@ -9,22 +9,15 @@
 #include "../ConsoleHandler.h"
 #include "../Game.h"
 #include "../scenes/Menu.h"
-
+#include "../Account.h"
 
 bool Game::handleHypothesis(Player *p, Player nextP)
 {
     int possibilities = 0;
     bool finish = false;
+    bool finalPlace;
 
-    ///*************************************************************************
-                            gotoxy(5,23);
-                            getSolution().display();
-
-                            while(!kbhit());
-                            getch();
-    ///*************************************************************************
-
-    CanMakeHypothesis(*p);
+    CanMakeHypothesis(*p,finalPlace);
 
     possibilities = p->getCanMakeHypothesis();
 
@@ -32,7 +25,7 @@ bool Game::handleHypothesis(Player *p, Player nextP)
         return false;
     else
     {
-        p->setHypothesis(getAllCard());
+        p->setHypothesis(getAllCard(),finalPlace);
 
 
         if(possibilities == 1)
@@ -47,6 +40,15 @@ bool Game::handleHypothesis(Player *p, Player nextP)
             finish = HypothesisVerification(*p,true);
             p->setCanPlay(finish);
         }
+        if (finish)
+        {
+            Account acc;
+            acc.loadingDatas();
+            for (auto& pl : acc.getScores())
+                if (pl.first == p->getName())
+                    pl.second += 1;
+            acc.writingDatas();
+        }
 
         return finish;
     }
@@ -55,13 +57,19 @@ bool Game::handleHypothesis(Player *p, Player nextP)
 }
 
 
-void Game::CanMakeHypothesis(Player &p)
+void Game::CanMakeHypothesis(Player &p, bool &finalPlace)
 {
     //Player can make the final accusation
     if(p.getX()>13 && p.getX()<21 && p.getY()>10 && p.getY()<13 && p.getWorldName() == "maps/main")
+    {
         p.setCanMakeHypothesis(2);
+        finalPlace = false;
+    }
     else if(p.getWorldName()!="maps/main")
+    {
         p.setCanMakeHypothesis(1);
+        finalPlace = true;
+    }
     else
         p.setCanMakeHypothesis(0);
 }

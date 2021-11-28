@@ -47,9 +47,15 @@ void Game::start2()
 
 void Game::run()
 {
+    int eliminated(0);
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[getTurn()  % getPlayers().size()], &getDice(), getPlayers()[getTurn() % getPlayers().size()+1]);
+        if(getPlayers()[getTurn() % getPlayers().size()].getCanPlay())
+            handlePlayerTurn(&getPlayers()[getTurn() % getPlayers().size()], &getDice(), getPlayers()[(getTurn()+1) % getPlayers().size()]);
+        else
+            eliminated++;
+        if(eliminated == getPlayers().size())
+            gameOver();
         newTurn();
     }
 }
@@ -61,6 +67,7 @@ void Game::askAccountOfPlayers()
     acc.loadingDatas();
 
     system("cls");
+    showStars(AnimatedElement(), Player());
     int score = 0;
     std::string adjectives[] = {"Premier", "Second", "Troisi", "Quatri", "Cinqui", "Sixi"};
     AnimatedElement sharp(16, 11);
@@ -98,8 +105,8 @@ void Game::askAccountOfPlayers()
                     state = State::PASSWORD;
                 else {
                     std::string resp;
-                    printAt(48, 15, "Pas de compte trouve.");
-                    printAt(48, 16, "Voulez-vous en creer un ?");
+                    printAt(48, 15, "Pas de compte trouv\x82.");
+                    printAt(48, 16, "Voulez-vous en faire un ?");
                     printAt(48, 17, "Oui / Non");
                     do {
                         resp = acc.askLogs(48, 18);
@@ -153,6 +160,7 @@ void Game::askAccountOfPlayers()
 void Game::askNbOfPlayers()
 {
     system("cls");
+    showStars(AnimatedElement(), Player());
     int nbOfPlayers = 2;
     int saisie = -1;
     gotoxy(40, 12);

@@ -7,21 +7,6 @@
 #include <time.h>
 #include <vector>
 
- std::istream& load(std::istream& is){
-    size_t vsize;
-    if(is.read((char*)&vsize, sizeof(vsize))) {
-        first_vector.resize(vsize);
-        is.read((char*)first_vector.data(), vsize*sizeof(float));
-    }
-    return is;
-}
-std::ostream& save(std::ostream& os){
-    size_t vsize=first_vector.size();
-    os.write((char*)&vsize, sizeof(vsize));
-    os.write((char*)first_vector.data(), vsize*sizeof(float));
-    return os;
-}
-
 void Game::saveCurrentGame()
 {
     Game temp = *this;

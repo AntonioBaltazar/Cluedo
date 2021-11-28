@@ -43,7 +43,7 @@ public:
     void setMovementAvailable(int movement);
     void setNotes(std::string notes);
     void setPlayerPackage(Card newCard);
-    void setHypothesis(std::vector<Card> allCards);
+    void setHypothesis(std::vector<Card> allCards, bool finalPlace);
     void setCanPlay(bool status);
     void setCanMakeHypothesis(int status);
 

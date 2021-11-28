@@ -32,10 +32,11 @@ public:
     ///Methods
     void display();
     void script_Creation(std::vector<Card> myPackage);
-    void make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis, std::string name, Color playerColor);
+    void make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis, std::string name, Color playerColor, std::string planete);
     Script choose_elem(std::vector<Card> hyPackage, int choice, int column,Script prev);
     std::vector<Card> display_tab_hyp(Script hypothesis,std::vector<Card> myPackage);
     std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage);
+
 };
 
 #endif // SCRIPT_H_INCLUDED

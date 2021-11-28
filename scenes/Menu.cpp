@@ -12,7 +12,6 @@
 
 void Menu::render()
 {
-    system("cls");
     std::mutex lock;
     auto f = [&lock, this](std::string fileName, int translateX, int translateY) {
         std::vector<std::string> cluedo;
@@ -95,22 +94,23 @@ void Menu::renderHorizontalBar(int translateX, int translateY)
 
 void Menu::launch()
 {
-    render();
     Game g;
     int input, choice = 1;
-    std::string sentences[] = {"1. Nouvelle partie", "2. Reprendre une partie", "3. R\x8agles du jeu", "4. Tableau des scores", "5. Cr\x82\dits", "6. Quitter"};
+    std::string sentences[] = {"Nouvelle partie", "R\x8agles du jeu", "Tableau des scores", "Cr\x82\dits", "Quitter"};
 
     while (1)
     {
+        g.showStars(AnimatedElement(), Player());
+        render();
         do
         {
             if (input == 75 && choice > 1) choice--;
-            if (input == 77 && choice < 6) choice++;
+            if (input == 77 && choice < 5) choice++;
             for (int i = 0; i < 40; i++) printAt(40+i, 20, " ");
             gotoxy(46, 20);
             std::cout << (choice > 1 ? char(17) : ' ');
             gotoxy(74, 20);
-            std::cout << (choice < 6 ? char(16) : ' ');
+            std::cout << (choice < 5 ? char(16) : ' ');
             printAt(60 - sentences[choice-1].size()/2, 20, color(sentences[choice-1], Color::Bright_Cyan));
             input = getInput();
         } while (input != 13);
@@ -121,23 +121,19 @@ void Menu::launch()
                 g.start2();
                 break;
             case 2 :
-                g.lunchFromSave();
-                g.run();
-                break;
-            case 3 :
                 g.rules();
                 break;
-            case 4 :
+            case 3 :
+                g.scores();
                 break;
-            case 5 :
+            case 4 :
                 g.credits();
                 break;
-            case 6 :
+            case 5 :
                 PostMessage(GetConsoleWindow(), WM_CLOSE, 0, 0);
                 break;
         }
         system("cls");
-        render();
         input = 0;
     }
 }

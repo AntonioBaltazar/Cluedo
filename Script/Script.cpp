@@ -72,11 +72,10 @@ void Script::script_Creation(std::vector<Card> myPackage)
 
 void Script::display() { std::cout<<m_person<<" a tue Mr Lenoir sur "<<m_room<<" avec "<<m_weapon<<std::endl; }
 
-
 /// Allow the player to make an hypothesis and returns it
-void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis, std::string name, Color playerColor)
+void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis, std::string name, Color playerColor, std::string planete)
 {
-    Script hypothesis("quelqu'un","une planete","quelque chose");
+    Script hypothesis("quelqu'un","une plan\x8a\te","quelque chose");
     int column = 0;
     int key = 0;
     int x = 18;
@@ -97,7 +96,15 @@ void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis, 
         std::cout<<color(name+" : ",playerColor);
         gotoxy(23+name.size(),23);
         std::cout<<"Mr Lenoir a \x82t\x82 tu\x82 par "<<color(hypothesis.getPerson(),Color::Yellow);
-        std::cout<<" sur "<<color(hypothesis.getRoom(),Color::Blue);
+        if(finalHypothesis)
+        {
+            std::vector<std::string> temp = strSplit(planete,"/");
+            temp[2][0] -= 32;
+            std::cout<<" sur "<<color(temp[2],Color::Blue);
+        }
+        else
+            std::cout<<" sur "<<color(hypothesis.getRoom(),Color::Blue);
+
         std::cout<<" avec "<<color(hypothesis.getWeapon(),Color::Magenta)<<".       ";
 
         key = getInput();
@@ -132,7 +139,6 @@ void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis, 
     system("CLS");
 
 }
-
 
 ///Display a tab with all the card possible so that the player can make a choice
 std::vector<Card> Script::display_tab_hyp(Script hypothesis,std::vector<Card> myPackage)

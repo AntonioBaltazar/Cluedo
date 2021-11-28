@@ -36,6 +36,7 @@ void Player::setPlayerPackage(Card newCard) {m_playerPackage.push_back(newCard);
 void Player::setCanPlay(bool status) {m_canPlay = status;};
 void Player::setCanMakeHypothesis(int status) {m_canMakeHypothesis = status;};
 
+
 // Methods
 bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)
 {
@@ -102,7 +103,7 @@ void Player::create_player_package(std::vector<Card> &gamePackage)
 }
 
 
-void Player::setHypothesis(std::vector<Card> allCards)  {   m_hypothesis.make_hypothesis(allCards,false,getName(),getColorName());   }
+void Player::setHypothesis(std::vector<Card> allCards, bool finalPlace)  {   m_hypothesis.make_hypothesis(allCards,finalPlace,getName(),getColorName(),getWorldName());   }
 
 Script Player::getHypothesis()const {  return m_hypothesis;}
 
