@@ -32,49 +32,14 @@ void Script::setWeapon(std::string weapon)  { m_weapon=weapon ; }
 
         ///     *********************       METHOD'S IMPLEMENTATION     ****************************        ///
 
-///Manage all the subprograms concerning the script, the hypothesis and the card package
-void script_management()
-{
-    int nb_card = 0;
-    Player p;
-    Card temp;
-    system("CLS");
-
-    /// Card package creation and shuffle
-    std::vector<Card> myPackage = temp.card_Creation(nb_card);
-    myPackage = temp.card_Shuffle(myPackage, nb_card);
-
-    p.create_player_package(myPackage);
-    Script solution;
-    Script hypothesis;
-    /// Script creation
-    solution.script_Creation(myPackage);
-    solution.display();
-
-    /// Player makes an hypothesis
-    hypothesis.make_hypothesis(myPackage,false);
-    hypothesis.display();
-    /// We compare the solution and the hypothesis and display the result
-    //HypothesisVerification(solution,hypothesis);
-
-    ///Player p shows a card
-    //show_card();
-
-    gotoxy(0,23);
-
-}
-
 ///Create the solution of the murderer and returns it in a script
 void Script::script_Creation(std::vector<Card> myPackage)
 {
     Script solution;
     std::vector<Card>::iterator it;
     std::vector<Card> person;
-    int nbperson;
     std::vector<Card> planet;
-    int nbplanet;
     std::vector<Card> weapon;
-    int nbweapon;
     int random = 0;
 
     srand(time(NULL));
@@ -109,20 +74,18 @@ void Script::display() { std::cout<<m_person<<" a tue Mr Lenoir sur "<<m_room<<"
 
 
 /// Allow the player to make an hypothesis and returns it
-void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis)
+void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis, std::string name, Color playerColor)
 {
     Script hypothesis("quelqu'un","une planete","quelque chose");
-    Person accuser("Accuseur",Color::Red);
     int column = 0;
     int key = 0;
     int x = 18;
     int y = 8;
     int choice = 0;
-
     system("cls");
 
     ///Display all choices possible
-    std::vector<Card> hyPackage = display_tab_hyp(hypothesis,myPackage, accuser);
+    std::vector<Card> hyPackage = display_tab_hyp(hypothesis,myPackage);
 
     gotoxy(x,y);
     std::cout<<char(16);
@@ -131,9 +94,9 @@ void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis)
         hypothesis = choose_elem(hyPackage,choice, column, hypothesis);
 
         gotoxy(20,23);
-        std::cout<<color(accuser.getName()+" : ",accuser.getColorName());
-        gotoxy(23+accuser.getName().size(),23);
-        std::cout<<"Mr Lenoir a ete tue par "<<color(hypothesis.getPerson(),Color::Yellow);
+        std::cout<<color(name+" : ",playerColor);
+        gotoxy(23+name.size(),23);
+        std::cout<<"Mr Lenoir a \x82t\x82 tu\x82 par "<<color(hypothesis.getPerson(),Color::Yellow);
         std::cout<<" sur "<<color(hypothesis.getRoom(),Color::Blue);
         std::cout<<" avec "<<color(hypothesis.getWeapon(),Color::Magenta)<<".       ";
 
@@ -172,7 +135,7 @@ void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis)
 
 
 ///Display a tab with all the card possible so that the player can make a choice
-std::vector<Card> Script::display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser)
+std::vector<Card> Script::display_tab_hyp(Script hypothesis,std::vector<Card> myPackage)
 {
     Dialog d;
     int x1=5,x2=41,x3=77,x4=115;
@@ -296,13 +259,6 @@ Script Script::choose_elem(std::vector<Card> hyPackage, int choice, int column, 
         hypothesis.setRoom(prev.getRoom());
         hypothesis.setWeapon(hyPackage[i].getName());
     }
-
-//    for(auto& e:hyPackage)
-//    {
-//        e.display();
-//
-//    }
-//    getInput();
 
     return hypothesis;
 }

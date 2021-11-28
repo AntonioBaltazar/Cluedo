@@ -6,12 +6,18 @@
 class Account {
 private:
     std::vector<std::pair<std::string, std::string>> m_logins;
+    int m_score=0;
 public:
     // Destructors & Destructor
     Account();
     ~Account();
     // Getters
-    std::vector<std::pair<std::string, std::string>>& getLogins();
+    int getScore()const;
+    std::vector<std::pair<std::string, std::string>>& getLogins(int &score);
+
+    // Setter
+    void setScore(int score);
+
     // Methods
     void loadingDatas();
     void writingDatas();

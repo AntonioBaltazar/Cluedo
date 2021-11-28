@@ -17,11 +17,11 @@ bool Game::handleHypothesis(Player *p, Player nextP)
     bool finish = false;
 
     ///*************************************************************************
-    gotoxy(5,23);
-    getSolution().display();
+                            gotoxy(5,23);
+                            getSolution().display();
 
-    while(!kbhit());
-    getch();
+                            while(!kbhit());
+                            getch();
     ///*************************************************************************
 
     CanMakeHypothesis(*p);

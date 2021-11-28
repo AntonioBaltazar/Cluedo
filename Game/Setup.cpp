@@ -63,11 +63,11 @@ void Game::askAccountOfPlayers()
     acc.loadingDatas();
 
     system("cls");
+    int score = 0;
     std::string adjectives[] = {"Premier", "Second", "Troisi", "Quatri", "Cinqui", "Sixi"};
     AnimatedElement sharp(16, 11);
     AnimatedElement nb;
     sharp.render("numbers/sharp");
-    int saisie, index;
     enum State { USERNAME, PASSWORD, REGISTER, COLOR, DONE};
     std::vector<std::vector<int>> spawnCoords = {{16, 11}, {18, 11}, {16, 12}, {18, 12}, {20, 11}, {14, 12}};
 
@@ -125,7 +125,7 @@ void Game::askAccountOfPlayers()
                 std::pair<std::string, std::string> newP;
                 newP.first = pseudo;
                 newP.second = password;
-                acc.getLogins().push_back(newP);
+                acc.getLogins(score).push_back(newP);
                 state = State::COLOR;
             } else if (state == State::COLOR) {
                 printAt(85, 13, color("Choississez un pion :", Color::Bright_White));

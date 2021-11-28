@@ -7,6 +7,8 @@
 #include <fstream>
 #include <typeinfo>
 #include <time.h>
+
+#include "Dialog.h"
 #include "World.h"
 #include "render/Dice.h"
 #include "Player.h"
@@ -58,15 +60,34 @@ void Game::start()
     getElements().push_back(&db);
     getElements().push_back(&np);
 
-    int nbTurn = 0;
+    int nbTurn = 0, eliminated = 0;
     while(!isFinish())
     {
         if(getPlayers()[nbTurn % getPlayers().size()].getCanPlay())
             handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d, getPlayers()[(nbTurn+1) % getPlayers().size()]);
+        else
+            eliminated++;
+        if(eliminated == getPlayers().size())
+            gameOver();
         nbTurn++;
     }
 
     while(!kbhit());
+}
+
+void Game::gameOver()
+{
+    Dialog d;
+    AnimatedElement anel;
+    Player p;
+
+    d.addMessage(Message(p,"GAME OVER"));
+    showStars(anel,p);
+    d.displayBordersPers(48,70,11,15);
+    d.displayMessResultHyp(45,10,false);
+
+
+    setFinish(true);
 }
 
 void Game::handlePlayerTurn(Player* p, Dice* d, Player nextPlayer)
