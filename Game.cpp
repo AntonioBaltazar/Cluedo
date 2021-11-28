@@ -7,8 +7,6 @@
 #include <fstream>
 #include <typeinfo>
 #include <time.h>
-
-#include "Dialog.h"
 #include "World.h"
 #include "render/Dice.h"
 #include "Player.h"
@@ -325,8 +323,7 @@ void Game::rules()
         {
             indexX = 0;
             indexY++;
-            printAt(x1 + indexX, y + indexY, str + " ");
-        }
+            printAt(x1 + indexX, y + indexY, str + " ");        }
     }
 
     //Animation of text to flash
