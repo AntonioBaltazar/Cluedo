@@ -62,7 +62,7 @@ public:
 
     //In-game
     void displayMap(Player p, std::vector<Square> pWorld, AnimatedElement world);
-    void handlePlayerTurn(Player* p, Dice* d);
+    void handlePlayerTurn(Player* p, Dice* d, Player nextPlayer);
     void movePlayerTo(int dirX, int dirY, std::vector<Square>& content, Player* p, World* w);
     void clearGlobal();
     void startDialog(std::string dialogPath);
@@ -74,7 +74,7 @@ public:
 
     //Hypothesis
     void handlePlayerTurn2(Player* p, Dice* d);
-    bool handleHypothesis(Player* p);
+    bool handleHypothesis(Player* p, Player nextP);
     void CanMakeHypothesis(Player &p);
     bool HypothesisVerification(Player &p, bool finalPlace);
 

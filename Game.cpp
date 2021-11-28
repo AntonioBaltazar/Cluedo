@@ -29,16 +29,14 @@ void Game::start()
     //Card package creation and shuffle
     setAllPackages();
 
-    //Card distribution to all the players
-    cardDistrib();
-
     //We create a new script for the game
     setSolution();
 
-    system("cls");
-
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
+
+    //Card distribution to all the players
+    cardDistrib();
 
     World board(16, 11, "Board", "maps/main");
     for (auto& p : getPlayers())
@@ -66,19 +64,14 @@ void Game::start()
     int nbTurn = 0;
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
-
-        //Hypothese
-        //getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());
-        //HypothesisVerification(getPlayers()[nbTurn % getPlayers().size()],true);
+        if(getPlayers()[nbTurn % getPlayers().size()].getCanPlay())
+            handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d,getPlayers()[(nbTurn+1) % getPlayers().size()]);
 
         nbTurn++;
     }
-
-    while(!kbhit());
 }
 
-void Game::handlePlayerTurn(Player* p, Dice* d)
+void Game::handlePlayerTurn(Player* p, Dice* d, Player nextPlayer)
 {
     getDashboard().renderTurn(p);
     AnimatedElement ae;
@@ -87,13 +80,15 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
     ae.init(std::string(p->getWorldName()));
 
     displayMap(*p, pWorld, ae);
+
     if (p->getWorldName() == "maps/main")
         p->setMovementAvailable(d->throwing());
     else
         p->setMovementAvailable(-1);
+
     getDashboard().renderTurn(p);
 
-    int saisie;
+    int saisie =0;
     do
     {
         FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
@@ -111,6 +106,14 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
             findDialog(pWorld, p);
             displayMap(*p, pWorld, ae);
         }
+
+         //Hypothesis
+        if(saisie == 104)
+        {
+            setFinish(handleHypothesis(p,nextPlayer));
+            p->setMovementAvailable(0);
+        }
+
     }
     while (p->getMovementAvailable() > 0 || p->getMovementAvailable() == -1);
 }

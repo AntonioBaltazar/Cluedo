@@ -20,7 +20,12 @@ void Game::handlePlayerTurn2(Player* p, Dice* d)
     ae.init(std::string(p->getWorldName()));
 
     displayMap(*p, pWorld, ae);
-    p->setMovementAvailable(d->throwing());
+
+    if (p->getWorldName() == "maps/main")
+        p->setMovementAvailable(d->throwing());
+    else
+        p->setMovementAvailable(-1);
+
     getDashboard().renderTurn(p);
 
     std::string dialog("");
@@ -42,7 +47,7 @@ void Game::handlePlayerTurn2(Player* p, Dice* d)
         //Hypothesis
         if(saisie == 104)
         {
-            setFinish(handleHypothesis(p));
+            //setFinish(handleHypothesis(p));
             p->setMovementAvailable(0);
         }
 
@@ -57,7 +62,7 @@ void Game::handlePlayerTurn2(Player* p, Dice* d)
     while (p->getMovementAvailable() > 0);
 }
 
-bool Game::handleHypothesis(Player *p)
+bool Game::handleHypothesis(Player *p, Player nextP)
 {
     int possibilities = 0;
     bool finish = false;
@@ -78,10 +83,15 @@ bool Game::handleHypothesis(Player *p)
         return false;
     else
     {
-        p->setHypothesis(getGamePackage());
+        p->setHypothesis(getAllCard());
+
 
         if(possibilities == 1)
+        {
             HypothesisVerification(*p,false);
+
+            nextP.show_card();
+        }
 
         else if(possibilities == 2)
         {
@@ -91,6 +101,7 @@ bool Game::handleHypothesis(Player *p)
 
         return finish;
     }
+
 
 }
 
@@ -108,9 +119,6 @@ void Game::start3()
 
     //We create a new script for the game
     setSolution();
-    //getSolution().display();
-
-    //displayPackage(getAllCard());
 
     //Card distribution to all the players
     cardDistrib();
@@ -192,8 +200,6 @@ bool Game::HypothesisVerification(Player &p, bool finalPlace)
     std::string text[2];
     bool right = false;
     bool isGameOver = false;
-
-
 
     if(finalPlace)
     {

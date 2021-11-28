@@ -22,4 +22,4 @@ Weapon : une corde
 Weapon : une matraque
 Weapon : une brique
 Weapon : un fouet
-Weapon : une tuyau
+Weapon : un tuyau
