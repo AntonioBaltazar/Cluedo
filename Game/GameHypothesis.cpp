@@ -13,7 +13,9 @@
 
 void Game::handlePlayerTurn2(Player* p, Dice* d)
 {
-    getDashboard().renderTurn(p);
+    for (auto& w : getWorlds())
+        if (w.getPath() == p->getWorldName())
+            getDashboard().renderTurn(p, w.getName());
     AnimatedElement ae;
     std::vector<Square> pWorld;
     ae.saveAsWorld(pWorld, std::string(p->getWorldName()));
@@ -21,7 +23,9 @@ void Game::handlePlayerTurn2(Player* p, Dice* d)
 
     displayMap(*p, pWorld, ae);
     p->setMovementAvailable(d->throwing());
-    getDashboard().renderTurn(p);
+    for (auto& w : getWorlds())
+        if (w.getPath() == p->getWorldName())
+            getDashboard().renderTurn(p, w.getName());
 
     std::string dialog("");
     int saisie;

@@ -1,12 +1,12 @@
 Number of cards : 21
 
-Person : Antonio
-Person : Emma
-Person : Martin
-Person : Jacquis
-Person : Michel
-Person : Marie
-Person : Michou
+Person : Newton
+Person : Zaphod
+Person : M.Ribuot
+Person : Musk
+Person : Freddie
+Person : Le russe
+Person : Beethoven
 
 Planet : Venus
 Planet : Saturne
@@ -22,4 +22,4 @@ Weapon : une corde
 Weapon : une matraque
 Weapon : une brique
 Weapon : un fouet
-Weapon : une tuyau
+Weapon : un tuyau
