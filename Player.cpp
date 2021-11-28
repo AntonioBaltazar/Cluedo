@@ -22,6 +22,8 @@ std::string Player::getWorldName() const { return m_worldName; }
 int Player::getMovementAvailable() const { return m_mvtAvailable; }
 std::string Player::getNotes() const { return m_notes; }
 std::vector<Card> Player::getPlayerPackage() const { return m_playerPackage;}
+bool Player::getCanPlay()const {return m_canPlay;};
+int Player::getCanMakeHypothesis()const {return m_canMakeHypothesis;};
 
 
 // Setters
@@ -31,6 +33,8 @@ void Player::setWorldName(std::string worldName) { m_worldName = worldName; }
 void Player::setMovementAvailable(int movement) { m_mvtAvailable = movement; }
 void Player::setNotes(std::string notes) { m_notes = notes; }
 void Player::setPlayerPackage(Card newCard) {m_playerPackage.push_back(newCard);}
+void Player::setCanPlay(bool status) {m_canPlay = status;};
+void Player::setCanMakeHypothesis(int status) {m_canMakeHypothesis = status;};
 
 // Methods
 bool Player::canMoveTo(int dirX, int dirY, std::vector<Square> world)

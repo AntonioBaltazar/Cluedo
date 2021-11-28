@@ -68,10 +68,15 @@ public:
     void clearGlobal();
     void startDialog(std::string dialogPath);
     void showStars(AnimatedElement world, Player p);
-    void HypothesisVerification(Player p, bool finalPlace);
 
     // Notepad
     void handleNotepad(Player* p);
+
+    //Hypothesis
+    void handlePlayerTurn2(Player* p, Dice* d);
+    bool handleHypothesis(Player* p);
+    void CanMakeHypothesis(Player &p);
+    bool HypothesisVerification(Player &p, bool finalPlace);
 
     //Extra
     void displayPackage(std::vector<Card> Gamepackage);

@@ -1,4 +1,4 @@
-Number of cards : 18
+Number of cards : 21
 
 Person : Antonio
 Person : Emma
@@ -6,6 +6,7 @@ Person : Martin
 Person : Jacquis
 Person : Michel
 Person : Marie
+Person : Michou
 
 Planet : Venus
 Planet : Saturne
@@ -13,6 +14,7 @@ Planet : Mars
 Planet : Mercure
 Planet : Jupiter
 Planet : Neptune
+Planet : Terre
 
 Weapon : un fusil
 Weapon : un pistolet
@@ -20,3 +22,4 @@ Weapon : une corde
 Weapon : une matraque
 Weapon : une brique
 Weapon : un fouet
+Weapon : une tuyau

@@ -1,5 +1,6 @@
 #include "Script.h"
-#include "iostream"
+#include <iostream>
+#include <time.h>
 #include "../Player.h"
 //Constructor's and Destructor's Implementation
 ///     **********       Constructor's and Destructor's IMPLEMENTATION     ****************        ///
@@ -68,21 +69,39 @@ void Script::script_Creation(std::vector<Card> myPackage)
 {
     Script solution;
     std::vector<Card>::iterator it;
+    std::vector<Card> person;
+    int nbperson;
+    std::vector<Card> planet;
+    int nbplanet;
+    std::vector<Card> weapon;
+    int nbweapon;
+    int random = 0;
+
+    srand(time(NULL));
 
     for(it = myPackage.begin();  it != myPackage.end() ; it++ )
     {
         //Test if it is a person card, if yes we set this person as the murderer of Mr Lenoir
         if(it->getType() == "Person")
-            setPerson(it->getName());
+            person.push_back(Card(it->getType(), it->getName()));
 
         //Test if it is a room card, if yes we set this room as the place of the murder of Mr Lenoir
         if(it->getType() == "Planet")
-            setRoom(it->getName());
+            planet.push_back(Card(it->getType(), it->getName()));
 
         //Test if it is a weapon card, if yes we set this weapon as the object that was used for the murder
         if(it->getType() == "Weapon")
-            setWeapon(it->getName());
+            weapon.push_back(Card(it->getType(), it->getName()));
     }
+
+    random=rand()%person.size();
+    setPerson(person[random].getName());
+
+    random=rand()%planet.size();
+    setRoom(planet[random].getName());
+
+    random=rand()%weapon.size();
+    setWeapon(weapon[random].getName());
 }
 
 
@@ -125,7 +144,7 @@ void Script::make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis)
 
         if (key == 72 && choice > 0) {  y = y-2;    choice--;   }
 
-        if (key == 80 && choice < 5) {  y = y+2;    choice++;   }
+        if (key == 80 && choice < 6) {  y = y+2;    choice++;   }
 
         if(key == 13 && finalHypothesis == false)
             column++;
@@ -157,7 +176,7 @@ std::vector<Card> Script::display_tab_hyp(Script hypothesis,std::vector<Card> my
 {
     Dialog d;
     int x1=5,x2=41,x3=77,x4=115;
-    int y1=2,y2=6,y3=20;
+    int y1=2,y2=6,y3=22;
 
     d.displayBordersPers(x1,x4,y1,y2);
     d.displayBordersPers(x1,x4,y2,y3);
@@ -190,10 +209,10 @@ std::vector<Card> Script::display_tab_hyp(Script hypothesis,std::vector<Card> my
 std::vector<Card> Script::display_elem_tab_hyp(std::vector<Card> myPackage)
 {
     int cmptPerson = 8, cmptRoom = 8, cmptWeapon = 8;
-    int i=0, j=6, k=12;
+    int i=0, j=7, k=14;
     std::vector<Card>::iterator it;
     std::vector<Card> temp;
-    Card hyPackage[18];
+    Card hyPackage[22];
 
     for(it = myPackage.begin();it!=myPackage.end();it++)
     {
@@ -239,7 +258,7 @@ std::vector<Card> Script::display_elem_tab_hyp(std::vector<Card> myPackage)
 
     }
 
-    for(int m = 0; m < 18; m++)
+    for(int m = 0; m < 19; m++)
     {
         temp.push_back(hyPackage[m]);
     }
@@ -264,6 +283,7 @@ Script Script::choose_elem(std::vector<Card> hyPackage, int choice, int column, 
         case 3: i = 3;   break;
         case 4: i = 4;   break;
         case 5: i = 5;   break;
+        case 6: i = 6;   break;
         }
         hypothesis.setPerson(hyPackage[i].getName());
         hypothesis.setRoom(prev.getRoom());
@@ -274,12 +294,13 @@ Script Script::choose_elem(std::vector<Card> hyPackage, int choice, int column, 
     {
         switch(choice)
         {
-        case 0: i = 6;   break;
-        case 1: i = 7;   break;
-        case 2: i = 8;   break;
-        case 3: i = 9;   break;
-        case 4: i = 10;   break;
-        case 5: i = 11;   break;
+        case 0: i = 7;   break;
+        case 1: i = 8;   break;
+        case 2: i = 9;   break;
+        case 3: i = 10;   break;
+        case 4: i = 11;   break;
+        case 5: i = 12;   break;
+        case 6: i = 13;   break;
         }
         hypothesis.setPerson(prev.getPerson());
         hypothesis.setRoom(hyPackage[i].getName());
@@ -290,12 +311,13 @@ Script Script::choose_elem(std::vector<Card> hyPackage, int choice, int column, 
     {
         switch(choice)
         {
-        case 0: i = 12;   break;
-        case 1: i = 13;   break;
-        case 2: i = 14;   break;
-        case 3: i = 15;   break;
-        case 4: i = 16;   break;
-        case 5: i = 17;   break;
+        case 0: i = 14;   break;
+        case 1: i = 15;   break;
+        case 2: i = 16;   break;
+        case 3: i = 17;   break;
+        case 4: i = 18;   break;
+        case 5: i = 19;   break;
+        case 6: i = 20;   break;
         }
         hypothesis.setPerson(prev.getPerson());
         hypothesis.setRoom(prev.getRoom());

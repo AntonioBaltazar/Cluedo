@@ -162,10 +162,14 @@ void Dialog::displayMessResultHyp(int X,int Y, bool longText)
     int letters = 0;
     int limX1 = longText== true ? 50:36;
     int limX2 = longText== true ? 100:72;
+    Color myColor;
 
     //Color's choice
-    Color myColor = getMessages().front().getContent() == "Votre hypothese est fausse !"
-                    || getMessages().front().getContent() == "Helas ce n'est pas la bonne reponse, vous avez perdu !"
+    if(getMessages().front().getContent() == "En \x88tes vous sur ?"
+       || getMessages().front().getContent() == "Vous pourriez peut-\x88tre vous rendre \x85 la case principale ?")
+       myColor = Color::Cyan;
+    else
+       myColor = getMessages().front().getContent() == "H\x82las ce n'est pas la bonne r\x82ponse, vous avez perdu !"
                      ? Color::Red : Color::Green;
 
     gotoxy(X+10, Y+3);

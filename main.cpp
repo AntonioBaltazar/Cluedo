@@ -40,6 +40,7 @@ int main()
                 ///Appel fct Tonio
                 //g.cardDistrib();
                 g.start3();
+                //std::cout<<"En \x88tes vous sur ?";
                 //script_management();
                 break;
             case 3:

@@ -37,6 +37,7 @@ void Game::start()
 
     getPlayers().push_back(Player("Martin", Color::Bright_Green, 14, 11, ""));
     getPlayers().push_back(Player("Emma", Color::Bright_Yellow, 16,12, ""));
+    getPlayers().push_back(Player("Tonio", Color::Bright_Magenta, 15,13, ""));
 
     World board(16, 11, "Board", "maps/main");
     for (auto& p : getPlayers())
@@ -64,11 +65,8 @@ void Game::start()
     int nbTurn = 0;
     while(!isFinish())
     {
-        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
 
-        //Hypothese
-        //getPlayers()[nbTurn % getPlayers().size()].setHypothesis(getAllCard());
-        //HypothesisVerification(getPlayers()[nbTurn % getPlayers().size()],true);
+        handlePlayerTurn(&getPlayers()[nbTurn % getPlayers().size()], &d);
 
         nbTurn++;
     }
@@ -105,6 +103,9 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
             dialog = "";
             displayMap(*p, pWorld, ae);
         }
+
+        gotoxy(10,22);
+        //std::cout<<"X : "<<p->getX()<<std::endl<<"Y : "<<p->getY();
     }
     while (p->getMovementAvailable() > 0);
 }
