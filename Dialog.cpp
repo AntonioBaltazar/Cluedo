@@ -169,6 +169,7 @@ void Dialog::displayMessResultHyp(int X,int Y, bool longText)
        myColor = Color::Cyan;
     else
        myColor = getMessages().front().getContent() == "H\x82las ce n'est pas la bonne r\x82ponse, vous avez perdu !"
+                ||getMessages().front().getContent() == "GAME OVER"
                      ? Color::Red : Color::Green;
 
     gotoxy(X+10, Y+3);

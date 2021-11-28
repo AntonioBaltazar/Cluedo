@@ -32,17 +32,10 @@ public:
     ///Methods
     void display();
     void script_Creation(std::vector<Card> myPackage);
-    void make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis);
+    void make_hypothesis(std::vector<Card> myPackage, bool finalHypothesis, std::string name, Color playerColor);
     Script choose_elem(std::vector<Card> hyPackage, int choice, int column,Script prev);
-    std::vector<Card> display_tab_hyp(Script hypothesis,std::vector<Card> myPackage, Person accuser);
+    std::vector<Card> display_tab_hyp(Script hypothesis,std::vector<Card> myPackage);
     std::vector<Card> display_elem_tab_hyp(std::vector<Card> myPackage);
 };
-
-
-void script_management();
-
-
-
-
 
 #endif // SCRIPT_H_INCLUDED

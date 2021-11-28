@@ -102,7 +102,7 @@ void Player::create_player_package(std::vector<Card> &gamePackage)
 }
 
 
-void Player::setHypothesis(std::vector<Card> allCards)  {   m_hypothesis.make_hypothesis(allCards,false);   }
+void Player::setHypothesis(std::vector<Card> allCards)  {   m_hypothesis.make_hypothesis(allCards,false,getName(),getColorName());   }
 
 Script Player::getHypothesis()const {  return m_hypothesis;}
 
@@ -124,7 +124,6 @@ void Player::show_card()
     while(kbhit()) {}
     getch();
 }
-
 
 ///The player can decide which card he wants to show to the opponent
 int Player::menu_show_card()

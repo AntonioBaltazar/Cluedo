@@ -85,11 +85,11 @@ public:
     bool handleHypothesis(Player* p, Player nextP);
     void CanMakeHypothesis(Player &p);
     bool HypothesisVerification(Player &p, bool finalPlace);
+    void gameOver();
 
     //Extra
     void displayPackage(std::vector<Card> Gamepackage);
     void displaySolution();
-    void start3();
     void rules();
     void credits();
 };
