@@ -52,7 +52,7 @@ void Game::start()
     // Beginning
     Dice d(2, 1, 12, 6);
     //Dashboard db(100, 4, 25, 14);
-    Dashboard db(94, 4, 25, 18);
+    Dashboard db(94, 3, 25, 17);
     getDashboard() = db;
     Notepad np(2, 25, 25, 3);
     np.renderTurn();
@@ -88,24 +88,22 @@ void Game::handlePlayerTurn(Player* p, Dice* d)
     p->setMovementAvailable(d->throwing());
     getDashboard().renderTurn(p);
 
-    std::string dialog("");
     int saisie;
     do
     {
         FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
         saisie = getInput();
 
-        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) dialog = movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) dialog = movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) dialog = movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
-        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) dialog = movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 72 && p->canMoveTo(0, -1, pWorld)) movePlayerTo(0, -1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 80 && p->canMoveTo(0, 1, pWorld)) movePlayerTo(0, 1, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 75 && p->canMoveTo(-1, 0, pWorld)) movePlayerTo(-1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
+        if (saisie == 77 && p->canMoveTo(1, 0, pWorld)) movePlayerTo(1, 0, pWorld, p, getWorldFromPath(p->getWorldName()));
         if (saisie == 110 || saisie == 78) {
             handleNotepad(p);
             displayMap(*p, pWorld, ae);
         }
-        if (dialog != "") {
-            startDialog(dialog);
-            dialog = "";
+        if (saisie == 32) {
+            findDialog(pWorld, p);
             displayMap(*p, pWorld, ae);
         }
     }
@@ -148,11 +146,10 @@ void Game::displayMap(Player p, std::vector<Square> pWorld, AnimatedElement worl
 
 }
 
-std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
+void Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, Player* p, World* w)
 {
     bool isTping(false);
-    std::string dialogPath("");
-    for (auto& el : content) {
+    for (auto& el : content)
         if (el.getX() == p->getX() + 2*dirX && el.getY() == p->getY() + dirY && el.getType())
             if (el.getType() == SquareType::TELEPORTER)
                 if (getWorldFromPath(el.getTpPath()) != nullptr)
@@ -163,14 +160,6 @@ std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, 
                     isTping = true;
                     p->setMovementAvailable(0);
                 }
-        if (el.getType() == SquareType::NPC)
-            if ((el.getX() == p->getX() + 2 && el.getY() == p->getY() + dirY)
-                || (el.getX() == p->getX() - 2 && el.getY() == p->getY() + dirY)
-                || (el.getX() == p->getX() && el.getY() == p->getY() + 1)
-                || (el.getX() == p->getX() && el.getY() == p->getY() - 1))
-                dialogPath = el.getDialogPath();
-    }
-
     if (!isTping)
     {
         p->setX(p->getX() + 2*dirX);
@@ -181,7 +170,6 @@ std::string Game::movePlayerTo(int dirX, int dirY, std::vector<Square> content, 
         displayMap(*p, content, ae);
         getDashboard().renderTurn(p);
     }
-    return dialogPath;
 }
 
 template<typename T, typename K>
@@ -205,13 +193,28 @@ void Game::handleNotepad(Player* p)
         }
 }
 
+void Game::findDialog(std::vector<Square> content, Player* p)
+{
+    std::string dialogPath("");
+    for (auto& el : content) {
+        if (el.getType() == SquareType::NPC)
+            if ((el.getX() == p->getX() + 2 && el.getY() == p->getY())
+                || (el.getX() == p->getX() - 2 && el.getY() == p->getY())
+                || (el.getX() == p->getX() && el.getY() == p->getY() + 1)
+                || (el.getX() == p->getX() && el.getY() == p->getY() - 1))
+                dialogPath = el.getDialogPath();
+    }
+    if (dialogPath != "")
+         startDialog(dialogPath);
+}
+
 void Game::startDialog(std::string dialogPath)
 {
     std::ifstream f;
     std::string content;
     f.open("ressources/dialogs/" + dialogPath + ".txt");
 
-    Dialog dlg;
+    Dialog dlg(30, 22, 89, 6);
     //getElements().push_back(dlg);
     while (std::getline(f, content)) {
         if (content[0] != '\0') {
