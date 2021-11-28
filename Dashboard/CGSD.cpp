@@ -44,11 +44,14 @@ void Dashboard::renderTurn(Player* p)
 */
     // Number of possible movement
     int padMvt(getMaxY() - 3);
-    if (p->getMovementAvailable() == 0)
+    if (p->getMovementAvailable() == -1)
+        printBackToLine(strSplit("D\x82placements illimit\x82s", " "), paddingX, paddingY + padMvt + 1, 22, 0, Color::White);
+    else if (p->getMovementAvailable() == 0)
         printBackToLine(strSplit("Aucun d\x82placement", " "), paddingX, paddingY + padMvt + 1, 22, 0, Color::White);
     else {
-        printAt(paddingX, paddingY + padMvt, color(std::to_string(p->getMovementAvailable()), Color::Bright_Red));
-        printBackToLine(strSplit("d\x82placements restants", " "), paddingX, paddingY + padMvt, 22, 2, Color::Bright_White);
+        std::string s = p->getMovementAvailable() == 1 ? "" : "s";
+        printAt(paddingX, paddingY + padMvt + (s == "s" ? 0 : 1), color(std::to_string(p->getMovementAvailable()), Color::Bright_Red));
+        printBackToLine(strSplit("d\x82placement" + s + " restant" + s, " "), paddingX, paddingY + padMvt + (s == "s" ? 0 : 1), 22, 2, Color::Bright_White);
     }
 }
 
