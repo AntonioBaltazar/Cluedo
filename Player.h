@@ -11,6 +11,8 @@ class Player : public Person {
 private:
     int m_x;
     int m_y;
+    bool m_canPlay = true;
+    int m_canMakeHypothesis = 0; //0 : No | 1 : Yes (planet) | 2 : Yes (final place)
     std::string m_worldName;
     int m_mvtAvailable = 0;
     std::string m_notes;
@@ -31,6 +33,8 @@ public:
     std::string getNotes() const;
     std::vector<Card> getPlayerPackage()const;
     Script getHypothesis()const;
+    bool getCanPlay()const;
+    int getCanMakeHypothesis()const;
 
     // Setters
     void setX(int x);
@@ -40,6 +44,8 @@ public:
     void setNotes(std::string notes);
     void setPlayerPackage(Card newCard);
     void setHypothesis(std::vector<Card> allCards);
+    void setCanPlay(bool status);
+    void setCanMakeHypothesis(int status);
 
     // Methods
     bool canMoveTo(int dirX, int dirY, std::vector<Square> world);

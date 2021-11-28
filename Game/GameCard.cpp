@@ -18,7 +18,8 @@ void Game::setGamePackage()
     Card temp;
     int nbCard;
     m_gamePackage = temp.card_Creation(nbCard);
-    //m_gamePackage = temp.card_Shuffle(getGamePackage(),nbCard);
+    m_gamePackage = temp.card_Shuffle(getGamePackage(),nbCard);
+//    temp.card_Package_Display(m_gamePackage);
     setNbCard(nbCard);
  }
 
